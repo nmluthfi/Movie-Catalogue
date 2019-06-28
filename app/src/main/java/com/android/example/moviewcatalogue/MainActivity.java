@@ -2,12 +2,11 @@ package com.android.example.moviewcatalogue;
 
 import android.content.Intent;
 import android.content.res.TypedArray;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.android.example.moviewcatalogue.Adapter.MovieAdapter;
 import com.android.example.moviewcatalogue.Model.Movie;
@@ -38,15 +37,9 @@ public class MainActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(MainActivity.this, movies.get(position).getTitle(), Toast.LENGTH_LONG).show();
                 Intent startMoveDetailActivityyIntent = new Intent(MainActivity.this,
                         MovieDetailActivity.class);
                 startMoveDetailActivityyIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE, movies.get(position));
-//                startMoveDetailActivityyIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE_TITLE, movies.get(position).getTitle());
-//                startMoveDetailActivityyIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE_DESCRIPTION, movies.get(position).getDescription());
-//                startMoveDetailActivityyIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE_DATE_OF_RELEASE, movies.get(position).getDateOfRelease());
-//                startMoveDetailActivityyIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE_POSTER, movies.get(position).getImgPhoto());
-//                startMoveDetailActivityyIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE_USER_SCORE, movies.get(position).getUserScore());
                 startActivity(startMoveDetailActivityyIntent);
             }
         });

@@ -13,13 +13,9 @@ import com.bumptech.glide.request.RequestOptions;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
-    public static final String EXTRA_MOVIE_TITLE = "extra_movie_title";
-    public static final String EXTRA_MOVIE_DESCRIPTION = "extra_movie_description";
-    public static final String EXTRA_MOVIE_DATE_OF_RELEASE = "extra_movie_date_of_release";
-    public static final String EXTRA_MOVIE_USER_SCORE = "extra_movie_user_score";
-    public static final String EXTRA_MOVIE_POSTER = "extra_movie_poster";
     public static final String EXTRA_MOVIE = "extra_movie";
-    String title;
+
+    private String title;
     private TextView tvTitle, tvDescription, tvUserScore, tvDateOfRelease;
     private ImageView imgPoster;
 
