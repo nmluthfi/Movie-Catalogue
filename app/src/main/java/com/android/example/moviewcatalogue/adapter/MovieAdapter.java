@@ -1,4 +1,4 @@
-package com.android.example.moviewcatalogue.Adapter;
+package com.android.example.moviewcatalogue.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,8 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.example.moviewcatalogue.Model.Movie;
 import com.android.example.moviewcatalogue.R;
+import com.android.example.moviewcatalogue.model.Movie;
 
 import java.util.ArrayList;
 

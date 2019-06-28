@@ -1,12 +1,15 @@
-package com.android.example.moviewcatalogue.Model;
+package com.android.example.moviewcatalogue.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Movie implements Parcelable {
+public class TvShow implements Parcelable {
 
     private int imgPhoto;
     private String title, description, userScore, dateOfRelease;
+
+    public TvShow() {
+    }
 
     public int getImgPhoto() {
         return imgPhoto;
@@ -62,10 +65,7 @@ public class Movie implements Parcelable {
         dest.writeString(this.dateOfRelease);
     }
 
-    public Movie() {
-    }
-
-    protected Movie(Parcel in) {
+    protected TvShow(Parcel in) {
         this.imgPhoto = in.readInt();
         this.title = in.readString();
         this.description = in.readString();
@@ -73,15 +73,15 @@ public class Movie implements Parcelable {
         this.dateOfRelease = in.readString();
     }
 
-    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+    public static final Parcelable.Creator<TvShow> CREATOR = new Parcelable.Creator<TvShow>() {
         @Override
-        public Movie createFromParcel(Parcel source) {
-            return new Movie(source);
+        public TvShow createFromParcel(Parcel source) {
+            return new TvShow(source);
         }
 
         @Override
-        public Movie[] newArray(int size) {
-            return new Movie[size];
+        public TvShow[] newArray(int size) {
+            return new TvShow[size];
         }
     };
 }

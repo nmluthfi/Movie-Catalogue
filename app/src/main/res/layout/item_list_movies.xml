@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp">
@@ -9,6 +10,7 @@
         android:layout_width="100dp"
         android:layout_height="150dp"
         android:scaleType="centerCrop"
+        android:contentDescription="@string/movie_poster"
         android:src="@drawable/poster_aquaman"/>
 
     <TextView
@@ -17,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="26dp"
         android:layout_toEndOf="@id/img_photo"
-        android:text="Aquaman"
+        tools:text="Aquaman"
         android:textSize="18sp"
         android:maxLines="2"
         android:ellipsize="end"
@@ -34,7 +36,7 @@
         android:layout_toRightOf="@id/img_photo"
         android:ellipsize="end"
         android:maxLines="3"
-        android:text="Once home to the most advanced civilization on Earth, Atlantis is now an underwater kingdom ruled by the power-hungry King Orm. With a vast army at his disposal, Orm plans to conquer the remaining oceanic people and then the surface world. Standing in his way is Arthur Curry, Orm's half-human, half-Atlantean brother and true heir to the throne."
+        tools:text="Once home to the most advanced civilization on Earth, Atlantis is now an underwater kingdom ruled by the power-hungry King Orm. With a vast army at his disposal, Orm plans to conquer the remaining oceanic people and then the surface world. Standing in his way is Arthur Curry, Orm's half-human, half-Atlantean brother and true heir to the throne."
         android:layout_marginLeft="26dp"
         android:layout_toEndOf="@id/img_photo" />
 

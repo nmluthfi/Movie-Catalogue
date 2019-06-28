@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.android.example.moviewcatalogue.Adapter.MovieAdapter;
-import com.android.example.moviewcatalogue.Model.Movie;
+import com.android.example.moviewcatalogue.adapter.MovieAdapter;
+import com.android.example.moviewcatalogue.model.Movie;
 
 import java.util.ArrayList;
 
