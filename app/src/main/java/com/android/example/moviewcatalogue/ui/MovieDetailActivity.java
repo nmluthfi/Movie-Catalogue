@@ -31,7 +31,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         if (intentThatStartThisActivity != null) {
 
             tvTitle.setText(movie.getTitle());
-            tvDescription.setText(movie.getDescription());
+            tvDescription.setText(Integer.parseInt(movie.getDescription()));
             tvUserScore.setText(movie.getUserScore() + " of 100");
             tvDateOfRelease.setText(movie.getDateOfRelease());
 
