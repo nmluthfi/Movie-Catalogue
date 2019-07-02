@@ -1,4 +1,4 @@
-package com.android.example.moviewcatalogue;
+package com.android.example.moviewcatalogue.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.example.moviewcatalogue.R;
 import com.android.example.moviewcatalogue.model.Movie;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;

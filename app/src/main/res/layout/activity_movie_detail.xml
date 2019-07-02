@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".MovieDetailActivity">
+    tools:context=".ui.MovieDetailActivity">
 
     <ImageView
         android:id="@+id/img_photo"
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        tools:text="Sinopsis"
+        android:text="@string/sinopsys"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        tools:text="Judul FIlm"
+        android:text="@string/movie_title"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -81,7 +81,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        tools:text="Tahun Rilis"
+        android:text="@string/date_of_release"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -93,7 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        tools:text="Rating Film"
+        android:text="@string/film_rating"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         android:textStyle="bold"

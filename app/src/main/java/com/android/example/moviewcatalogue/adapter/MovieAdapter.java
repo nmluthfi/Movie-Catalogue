@@ -1,75 +1,93 @@
 package com.android.example.moviewcatalogue.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.example.moviewcatalogue.R;
 import com.android.example.moviewcatalogue.model.Movie;
+import com.android.example.moviewcatalogue.ui.MovieDetailActivity;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
-public class MovieAdapter extends BaseAdapter {
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     private Context mContext;
-    private ArrayList<Movie> movies;
+    private ArrayList<Movie> mData;
 
     public MovieAdapter(Context mContext) {
         this.mContext = mContext;
-        movies = new ArrayList<>();
     }
 
-    public void setMovies(ArrayList<Movie> movies) {
-        this.movies = movies;
+    public ArrayList<Movie> getmData() {
+        return mData;
+    }
+
+    public void setmData(ArrayList<Movie> mData) {
+        this.mData = mData;
+    }
+
+    @NonNull
+    @Override
+    public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_list_movies, viewGroup,
+                false);
+        return new MovieViewHolder(view);
     }
 
     @Override
-    public int getCount() {
-        return movies.size();
+    public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, final int position) {
+        final Movie movie = mData.get(position);
+        movieViewHolder.tvMovieTitle.setText(movie.getTitle());
+        movieViewHolder.tvMovieDescription.setText(movie.getDescription());
+
+        Glide.with(mContext)
+                .load(movie.getImgPhoto())
+                .apply(new RequestOptions().override(100, 150))
+                .into(movieViewHolder.ivMoviePoster);
+
+        movieViewHolder.btnViewMovie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDetailMovieActivity(mData.get(position));
+            }
+        });
     }
 
     @Override
-    public Object getItem(int position) {
-        return movies.get(position);
+    public int getItemCount() {
+        return mData.size();
     }
 
-    @Override
-    public long getItemId(int position) {
-        return position;
+    private void openDetailMovieActivity(Movie movie) {
+        Intent startMoveDetailActivityyIntent = new Intent(mContext, MovieDetailActivity.class);
+        startMoveDetailActivityyIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE, movie);
+        mContext.startActivity(startMoveDetailActivityyIntent);
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_list_movies,
-                    parent,
-                    false);
-        }
+    public class MovieViewHolder extends RecyclerView.ViewHolder {
 
-        MovieViewHolder movieViewHolder = new MovieViewHolder(convertView);
-        Movie movie = (Movie) getItem(position);
-        movieViewHolder.bind(movie);
-        return convertView;
-    }
 
-    private class MovieViewHolder {
-        private TextView tvTitle, tvDescription;
-        private ImageView imgPhoto;
+        TextView tvMovieTitle, tvMovieDescription;
+        ImageView ivMoviePoster;
+        Button btnViewMovie;
 
-        MovieViewHolder(View view) {
-            tvTitle = view.findViewById(R.id.tv_title);
-            tvDescription = view.findViewById(R.id.tv_description);
-            imgPhoto = view.findViewById(R.id.img_photo);
-        }
+        public MovieViewHolder(@NonNull View itemView) {
+            super(itemView);
 
-        void bind(Movie movie) {
-            tvTitle.setText(movie.getTitle());
-            tvDescription.setText(movie.getDescription());
-            imgPhoto.setImageResource(movie.getImgPhoto());
+            tvMovieTitle = itemView.findViewById(R.id.tv_title);
+            tvMovieDescription = itemView.findViewById(R.id.tv_description);
+            ivMoviePoster = itemView.findViewById(R.id.img_photo);
+            btnViewMovie = itemView.findViewById(R.id.btn_see_moview);
         }
     }
 }
