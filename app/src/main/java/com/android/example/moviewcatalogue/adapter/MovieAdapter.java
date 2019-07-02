@@ -48,7 +48,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, final int position) {
         final Movie movie = mData.get(position);
         movieViewHolder.tvMovieTitle.setText(movie.getTitle());
-        movieViewHolder.tvMovieDescription.setText(movie.getDescription());
+        movieViewHolder.tvMovieDescription.setText(Integer.parseInt(movie.getDescription()));
 
         Glide.with(mContext)
                 .load(movie.getImgPhoto())
