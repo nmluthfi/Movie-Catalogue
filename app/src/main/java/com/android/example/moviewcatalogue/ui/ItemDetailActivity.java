@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.android.example.moviewcatalogue.R;
 import com.android.example.moviewcatalogue.model.Movie;
+import com.android.example.moviewcatalogue.model.TvShow;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -30,6 +31,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         Intent intentThatStartThisActivity = getIntent();
         if (intentThatStartThisActivity != null) {
             Movie movie = intentThatStartThisActivity.getParcelableExtra(EXTRA_MOVIE);
+            TvShow tvShow = intentThatStartThisActivity.getParcelableExtra(EXTRA_TV_SHOW);
 
             if (movie != null) {
                 tvTitle.setText(movie.getTitle());
@@ -46,6 +48,22 @@ public class ItemDetailActivity extends AppCompatActivity {
                 if (actionBar != null) {
                     actionBar.setDisplayHomeAsUpEnabled(true);
                     actionBar.setTitle(movie.getTitle());
+                }
+            } else if (tvShow != null) {
+                tvTitle.setText(tvShow.getTitle());
+                tvDescription.setText(Integer.parseInt(tvShow.getDescription()));
+                tvUserScore.setText(tvShow.getUserScore() + " " + getResources().getString(R.string.user_score));
+                tvDateOfRelease.setText(tvShow.getDateOfRelease());
+
+                Glide.with(this)
+                        .load(tvShow.getImgPhoto())
+                        .apply(new RequestOptions().override(150, 250))
+                        .into(imgPoster);
+
+                ActionBar actionBar = getSupportActionBar();
+                if (actionBar != null) {
+                    actionBar.setDisplayHomeAsUpEnabled(true);
+                    actionBar.setTitle(tvShow.getTitle());
                 }
             }
         }
