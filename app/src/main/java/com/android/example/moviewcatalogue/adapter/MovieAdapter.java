@@ -76,7 +76,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
 
-
         TextView tvTitle, tvDescription;
         ImageView ivPoster;
         Button btnView;

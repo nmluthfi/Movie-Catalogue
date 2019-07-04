@@ -36,7 +36,7 @@ public class ItemDetailActivity extends AppCompatActivity {
             if (movie != null) {
                 tvTitle.setText(movie.getTitle());
                 tvDescription.setText(Integer.parseInt(movie.getDescription()));
-                tvUserScore.setText(movie.getUserScore() + " " + getResources().getString(R.string.user_score));
+                tvUserScore.setText(String.format("%s " + getString(R.string.user_score), movie.getUserScore()));
                 tvDateOfRelease.setText(movie.getDateOfRelease());
 
                 Glide.with(this)
@@ -52,7 +52,7 @@ public class ItemDetailActivity extends AppCompatActivity {
             } else if (tvShow != null) {
                 tvTitle.setText(tvShow.getTitle());
                 tvDescription.setText(Integer.parseInt(tvShow.getDescription()));
-                tvUserScore.setText(tvShow.getUserScore() + " " + getResources().getString(R.string.user_score));
+                tvUserScore.setText(String.format("%s " + getString(R.string.user_score), movie.getUserScore()));
                 tvDateOfRelease.setText(tvShow.getDateOfRelease());
 
                 Glide.with(this)
