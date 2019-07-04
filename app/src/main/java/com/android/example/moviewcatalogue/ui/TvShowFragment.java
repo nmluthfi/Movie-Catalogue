@@ -31,8 +31,9 @@ public class TvShowFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.list_item, container, false);
 
         initComponent(rootView);
-        tvShows.addAll(TvShowsData.getListData());
         initRecyclerView();
+
+        tvShows.addAll(TvShowsData.getListData());
 
         return rootView;
     }

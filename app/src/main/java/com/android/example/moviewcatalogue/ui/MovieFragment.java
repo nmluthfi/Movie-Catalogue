@@ -31,8 +31,9 @@ public class MovieFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.list_item, container, false);
 
         initComponent(rootView);
-        movies.addAll(MoviesData.getListData());
         initRecyclerView();
+
+        movies.addAll(MoviesData.getListData());
 
         return rootView;
     }
