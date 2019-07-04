@@ -32,20 +32,21 @@ public class MovieDetailActivity extends AppCompatActivity {
 
             tvTitle.setText(movie.getTitle());
             tvDescription.setText(Integer.parseInt(movie.getDescription()));
-            tvUserScore.setText(movie.getUserScore() + " of 100");
+            tvUserScore.setText(movie.getUserScore() + "/100");
             tvDateOfRelease.setText(movie.getDateOfRelease());
 
             Glide.with(this)
                     .load(movie.getImgPhoto())
                     .apply(new RequestOptions().override(150, 250))
                     .into(imgPoster);
+
+            ActionBar actionBar = getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setDisplayHomeAsUpEnabled(true);
+                actionBar.setTitle(movie.getTitle());
+            }
         }
 
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle(movie.getTitle());
-        }
     }
 
     private void initComponent() {

@@ -3,45 +3,38 @@ package com.android.example.moviewcatalogue.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.android.example.moviewcatalogue.R;
-import com.android.example.moviewcatalogue.adapter.MovieAdapter;
-import com.android.example.moviewcatalogue.data.MoviesData;
-import com.android.example.moviewcatalogue.model.Movie;
-
-import java.util.ArrayList;
+import com.android.example.moviewcatalogue.adapter.FragmentAdapter;
 
 public class MainActivity extends AppCompatActivity {
-
-    private RecyclerView recyclerView;
-    private ArrayList<Movie> movies = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initComponent();
-        initRecyclerView();
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setElevation(0f);
+        }
 
-        movies.addAll(MoviesData.getListData());
+        initView();
     }
 
-    private void initRecyclerView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        MovieAdapter movieAdapter = new MovieAdapter(this);
-        movieAdapter.setmData(movies);
-        recyclerView.setAdapter(movieAdapter);
-    }
+    private void initView() {
+        ViewPager viewPager = findViewById(R.id.viewpager);
+        FragmentAdapter adapter = new FragmentAdapter(this, getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
 
-    private void initComponent() {
-        recyclerView = findViewById(R.id.rv_list);
-        recyclerView.setHasFixedSize(true);
+        TabLayout tabLayout = findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
