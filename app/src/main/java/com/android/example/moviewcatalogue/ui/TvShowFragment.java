@@ -11,16 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.example.moviewcatalogue.R;
-import com.android.example.moviewcatalogue.adapter.MovieAdapter;
-import com.android.example.moviewcatalogue.data.MoviesData;
-import com.android.example.moviewcatalogue.model.Movie;
+import com.android.example.moviewcatalogue.adapter.TvShowAdapter;
+import com.android.example.moviewcatalogue.data.TvShowsData;
+import com.android.example.moviewcatalogue.model.TvShow;
 
 import java.util.ArrayList;
 
 public class TvShowFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private ArrayList<Movie> movies = new ArrayList<>();
+    private ArrayList<TvShow> tvShows = new ArrayList<>();
 
     public TvShowFragment() {
     }
@@ -31,7 +31,7 @@ public class TvShowFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.list_item, container, false);
 
         initComponent(rootView);
-        movies.addAll(MoviesData.getListData());
+        tvShows.addAll(TvShowsData.getListData());
         initRecyclerView();
 
         return rootView;
@@ -39,9 +39,9 @@ public class TvShowFragment extends Fragment {
 
     private void initRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        MovieAdapter movieAdapter = new MovieAdapter(getContext());
-        movieAdapter.setmData(movies);
-        recyclerView.setAdapter(movieAdapter);
+        TvShowAdapter tvShowAdapter = new TvShowAdapter(getContext());
+        tvShowAdapter.setmData(tvShows);
+        recyclerView.setAdapter(tvShowAdapter);
     }
 
     private void initComponent(View container) {

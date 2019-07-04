@@ -9,16 +9,16 @@ import java.util.List;
 public class TvShowsData {
 
     public static String[][] data = new String[][]{
-            {"Aquaman", "2018", "70", String.valueOf(R.drawable.poster_aquaman), String.valueOf(R.string.aquaman_description)},
-            {"A Star is Born", "2018", "65", String.valueOf(R.drawable.poster_a_star), String.valueOf(R.string.a_star_is_born_description)},
-            {"Avengers Infinity War", "2018", "50", String.valueOf(R.drawable.poster_avengerinfinity), String.valueOf(R.string.avengers_infinity_description)},
-            {"Bird Box", "2017", "90", String.valueOf(R.drawable.poster_birdbox), String.valueOf(R.string.bird_box_description)},
-            {"Bohemian Rhapsody", "2019", "83", String.valueOf(R.drawable.poster_bohemian), String.valueOf(R.string.boheiman_rhapsody_description)},
-            {"Bumble Bee", "2018", "74", String.valueOf(R.drawable.poster_bumblebee), String.valueOf(R.string.bumble_bee_description)},
-            {"CREED II", "2018", "67", String.valueOf(R.drawable.poster_creed), String.valueOf(R.string.creed_description)},
-            {"Once Upon A Deadpool", "2018", "55", String.valueOf(R.drawable.poster_deadpool), String.valueOf(R.string.deadpool_description)},
-            {"How to Train Your Dragon: The Hidden World", "2019", "90", String.valueOf(R.drawable.poster_dragon), String.valueOf(R.string.how_to_train_description)},
-            {"Dragon Ball Broly", "2018", "100", String.valueOf(R.drawable.poster_dragonball), String.valueOf(R.string.dragon_ball_description)}
+            {"Arrow", "2012", "58", String.valueOf(R.drawable.poster_arrow), String.valueOf(R.string.arrow_description)},
+            {"Doom Patrol", "2019", "61", String.valueOf(R.drawable.poster_doom_patrol), String.valueOf(R.string.doom_patrol_description)},
+            {"Fairy Tail ", "2009", "64", String.valueOf(R.drawable.poster_fairytail), String.valueOf(R.string.fairy_tail_description)},
+            {"Family Guy ", "1999", "65", String.valueOf(R.drawable.poster_family_guy), String.valueOf(R.string.family_guy_description)},
+            {"The Flash", "2014", "67", String.valueOf(R.drawable.poster_flash), String.valueOf(R.string.flash_description)},
+            {"Game of Thrones", "2011", "81", String.valueOf(R.drawable.poster_god), String.valueOf(R.string.game_of_thrones_description)},
+            {"Gotham", "2014", "69", String.valueOf(R.drawable.poster_gotham), String.valueOf(R.string.gotham_description)},
+            {"Grey's Anatomy ", "2005", "62", String.valueOf(R.drawable.poster_grey_anatomy), String.valueOf(R.string.grey_description)},
+            {"Hanna", "2019", "64", String.valueOf(R.drawable.poster_hanna), String.valueOf(R.string.hanna_description)},
+            {"Marvel's Iron Fist", "2017", "61", String.valueOf(R.drawable.poster_iron_fist), String.valueOf(R.string.iron_fist_description)}
     };
 
     public static List<TvShow> getListData() {
