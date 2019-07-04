@@ -7,6 +7,7 @@
     <string name="date_of_release">Date of Release</string>
     <string name="film_rating">Film Rating</string>
     <string name="change_language">Change language</string>
+    <string name="user_score">/100</string>
 
     <string name="category_movie">movie</string>
     <string name="category_tv_show">Tv Show</string>
@@ -41,6 +42,5 @@
     <string name="dragon_ball_description">
         As Goku investigates the destruction of the Southern Galaxy, Vegeta is taken to be King of the New Planet Vegeta, and to destroy the Legendary Super Saiyan, Broly.man, half-Atlantean brother and true heir to the throne.
     </string>
-
 
 </resources>

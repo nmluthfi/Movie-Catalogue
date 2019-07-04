@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestOptions;
 public class MovieDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_MOVIE = "extra_movie";
+    public static final String EXTRA_TV_SHOW = "extra_tv_show";
 
     private TextView tvTitle, tvDescription, tvUserScore, tvDateOfRelease;
     private ImageView imgPoster;
@@ -27,23 +28,25 @@ public class MovieDetailActivity extends AppCompatActivity {
         initComponent();
 
         Intent intentThatStartThisActivity = getIntent();
-        Movie movie = intentThatStartThisActivity.getParcelableExtra(EXTRA_MOVIE);
         if (intentThatStartThisActivity != null) {
+            Movie movie = intentThatStartThisActivity.getParcelableExtra(EXTRA_MOVIE);
 
-            tvTitle.setText(movie.getTitle());
-            tvDescription.setText(Integer.parseInt(movie.getDescription()));
-            tvUserScore.setText(movie.getUserScore() + "/100");
-            tvDateOfRelease.setText(movie.getDateOfRelease());
+            if (movie != null) {
+                tvTitle.setText(movie.getTitle());
+                tvDescription.setText(Integer.parseInt(movie.getDescription()));
+                tvUserScore.setText(movie.getUserScore() + " " + getResources().getString(R.string.user_score));
+                tvDateOfRelease.setText(movie.getDateOfRelease());
 
-            Glide.with(this)
-                    .load(movie.getImgPhoto())
-                    .apply(new RequestOptions().override(150, 250))
-                    .into(imgPoster);
+                Glide.with(this)
+                        .load(movie.getImgPhoto())
+                        .apply(new RequestOptions().override(150, 250))
+                        .into(imgPoster);
 
-            ActionBar actionBar = getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.setDisplayHomeAsUpEnabled(true);
-                actionBar.setTitle(movie.getTitle());
+                ActionBar actionBar = getSupportActionBar();
+                if (actionBar != null) {
+                    actionBar.setDisplayHomeAsUpEnabled(true);
+                    actionBar.setTitle(movie.getTitle());
+                }
             }
         }
 

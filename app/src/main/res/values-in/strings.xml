@@ -7,6 +7,10 @@
     <string name="date_of_release">Tanggal Rilis</string>
     <string name="film_rating">Ulasan Film</string>
     <string name="change_language">Ubah bahasa</string>
+    <string name="user_score">/100</string>
+
+    <string name="category_movie">Film</string>*
+    <string name="category_tv_show">Acara Tv</string>
 
     <string name="aquaman_description">
         Dulunya merupakan rumah bagi peradaban paling maju di Bumi, Atlantis sekarang merupakan kerajaan bawah laut yang diperintah oleh Raja Orm yang haus kekuasaan. Dengan pasukan yang sangat besar, Orm berencana untuk menaklukkan orang-orang samudera yang tersisa dan kemudian ke permukaan dunia. Yang menghalangi jalannya adalah Arthur Curry, lelaki setengah manusia Orm, setengah saudara Atlantis dan pewaris sejati takhta.
@@ -36,8 +40,5 @@
     <string name="dragon_ball_description">
         Saat Goku menyelidiki penghancuran Galaksi Selatan, Vegeta dianggap sebagai Raja dari Planet Baru Vegeta, dan untuk menghancurkan Super Saiyan Legendaris, Broly.man, saudara lelaki Atlantis yang setengah dan pewaris sejati takhta.
     </string>
-
-    <string name="category_movie">Film</string>
-    <string name="category_tv_show">Acara Tv</string>
 
 </resources>
