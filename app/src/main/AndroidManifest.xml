@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.MovieDetailActivity"
+            android:name=".ui.ItemDetailActivity"
             android:parentActivityName=".ui.MainActivity">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data

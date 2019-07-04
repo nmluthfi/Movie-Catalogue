@@ -12,7 +12,7 @@ import com.android.example.moviewcatalogue.model.Movie;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-public class MovieDetailActivity extends AppCompatActivity {
+public class ItemDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_MOVIE = "extra_movie";
     public static final String EXTRA_TV_SHOW = "extra_tv_show";

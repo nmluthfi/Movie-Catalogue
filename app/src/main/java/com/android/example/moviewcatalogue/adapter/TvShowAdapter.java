@@ -12,50 +12,52 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.example.moviewcatalogue.R;
-import com.android.example.moviewcatalogue.model.Movie;
+import com.android.example.moviewcatalogue.model.TvShow;
 import com.android.example.moviewcatalogue.ui.ItemDetailActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
-public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
+public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder> {
 
     private Context mContext;
-    private ArrayList<Movie> mData;
+    private ArrayList<TvShow> mData;
 
-    public MovieAdapter(Context mContext) {
+    public TvShowAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
-    public ArrayList<Movie> getmData() {
+    public ArrayList<TvShow> getmData() {
         return mData;
     }
 
-    public void setmData(ArrayList<Movie> mData) {
+    public void setmData(ArrayList<TvShow> mData) {
         this.mData = mData;
     }
 
     @NonNull
     @Override
-    public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_list, viewGroup,
+    public TvShowViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View rootView = LayoutInflater.from(mContext).inflate(R.layout.item_list, viewGroup,
                 false);
-        return new MovieViewHolder(view);
+
+        return new TvShowViewHolder(rootView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, final int position) {
-        final Movie movie = mData.get(position);
-        movieViewHolder.tvTitle.setText(movie.getTitle());
-        movieViewHolder.tvDescription.setText(Integer.parseInt(movie.getDescription()));
+    public void onBindViewHolder(@NonNull TvShowViewHolder tvShowViewHolder, final int position) {
+        TvShow tvShow = mData.get(position);
+
+        tvShowViewHolder.tvTitle.setText(tvShow.getTitle());
+        tvShowViewHolder.tvDescription.setText(Integer.parseInt(tvShow.getDescription()));
 
         Glide.with(mContext)
-                .load(movie.getImgPhoto())
+                .load(tvShow.getImgPhoto())
                 .apply(new RequestOptions().override(100, 150))
-                .into(movieViewHolder.ivPoster);
+                .into(tvShowViewHolder.ivPoster);
 
-        movieViewHolder.btnView.setOnClickListener(new View.OnClickListener() {
+        tvShowViewHolder.btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openItemDetailActivity(mData.get(position));
@@ -68,20 +70,19 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         return mData.size();
     }
 
-    private void openItemDetailActivity(Movie movie) {
+    private void openItemDetailActivity(TvShow tvShow) {
         Intent startMoveDetailActivityyIntent = new Intent(mContext, ItemDetailActivity.class);
-        startMoveDetailActivityyIntent.putExtra(ItemDetailActivity.EXTRA_MOVIE, movie);
+        startMoveDetailActivityyIntent.putExtra(ItemDetailActivity.EXTRA_TV_SHOW, tvShow);
         mContext.startActivity(startMoveDetailActivityyIntent);
     }
 
-    public class MovieViewHolder extends RecyclerView.ViewHolder {
-
+    public class TvShowViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle, tvDescription;
         ImageView ivPoster;
         Button btnView;
 
-        public MovieViewHolder(@NonNull View itemView) {
+        public TvShowViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvTitle = itemView.findViewById(R.id.tv_title);
