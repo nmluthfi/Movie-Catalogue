@@ -8,6 +8,9 @@
     <string name="film_rating">Film Rating</string>
     <string name="change_language">Change language</string>
 
+    <string name="category_movie">movie</string>
+    <string name="category_tv_show">Tv Show</string>
+
     <string name="aquaman_description">
         Once home to the most advanced civilization on Earth, Atlantis is now an underwater kingdom ruled by the power-hungry King Orm. With a vast army at his disposal, Orm plans to conquer the remaining oceanic people and then the surface world. Standing in his way is Arthur Curry, Orms half-human, half-Atlantean brother and true heir to the throne.
     </string>
@@ -39,7 +42,5 @@
         As Goku investigates the destruction of the Southern Galaxy, Vegeta is taken to be King of the New Planet Vegeta, and to destroy the Legendary Super Saiyan, Broly.man, half-Atlantean brother and true heir to the throne.
     </string>
 
-    <string name="category_movie">movie</string>
-    <string name="category_tv_show">Tv Show</string>
 
 </resources>

@@ -14,7 +14,8 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/poster_aquaman" />
+        app:srcCompat="@drawable/poster_aquaman"
+        android:contentDescription="@string/movie_poster" />
 
     <TextView
         android:id="@+id/tv_title"
