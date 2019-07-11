@@ -20,21 +20,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setElevation(0f);
-        }
-
         initView();
-    }
+        initActionBar();
 
-    private void initView() {
-        ViewPager viewPager = findViewById(R.id.viewpager);
-        FragmentAdapter adapter = new FragmentAdapter(this, getSupportFragmentManager());
-        viewPager.setAdapter(adapter);
-
-        TabLayout tabLayout = findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
@@ -50,5 +38,23 @@ public class MainActivity extends AppCompatActivity {
             startActivity(mIntent);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void initActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setElevation(0f);
+        }
+    }
+
+    private void initView() {
+        ViewPager viewPager = findViewById(R.id.viewpager);
+        FragmentAdapter adapter = new FragmentAdapter(this, getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+
+        TabLayout tabLayout = findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.getTabAt(0).setIcon(R.drawable.video_camera);
+        tabLayout.getTabAt(1).setIcon(R.drawable.tv_show);
     }
 }

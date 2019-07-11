@@ -64,6 +64,14 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowView
                 openItemDetailActivity(mData.get(position));
             }
         });
+
+        tvShowViewHolder.btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openItemDetailActivity(mData.get(position));
+            }
+        });
+
     }
 
     @Override

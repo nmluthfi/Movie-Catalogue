@@ -61,6 +61,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             public void onClick(View v) {
                 openItemDetailActivity(mData.get(position));
             }
+        })
+        ;movieViewHolder.btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openItemDetailActivity(mData.get(position));
+            }
         });
     }
 

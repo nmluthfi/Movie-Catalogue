@@ -11,13 +11,12 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/img_photo"
             android:layout_width="100dp"
-            android:layout_height="150dp"
+            android:layout_height="0dp"
             android:contentDescription="@string/movie_poster"
             android:scaleType="centerCrop"
             android:src="@drawable/poster_aquaman"
@@ -31,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
             android:layout_toEndOf="@id/img_photo"
             android:layout_toRightOf="@id/img_photo"
             android:ellipsize="end"
@@ -50,6 +50,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:layout_toEndOf="@id/img_photo"
             android:layout_toRightOf="@id/img_photo"
             android:ellipsize="end"
@@ -64,9 +66,11 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:background="@color/colorAccent"
             android:text="@string/btn_view_detail"
             android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_description"
             app:layout_constraintTop_toBottomOf="@+id/tv_description" />
 
