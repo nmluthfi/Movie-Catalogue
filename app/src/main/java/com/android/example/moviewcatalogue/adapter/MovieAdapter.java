@@ -3,6 +3,7 @@ package com.android.example.moviewcatalogue.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,7 +56,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                 .apply(new RequestOptions().override(100, 150))
                 .into(movieViewHolder.ivPoster);
 
-        movieViewHolder.btnView.setOnClickListener(new View.OnClickListener() {
+        movieViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openItemDetailActivity(mData.get(position));
@@ -79,6 +80,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         TextView tvTitle, tvDescription;
         ImageView ivPoster;
         Button btnView;
+        CardView cardView;
 
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -87,6 +89,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             tvDescription = itemView.findViewById(R.id.tv_description);
             ivPoster = itemView.findViewById(R.id.img_photo);
             btnView = itemView.findViewById(R.id.btn_see_moview);
+            cardView = itemView.findViewById(R.id.cv_item);
         }
     }
+    public interface OnClickListener {
+        void onItemClick(int id);
+    }
+
 }
