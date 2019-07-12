@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -52,6 +51,9 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowView
 
         tvShowViewHolder.tvTitle.setText(tvShow.getTitle());
         tvShowViewHolder.tvDescription.setText(Integer.parseInt(tvShow.getDescription()));
+        tvShowViewHolder.tvUserScore.setText(
+                String.format("%s" + mContext.getString(R.string.user_score),
+                        tvShow.getUserScore()));
 
         Glide.with(mContext)
                 .load(tvShow.getImgPhoto())
@@ -64,14 +66,6 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowView
                 openItemDetailActivity(mData.get(position));
             }
         });
-
-        tvShowViewHolder.btnView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openItemDetailActivity(mData.get(position));
-            }
-        });
-
     }
 
     @Override
@@ -87,9 +81,8 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowView
 
     public class TvShowViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvTitle, tvDescription;
+        TextView tvTitle, tvDescription, tvUserScore;
         ImageView ivPoster;
-        Button btnView;
         CardView cardView;
 
         public TvShowViewHolder(@NonNull View itemView) {
@@ -98,7 +91,7 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowView
             tvTitle = itemView.findViewById(R.id.tv_title);
             tvDescription = itemView.findViewById(R.id.tv_description);
             ivPoster = itemView.findViewById(R.id.img_photo);
-            btnView = itemView.findViewById(R.id.btn_see_moview);
+            tvUserScore = itemView.findViewById(R.id.tv_user_score);
             cardView = itemView.findViewById(R.id.cv_item);
         }
     }

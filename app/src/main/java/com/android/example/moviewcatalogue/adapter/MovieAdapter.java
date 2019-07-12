@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -50,6 +49,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         final Movie movie = mData.get(position);
         movieViewHolder.tvTitle.setText(movie.getTitle());
         movieViewHolder.tvDescription.setText(Integer.parseInt(movie.getDescription()));
+        movieViewHolder.tvUserScore.setText(String.format(
+                "%s" + mContext.getString(R.string.user_score),
+                movie.getUserScore()));
 
         Glide.with(mContext)
                 .load(movie.getImgPhoto())
@@ -57,12 +59,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                 .into(movieViewHolder.ivPoster);
 
         movieViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openItemDetailActivity(mData.get(position));
-            }
-        })
-        ;movieViewHolder.btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openItemDetailActivity(mData.get(position));
@@ -83,9 +79,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvTitle, tvDescription;
+        TextView tvTitle, tvDescription, tvUserScore;
         ImageView ivPoster;
-        Button btnView;
         CardView cardView;
 
         public MovieViewHolder(@NonNull View itemView) {
@@ -94,12 +89,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             tvTitle = itemView.findViewById(R.id.tv_title);
             tvDescription = itemView.findViewById(R.id.tv_description);
             ivPoster = itemView.findViewById(R.id.img_photo);
-            btnView = itemView.findViewById(R.id.btn_see_moview);
+            tvUserScore = itemView.findViewById(R.id.tv_user_score);
             cardView = itemView.findViewById(R.id.cv_item);
         }
-    }
-    public interface OnClickListener {
-        void onItemClick(int id);
     }
 
 }
