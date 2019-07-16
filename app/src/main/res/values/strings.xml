@@ -45,6 +45,7 @@
     <string name="iron_fist_description">
         Danny Rand resurfaces 15 years after being presumed dead. Now, with the power of the Iron Fist, he seeks to reclaim his past and fulfill his destiny.
     </string>
+
     <string name="err_msg_load_data">Failed loading data</string>
 
 </resources>

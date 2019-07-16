@@ -46,4 +46,6 @@
         Danny Rand muncul kembali 15 tahun setelah dianggap mati. Sekarang, dengan kekuatan Iron Fist, ia berusaha untuk merebut kembali masa lalunya dan memenuhi takdirnya.
     </string>
 
+    <string name="err_msg_load_data">Gagal memuat data</string>
+
 </resources>

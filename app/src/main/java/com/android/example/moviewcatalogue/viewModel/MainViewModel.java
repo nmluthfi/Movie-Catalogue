@@ -47,7 +47,6 @@ public class MainViewModel extends ViewModel {
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Log.e("ERROR MAIN VIEW MODEL", "ERROR MAIN VIEW MODEL", error);

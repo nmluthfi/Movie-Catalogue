@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.example.moviewcatalogue.R;
@@ -18,8 +20,9 @@ public class ItemDetailActivity extends AppCompatActivity {
     public static final String EXTRA_MOVIE = "extra_movie";
     public static final String EXTRA_TV_SHOW = "extra_tv_show";
 
-    private TextView tvTitle, tvDescription, tvUserScore, tvDateOfRelease;
+    private TextView tvTitle, tvDescription, tvUserScore, tvDateOfRelease, tvFailedLoadData;
     private ImageView imgPoster;
+    private ProgressBar pbLoadData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         if (intentThatStartThisActivity != null) {
             Movie movie = intentThatStartThisActivity.getParcelableExtra(EXTRA_MOVIE);
             TvShow tvShow = intentThatStartThisActivity.getParcelableExtra(EXTRA_TV_SHOW);
+            pbLoadData.setVisibility(View.VISIBLE);
 
             if (movie != null) {
                 tvTitle.setText(movie.getTitle());
@@ -49,6 +53,7 @@ public class ItemDetailActivity extends AppCompatActivity {
                     actionBar.setDisplayHomeAsUpEnabled(true);
                     actionBar.setTitle(movie.getTitle());
                 }
+
             } else if (tvShow != null) {
                 tvTitle.setText(tvShow.getTitle());
                 tvDescription.setText(Integer.parseInt(tvShow.getDescription()));
@@ -65,9 +70,12 @@ public class ItemDetailActivity extends AppCompatActivity {
                     actionBar.setDisplayHomeAsUpEnabled(true);
                     actionBar.setTitle(tvShow.getTitle());
                 }
+            } else {
+                tvFailedLoadData.setVisibility(View.VISIBLE);
             }
         }
 
+        pbLoadData.setVisibility(View.GONE);
     }
 
     private void initComponent() {
@@ -75,7 +83,11 @@ public class ItemDetailActivity extends AppCompatActivity {
         tvDateOfRelease = findViewById(R.id.tv_date_of_release);
         tvDescription = findViewById(R.id.tv_description);
         tvUserScore = findViewById(R.id.tv_user_score);
+        tvFailedLoadData = findViewById(R.id.tv_failed_load_data);
 
         imgPoster = findViewById(R.id.img_photo);
+
+        pbLoadData = findViewById(R.id.pb_loading_detail_data);
+
     }
 }
