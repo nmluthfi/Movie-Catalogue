@@ -47,7 +47,7 @@ public class MovieViewModel extends ViewModel {
             }
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Log.e("ERROR MAIN VIEW MODEL", "ERROR MAIN VIEW MODEL", error);
+                Log.e("ERROR MOVIE VIEW MODEL", "ERROR MOVIE VIEW MODEL", error);
             }
         });
     }

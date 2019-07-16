@@ -1,10 +1,6 @@
 package com.android.example.moviewcatalogue.data;
 
 import com.android.example.moviewcatalogue.R;
-import com.android.example.moviewcatalogue.model.TvShow;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TvShowsData {
 
@@ -21,20 +17,20 @@ public class TvShowsData {
             {"Marvel's Iron Fist", "2017", "61", String.valueOf(R.drawable.poster_iron_fist), String.valueOf(R.string.iron_fist_description)}
     };
 
-    public static List<TvShow> getListData() {
-        TvShow tvShow = null;
-        List<TvShow> list = new ArrayList<>();
-        for (String[] aData : data) {
-            tvShow = new TvShow();
-            tvShow.setTitle(aData[0]);
-            tvShow.setDateOfRelease(aData[1]);
-            tvShow.setUserScore(aData[2]);
-            tvShow.setImgPhoto(Integer.parseInt(aData[3]));
-            tvShow.setDescription(aData[4]);
-
-            list.add(tvShow);
-        }
-
-        return list;
-    }
+//    public static List<TvShow> getListData() {
+//        TvShow tvShow = null;
+//        List<TvShow> list = new ArrayList<>();
+//        for (String[] aData : data) {
+//            tvShow = new TvShow();
+//            tvShow.setTitle(aData[0]);
+//            tvShow.setDateOfFirstAir(aData[1]);
+//            tvShow.setUserScore(aData[2]);
+//            tvShow.setImgPhoto(Integer.parseInt(aData[3]));
+//            tvShow.setDescription(aData[4]);
+//
+//            list.add(tvShow);
+//        }
+//
+//        return list;
+//    }
 }

@@ -64,9 +64,9 @@ public class ItemDetailActivity extends AppCompatActivity {
 
             } else if (tvShow != null) {
                 tvTitle.setText(tvShow.getTitle());
-                tvDescription.setText(Integer.parseInt(tvShow.getDescription()));
+                tvDescription.setText(tvShow.getDescription());
                 tvUserScore.setText(String.format("%s" + getString(R.string.user_score), tvShow.getUserScore()));
-                tvDateOfRelease.setText(tvShow.getDateOfRelease());
+                tvDateOfRelease.setText(tvShow.getDateOfFirstAir());
 
                 Glide.with(this)
                         .load(tvShow.getImgPhoto())

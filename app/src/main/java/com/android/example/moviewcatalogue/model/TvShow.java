@@ -2,6 +2,10 @@ package com.android.example.moviewcatalogue.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -9,8 +13,35 @@ public class TvShow implements Parcelable {
 
     private int id;
     private Double userScore;
-    private String title, description, dateOfRelease, imgPhoto;
+    private String title, description, dateOfFirstAir, imgPhoto;
     private ArrayList<Integer> genreId = new ArrayList<>();
+
+    public TvShow(JSONObject currentTvShow) {
+        try {
+            int id = currentTvShow.getInt("id");
+            double userScore = currentTvShow.getDouble("vote_average");
+            String title = currentTvShow.getString("name");
+            String description = currentTvShow.getString("overview");
+            String dateOfRelase = currentTvShow.getString("first_air_date");
+            String photoUrl = currentTvShow.getString("poster_path");
+            String posterPath = "https://image.tmdb.org/t/p/w342/" + photoUrl;
+
+            JSONArray genre_ids = currentTvShow.getJSONArray("genre_ids");
+            for (int i = 0; i < genre_ids.length(); i++) {
+                this.genreId.add(genre_ids.getInt(i));
+            }
+
+            this.id = id;
+            this.userScore = userScore;
+            this.title = title;
+            this.description = description;
+            this.dateOfFirstAir = dateOfRelase;
+            this.imgPhoto = posterPath;
+            Log.d("TV show", title);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public TvShow() {
     }
@@ -47,12 +78,12 @@ public class TvShow implements Parcelable {
         this.description = description;
     }
 
-    public String getDateOfRelease() {
-        return dateOfRelease;
+    public String getDateOfFirstAir() {
+        return dateOfFirstAir;
     }
 
-    public void setDateOfRelease(String dateOfRelease) {
-        this.dateOfRelease = dateOfRelease;
+    public void setDateOfFirstAir(String dateOfFirstAir) {
+        this.dateOfFirstAir = dateOfFirstAir;
     }
 
     public String getImgPhoto() {
@@ -82,7 +113,7 @@ public class TvShow implements Parcelable {
         dest.writeValue(this.userScore);
         dest.writeString(this.title);
         dest.writeString(this.description);
-        dest.writeString(this.dateOfRelease);
+        dest.writeString(this.dateOfFirstAir);
         dest.writeString(this.imgPhoto);
         dest.writeList(this.genreId);
     }
@@ -92,7 +123,7 @@ public class TvShow implements Parcelable {
         this.userScore = (Double) in.readValue(Double.class.getClassLoader());
         this.title = in.readString();
         this.description = in.readString();
-        this.dateOfRelease = in.readString();
+        this.dateOfFirstAir = in.readString();
         this.imgPhoto = in.readString();
         this.genreId = new ArrayList<Integer>();
         in.readList(this.genreId, Integer.class.getClassLoader());

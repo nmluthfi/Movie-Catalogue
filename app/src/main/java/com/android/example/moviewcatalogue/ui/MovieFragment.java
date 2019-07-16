@@ -78,7 +78,6 @@ public class MovieFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         movieAdapter= new MovieAdapter(getContext());
         movieAdapter.notifyDataSetChanged();
-//        movieAdapter.setmData(movies);
         recyclerView.setAdapter(movieAdapter);
     }
 

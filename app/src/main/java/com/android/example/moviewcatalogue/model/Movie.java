@@ -37,7 +37,7 @@ public class Movie implements Parcelable {
             this.description = description;
             this.dateOfRelease = dateOfRelase;
             this.imgPhoto = posterPath;
-            Log.d("LOG MVM", String.valueOf(genreId));
+            Log.d("Movie", String.valueOf(genreId));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder> {
 
     private Context mContext;
-    private ArrayList<TvShow> mData;
+    private ArrayList<TvShow> mData = new ArrayList<>();
 
     public TvShowAdapter(Context mContext) {
         this.mContext = mContext;
@@ -33,7 +33,9 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowView
     }
 
     public void setmData(ArrayList<TvShow> mData) {
-        this.mData = mData;
+        this.mData.clear();
+        this.mData.addAll(mData);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -50,7 +52,7 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowView
         TvShow tvShow = mData.get(position);
 
         tvShowViewHolder.tvTitle.setText(tvShow.getTitle());
-        tvShowViewHolder.tvDescription.setText(Integer.parseInt(tvShow.getDescription()));
+        tvShowViewHolder.tvDescription.setText(tvShow.getDescription());
         tvShowViewHolder.tvUserScore.setText(
                 String.format("%s" + mContext.getString(R.string.user_score),
                         tvShow.getUserScore()));
