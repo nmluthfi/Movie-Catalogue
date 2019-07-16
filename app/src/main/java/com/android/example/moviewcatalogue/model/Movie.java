@@ -47,10 +47,6 @@ public class Movie implements Parcelable {
         return genreId;
     }
 
-    public void setGenreId(ArrayList<Integer> genreId) {
-        this.genreId = genreId;
-    }
-
     public int getId() {
         return id;
     }
@@ -63,43 +59,20 @@ public class Movie implements Parcelable {
         return imgPhoto;
     }
 
-    public void setImgPhoto(String imgPhoto) {
-        this.imgPhoto = imgPhoto;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Double getUserScore() {
         return userScore;
     }
 
-    public void setUserScore(Double userScore) {
-        this.userScore = userScore;
-    }
-
     public String getDateOfRelease() {
         return dateOfRelease;
-    }
-
-    public void setDateOfRelease(String dateOfRelease) {
-        this.dateOfRelease = dateOfRelease;
-    }
-
-    public Movie() {
     }
 
     @Override

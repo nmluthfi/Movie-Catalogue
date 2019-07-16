@@ -28,10 +28,6 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowView
         this.mContext = mContext;
     }
 
-    public ArrayList<TvShow> getmData() {
-        return mData;
-    }
-
     public void setmData(ArrayList<TvShow> mData) {
         this.mData.clear();
         this.mData.addAll(mData);

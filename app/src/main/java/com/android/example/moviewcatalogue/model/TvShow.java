@@ -58,48 +58,24 @@ public class TvShow implements Parcelable {
         return userScore;
     }
 
-    public void setUserScore(Double userScore) {
-        this.userScore = userScore;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getDateOfFirstAir() {
         return dateOfFirstAir;
-    }
-
-    public void setDateOfFirstAir(String dateOfFirstAir) {
-        this.dateOfFirstAir = dateOfFirstAir;
     }
 
     public String getImgPhoto() {
         return imgPhoto;
     }
 
-    public void setImgPhoto(String imgPhoto) {
-        this.imgPhoto = imgPhoto;
-    }
-
     public ArrayList<Integer> getGenreId() {
         return genreId;
-    }
-
-    public void setGenreId(ArrayList<Integer> genreId) {
-        this.genreId = genreId;
     }
 
     @Override

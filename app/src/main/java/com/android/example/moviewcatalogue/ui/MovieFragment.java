@@ -59,7 +59,7 @@ public class MovieFragment extends Fragment {
         public void onChanged(@Nullable ArrayList<Movie> movies) {
             if (movies != null) {
                 movieAdapter.setmData(movies);
-                pbLoadData.setVisibility(View.GONE);
+                showLoading(false);
             } else {
                 tvFailedLoadData.setVisibility(View.VISIBLE);
             }

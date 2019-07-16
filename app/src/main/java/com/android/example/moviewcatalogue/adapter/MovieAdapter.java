@@ -28,10 +28,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         this.mContext = mContext;
     }
 
-    public ArrayList<Movie> getmData() {
-        return mData;
-    }
-
     public void setmData(ArrayList<Movie> mData) {
         this.mData.clear();
         this.mData.addAll(mData);
