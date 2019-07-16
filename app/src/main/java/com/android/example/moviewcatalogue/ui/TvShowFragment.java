@@ -28,14 +28,16 @@ public class TvShowFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.list_item, container, false);
+        return inflater.inflate(R.layout.list_item, container, false);
+    }
 
-        initComponent(rootView);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initComponent(view);
         initRecyclerView();
 
         tvShows.addAll(TvShowsData.getListData());
-
-        return rootView;
     }
 
     private void initRecyclerView() {

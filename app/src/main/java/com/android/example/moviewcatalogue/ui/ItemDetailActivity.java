@@ -35,8 +35,8 @@ public class ItemDetailActivity extends AppCompatActivity {
 
             if (movie != null) {
                 tvTitle.setText(movie.getTitle());
-                tvDescription.setText(Integer.parseInt(movie.getDescription()));
-                tvUserScore.setText(String.format("%s " + getString(R.string.user_score), movie.getUserScore()));
+                tvDescription.setText(movie.getDescription());
+                tvUserScore.setText(String.format("%s" + getString(R.string.user_score), movie.getUserScore()));
                 tvDateOfRelease.setText(movie.getDateOfRelease());
 
                 Glide.with(this)

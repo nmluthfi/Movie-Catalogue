@@ -58,5 +58,6 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(R.drawable.video_camera);
         tabLayout.getTabAt(1).setIcon(R.drawable.tv_show);
+
     }
 }

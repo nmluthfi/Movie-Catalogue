@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     private Context mContext;
-    private ArrayList<Movie> mData;
+    private ArrayList<Movie> mData = new ArrayList<>();
 
     public MovieAdapter(Context mContext) {
         this.mContext = mContext;
@@ -33,7 +33,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     }
 
     public void setmData(ArrayList<Movie> mData) {
-        this.mData = mData;
+        this.mData.clear();
+        this.mData.addAll(mData);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -48,7 +50,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, final int position) {
         final Movie movie = mData.get(position);
         movieViewHolder.tvTitle.setText(movie.getTitle());
-        movieViewHolder.tvDescription.setText(Integer.parseInt(movie.getDescription()));
+        movieViewHolder.tvDescription.setText(movie.getDescription());
         movieViewHolder.tvUserScore.setText(String.format(
                 "%s" + mContext.getString(R.string.user_score),
                 movie.getUserScore()));

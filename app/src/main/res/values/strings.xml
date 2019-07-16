@@ -7,7 +7,7 @@
     <string name="date_of_release">Date of Release</string>
     <string name="film_rating">Film Rating</string>
     <string name="change_language">Change language</string>
-    <string name="user_score">/100</string>
+    <string name="user_score">/10</string>
 
     <string name="category_movie">movie</string>
     <string name="category_tv_show">Tv Show</string>
@@ -79,5 +79,6 @@
     <string name="iron_fist_description">
         Danny Rand resurfaces 15 years after being presumed dead. Now, with the power of the Iron Fist, he seeks to reclaim his past and fulfill his destiny.
     </string>
+    <string name="err_msg_load_data">Failed loading data</string>
 
 </resources>

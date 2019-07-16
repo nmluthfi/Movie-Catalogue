@@ -28,8 +28,8 @@ public class MoviesData {
             movie = new Movie();
             movie.setTitle(aData[0]);
             movie.setDateOfRelease(aData[1]);
-            movie.setUserScore(aData[2]);
-            movie.setImgPhoto(Integer.parseInt(aData[3]));
+            movie.setUserScore(Double.valueOf(aData[2]));
+            movie.setImgPhoto((aData[3]));
             movie.setDescription(aData[4]);
 
             list.add(movie);

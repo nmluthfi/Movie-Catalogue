@@ -2,17 +2,52 @@ package com.android.example.moviewcatalogue.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
+
+import org.json.JSONObject;
 
 public class Movie implements Parcelable {
 
-    private int imgPhoto;
-    private String title, description, userScore, dateOfRelease;
+    private int id;
+    private Double userScore;
+    private String title, description, dateOfRelease, imgPhoto;
 
-    public int getImgPhoto() {
+    public Movie(JSONObject currentMovie) {
+        try {
+            int id = currentMovie.getInt("id");
+            double userScore = currentMovie.getDouble("vote_average");
+            String title = currentMovie.getString("title");
+            String description = currentMovie.getString("overview");
+            String dateOfRelase = currentMovie.getString("release_date");
+            String photoUrl = currentMovie.getString("poster_path");
+
+            String posterPath = "https://image.tmdb.org/t/p/w342/" + photoUrl;
+
+            this.id = id;
+            this.userScore = userScore;
+            this.title = title;
+            this.description = description;
+            this.dateOfRelease = dateOfRelase;
+            this.imgPhoto = posterPath;
+            Log.d("LOG MVM", String.valueOf(title));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getImgPhoto() {
         return imgPhoto;
     }
 
-    public void setImgPhoto(int imgPhoto) {
+    public void setImgPhoto(String imgPhoto) {
         this.imgPhoto = imgPhoto;
     }
 
@@ -32,11 +67,11 @@ public class Movie implements Parcelable {
         this.description = description;
     }
 
-    public String getUserScore() {
+    public Double getUserScore() {
         return userScore;
     }
 
-    public void setUserScore(String userScore) {
+    public void setUserScore(Double userScore) {
         this.userScore = userScore;
     }
 
@@ -48,6 +83,9 @@ public class Movie implements Parcelable {
         this.dateOfRelease = dateOfRelease;
     }
 
+    public Movie() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -55,22 +93,21 @@ public class Movie implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.imgPhoto);
+        dest.writeInt(this.id);
+        dest.writeValue(this.userScore);
         dest.writeString(this.title);
         dest.writeString(this.description);
-        dest.writeString(this.userScore);
         dest.writeString(this.dateOfRelease);
-    }
-
-    public Movie() {
+        dest.writeString(this.imgPhoto);
     }
 
     protected Movie(Parcel in) {
-        this.imgPhoto = in.readInt();
+        this.id = in.readInt();
+        this.userScore = (Double) in.readValue(Double.class.getClassLoader());
         this.title = in.readString();
         this.description = in.readString();
-        this.userScore = in.readString();
         this.dateOfRelease = in.readString();
+        this.imgPhoto = in.readString();
     }
 
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {
