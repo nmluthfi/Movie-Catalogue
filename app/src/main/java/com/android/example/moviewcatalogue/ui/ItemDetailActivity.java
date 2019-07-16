@@ -46,7 +46,7 @@ public class ItemDetailActivity extends AppCompatActivity {
                 tvUserScore.setText(String.format("%s" + getString(R.string.user_score), movie.getUserScore()));
                 tvDateOfRelease.setText(movie.getDateOfRelease());
 
-                ArrayList<String> genreInString = GenreChecks.CheckGenre(movie.getGenreId());
+                ArrayList<String> genreInString = GenreChecks.MovieGenre(movie.getGenreId());
                 for (int i = 0; i < genreInString.size(); i++) {
                     tvGenre.setText(genreInString.get(i));
                 }
@@ -67,6 +67,11 @@ public class ItemDetailActivity extends AppCompatActivity {
                 tvDescription.setText(tvShow.getDescription());
                 tvUserScore.setText(String.format("%s" + getString(R.string.user_score), tvShow.getUserScore()));
                 tvDateOfRelease.setText(tvShow.getDateOfFirstAir());
+
+                ArrayList<String> genreInString = GenreChecks.TvShowGenre(tvShow.getGenreId());
+                for (int i = 0; i < genreInString.size(); i++) {
+                    tvGenre.setText(genreInString.get(i));
+                }
 
                 Glide.with(this)
                         .load(tvShow.getImgPhoto())
