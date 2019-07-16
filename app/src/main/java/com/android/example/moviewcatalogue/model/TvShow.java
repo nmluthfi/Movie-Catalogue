@@ -3,20 +3,32 @@ package com.android.example.moviewcatalogue.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+
 public class TvShow implements Parcelable {
 
-    private int imgPhoto;
-    private String title, description, userScore, dateOfRelease;
+    private int id;
+    private Double userScore;
+    private String title, description, dateOfRelease, imgPhoto;
+    private ArrayList<Integer> genreId = new ArrayList<>();
 
     public TvShow() {
     }
 
-    public int getImgPhoto() {
-        return imgPhoto;
+    public int getId() {
+        return id;
     }
 
-    public void setImgPhoto(int imgPhoto) {
-        this.imgPhoto = imgPhoto;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Double getUserScore() {
+        return userScore;
+    }
+
+    public void setUserScore(Double userScore) {
+        this.userScore = userScore;
     }
 
     public String getTitle() {
@@ -35,20 +47,28 @@ public class TvShow implements Parcelable {
         this.description = description;
     }
 
-    public String getUserScore() {
-        return userScore;
-    }
-
-    public void setUserScore(String userScore) {
-        this.userScore = userScore;
-    }
-
     public String getDateOfRelease() {
         return dateOfRelease;
     }
 
     public void setDateOfRelease(String dateOfRelease) {
         this.dateOfRelease = dateOfRelease;
+    }
+
+    public String getImgPhoto() {
+        return imgPhoto;
+    }
+
+    public void setImgPhoto(String imgPhoto) {
+        this.imgPhoto = imgPhoto;
+    }
+
+    public ArrayList<Integer> getGenreId() {
+        return genreId;
+    }
+
+    public void setGenreId(ArrayList<Integer> genreId) {
+        this.genreId = genreId;
     }
 
     @Override
@@ -58,22 +78,27 @@ public class TvShow implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.imgPhoto);
+        dest.writeInt(this.id);
+        dest.writeValue(this.userScore);
         dest.writeString(this.title);
         dest.writeString(this.description);
-        dest.writeString(this.userScore);
         dest.writeString(this.dateOfRelease);
+        dest.writeString(this.imgPhoto);
+        dest.writeList(this.genreId);
     }
 
     protected TvShow(Parcel in) {
-        this.imgPhoto = in.readInt();
+        this.id = in.readInt();
+        this.userScore = (Double) in.readValue(Double.class.getClassLoader());
         this.title = in.readString();
         this.description = in.readString();
-        this.userScore = in.readString();
         this.dateOfRelease = in.readString();
+        this.imgPhoto = in.readString();
+        this.genreId = new ArrayList<Integer>();
+        in.readList(this.genreId, Integer.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<TvShow> CREATOR = new Parcelable.Creator<TvShow>() {
+    public static final Creator<TvShow> CREATOR = new Creator<TvShow>() {
         @Override
         public TvShow createFromParcel(Parcel source) {
             return new TvShow(source);

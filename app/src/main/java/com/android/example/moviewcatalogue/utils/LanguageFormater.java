@@ -13,7 +13,7 @@ public class LanguageFormater {
         if (currentLanguage.equalsIgnoreCase("ind")) {
             language = "id-ID";
         } else if (currentLanguage.equalsIgnoreCase("eng")) {
-            language = "en-En";
+            language = "en-US";
         }
 
         return language;

@@ -6,7 +6,6 @@ import android.arch.lifecycle.ViewModel;
 import android.util.Log;
 
 import com.android.example.moviewcatalogue.model.Movie;
-import com.android.example.moviewcatalogue.model.TvShow;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -18,11 +17,10 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
-public class MainViewModel extends ViewModel {
+public class MovieViewModel extends ViewModel {
 
     private static final String API_KEY = "af47732ccfe067085f13970fee065143";
     private MutableLiveData<ArrayList<Movie>> listMovies = new MutableLiveData<>();
-    private MutableLiveData<ArrayList<TvShow>> listTvShows = new MutableLiveData<>();
 
     public void setMovie(String currentLanguage) {
         // request API
@@ -54,16 +52,9 @@ public class MainViewModel extends ViewModel {
         });
     }
 
-    void setTvShow() {
-        // request API
-    }
 
     public LiveData<ArrayList<Movie>> getMovies() {
         return listMovies;
-    }
-
-    public LiveData<ArrayList<TvShow>> getTvShows() {
-        return listTvShows;
     }
 
 }

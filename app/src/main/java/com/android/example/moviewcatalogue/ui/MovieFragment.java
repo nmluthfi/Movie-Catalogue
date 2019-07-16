@@ -18,14 +18,14 @@ import com.android.example.moviewcatalogue.R;
 import com.android.example.moviewcatalogue.adapter.MovieAdapter;
 import com.android.example.moviewcatalogue.model.Movie;
 import com.android.example.moviewcatalogue.utils.LanguageFormater;
-import com.android.example.moviewcatalogue.viewModel.MainViewModel;
+import com.android.example.moviewcatalogue.viewModel.MovieViewModel;
 
 import java.util.ArrayList;
 
 public class MovieFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private MainViewModel movieViewModel;
+    private MovieViewModel movieViewModel;
     private MovieAdapter movieAdapter;
 
     private ProgressBar pbLoadData;
@@ -86,7 +86,7 @@ public class MovieFragment extends Fragment {
         recyclerView = container.findViewById(R.id.rv_list);
         recyclerView.setHasFixedSize(true);
 
-        movieViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
         movieViewModel.getMovies().observe(this, getMovie);
 
         pbLoadData = container.findViewById(R.id.pb_loading_list_data);
