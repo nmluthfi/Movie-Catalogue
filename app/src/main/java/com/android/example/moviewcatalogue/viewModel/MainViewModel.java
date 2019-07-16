@@ -1,4 +1,4 @@
-package com.android.example.moviewcatalogue.ViewModel;
+package com.android.example.moviewcatalogue.viewModel;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
@@ -24,11 +24,12 @@ public class MainViewModel extends ViewModel {
     private MutableLiveData<ArrayList<Movie>> listMovies = new MutableLiveData<>();
     private MutableLiveData<ArrayList<TvShow>> listTvShows = new MutableLiveData<>();
 
-    public void setMovie() {
+    public void setMovie(String currentLanguage) {
         // request API
         AsyncHttpClient client = new AsyncHttpClient();
         final ArrayList<Movie> listItem = new ArrayList<>();
-        String url = "https://api.themoviedb.org/3/discover/movie?api_key=" + API_KEY;
+        String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=" + API_KEY +
+                "&language=" + currentLanguage;
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

@@ -13,40 +13,6 @@
     <string name="category_tv_show">Tv Show</string>
 
     <!--
-        String resource untuk localization data Movie
-    -->
-    <string name="aquaman_description">
-        Once home to the most advanced civilization on Earth, Atlantis is now an underwater kingdom ruled by the power-hungry King Orm. With a vast army at his disposal, Orm plans to conquer the remaining oceanic people and then the surface world. Standing in his way is Arthur Curry, Orms half-human, half-Atlantean brother and true heir to the throne.
-    </string>
-    <string name="a_star_is_born_description">
-        Seasoned musician Jackson Maine discovers and falls in love with struggling artist Ally. She has just about given up on her dream to make it big as a singer until Jack coaxes her into the spotlight. But even as Allys career takes off, the personal side of their relationship is breaking down, as Jack fights an ongoing battle with his own internal demons.
-    </string>
-    <string name="avengers_infinity_description">
-        As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain.
-    </string>
-    <string name="bird_box_description">
-        Five years after an ominous unseen presence drives most of society to suicide, a survivor and her two children make a desperate bid to reach safety.
-    </string>
-    <string name="boheiman_rhapsody_description">
-        Singer Freddie Mercury, guitarist Brian May, drummer Roger Taylor and bass guitarist John Deacon take the music world by storm when they form the rock n roll band Queen in 1970. Hit songs become instant classics. When Mercurys increasingly wild lifestyle starts to spiral out of control, Queen soon faces its greatest challenge yet finding a way to keep the band together amid the success and excess.
-    </string>
-    <string name="bumble_bee_description">
-        On the run in the year 1987, Bumblebee finds refuge in a junkyard in a small Californian beach town. Charlie, on the cusp of turning 18 and trying to find her place in the world, discovers Bumblebee, battle-scarred and broken. When Charlie revives him, she quickly learns this is no ordinary yellow VW bug. Featured Crew
-    </string>
-    <string name="creed_description">
-        Between personal obligations and training for his next big fight against an opponent with ties to his familys past, Adonis Creed is up against the challenge of his life.
-    </string>
-    <string name="deadpool_description">
-        A kidnapped Fred Savage is forced to endure Deadpools PG-13 rendition of Deadpool 2 as a Princess Bride-esque story thats full of magic, wonder and zero Fs.
-    </string>
-    <string name="how_to_train_description">
-        As Hiccup fulfills his dream of creating a peaceful dragon utopia, Toothless’ discovery of an untamed, elusive mate draws the Night Fury away. When danger mounts at home and Hiccup’s reign as village chief is tested, both dragon and rider must make impossible decisions to save their kind.
-    </string>
-    <string name="dragon_ball_description">
-        As Goku investigates the destruction of the Southern Galaxy, Vegeta is taken to be King of the New Planet Vegeta, and to destroy the Legendary Super Saiyan, Broly.man, half-Atlantean brother and true heir to the throne.
-    </string>
-
-    <!--
         String resource untuk localization data TvShow
     -->
     <string name="arrow_description">

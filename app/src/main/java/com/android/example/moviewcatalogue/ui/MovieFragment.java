@@ -25,7 +25,6 @@ import java.util.ArrayList;
 public class MovieFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    //    private ArrayList<Movie> movies = new ArrayList<>();
     private MainViewModel movieViewModel;
     private MovieAdapter movieAdapter;
 
@@ -38,7 +37,6 @@ public class MovieFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //        movies.addAll(MoviesData.getListData());
         return inflater.inflate(R.layout.list_item, container, false);
     }
 
