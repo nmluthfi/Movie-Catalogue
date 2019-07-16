@@ -15,9 +15,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.example.moviewcatalogue.R;
-import com.android.example.moviewcatalogue.ViewModel.MainViewModel;
 import com.android.example.moviewcatalogue.adapter.MovieAdapter;
 import com.android.example.moviewcatalogue.model.Movie;
+import com.android.example.moviewcatalogue.utils.LanguageFormater;
+import com.android.example.moviewcatalogue.viewModel.MainViewModel;
 
 import java.util.ArrayList;
 
@@ -51,7 +52,7 @@ public class MovieFragment extends Fragment {
     }
 
     private void loadData() {
-        movieViewModel.setMovie();
+        movieViewModel.setMovie(LanguageFormater.checkCurrentLanguage());
         showLoading(true);
     }
 
