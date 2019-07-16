@@ -12,15 +12,18 @@ import android.widget.TextView;
 import com.android.example.moviewcatalogue.R;
 import com.android.example.moviewcatalogue.model.Movie;
 import com.android.example.moviewcatalogue.model.TvShow;
+import com.android.example.moviewcatalogue.utils.GenreChecks;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+
+import java.util.ArrayList;
 
 public class ItemDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_MOVIE = "extra_movie";
     public static final String EXTRA_TV_SHOW = "extra_tv_show";
 
-    private TextView tvTitle, tvDescription, tvUserScore, tvDateOfRelease, tvFailedLoadData;
+    private TextView tvTitle, tvDescription, tvUserScore, tvDateOfRelease, tvFailedLoadData, tvGenre;
     private ImageView imgPoster;
     private ProgressBar pbLoadData;
 
@@ -42,6 +45,11 @@ public class ItemDetailActivity extends AppCompatActivity {
                 tvDescription.setText(movie.getDescription());
                 tvUserScore.setText(String.format("%s" + getString(R.string.user_score), movie.getUserScore()));
                 tvDateOfRelease.setText(movie.getDateOfRelease());
+
+                ArrayList<String> genreInString = GenreChecks.CheckGenre(movie.getGenreId());
+                for (int i = 0; i < genreInString.size(); i++) {
+                    tvGenre.setText(genreInString.get(i));
+                }
 
                 Glide.with(this)
                         .load(movie.getImgPhoto())
@@ -83,6 +91,8 @@ public class ItemDetailActivity extends AppCompatActivity {
         tvDateOfRelease = findViewById(R.id.tv_date_of_release);
         tvDescription = findViewById(R.id.tv_description);
         tvUserScore = findViewById(R.id.tv_user_score);
+        tvGenre = findViewById(R.id.tv_genre);
+
         tvFailedLoadData = findViewById(R.id.tv_failed_load_data);
 
         imgPoster = findViewById(R.id.img_photo);

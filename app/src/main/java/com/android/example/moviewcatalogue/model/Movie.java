@@ -4,13 +4,17 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class Movie implements Parcelable {
 
     private int id;
     private Double userScore;
     private String title, description, dateOfRelease, imgPhoto;
+    private ArrayList<Integer> genreId = new ArrayList<>();
 
     public Movie(JSONObject currentMovie) {
         try {
@@ -20,8 +24,12 @@ public class Movie implements Parcelable {
             String description = currentMovie.getString("overview");
             String dateOfRelase = currentMovie.getString("release_date");
             String photoUrl = currentMovie.getString("poster_path");
-
             String posterPath = "https://image.tmdb.org/t/p/w342/" + photoUrl;
+
+            JSONArray genre_ids = currentMovie.getJSONArray("genre_ids");
+            for (int i = 0; i < genre_ids.length(); i++) {
+                this.genreId.add(genre_ids.getInt(i));
+            }
 
             this.id = id;
             this.userScore = userScore;
@@ -29,10 +37,18 @@ public class Movie implements Parcelable {
             this.description = description;
             this.dateOfRelease = dateOfRelase;
             this.imgPhoto = posterPath;
-            Log.d("LOG MVM", String.valueOf(title));
+            Log.d("LOG MVM", String.valueOf(genreId));
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<Integer> getGenreId() {
+        return genreId;
+    }
+
+    public void setGenreId(ArrayList<Integer> genreId) {
+        this.genreId = genreId;
     }
 
     public int getId() {
@@ -99,6 +115,7 @@ public class Movie implements Parcelable {
         dest.writeString(this.description);
         dest.writeString(this.dateOfRelease);
         dest.writeString(this.imgPhoto);
+        dest.writeList(this.genreId);
     }
 
     protected Movie(Parcel in) {
@@ -108,6 +125,8 @@ public class Movie implements Parcelable {
         this.description = in.readString();
         this.dateOfRelease = in.readString();
         this.imgPhoto = in.readString();
+        this.genreId = new ArrayList<Integer>();
+        in.readList(this.genreId, Integer.class.getClassLoader());
     }
 
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {

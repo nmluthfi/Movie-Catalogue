@@ -47,5 +47,6 @@
     </string>
 
     <string name="err_msg_load_data">Failed loading data</string>
+    <string name="genre">Genre</string>
 
 </resources>
