@@ -2,8 +2,11 @@ package com.android.example.moviewcatalogue.ui.main_menu.detail_item;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -23,8 +26,11 @@ public class ItemDetailActivity extends AppCompatActivity {
     public static final String EXTRA_TV_SHOW = "extra_tv_show";
 
     private TextView tvTitle, tvDescription, tvUserScore, tvDateOfRelease, tvFailedLoadData, tvGenre;
-    private ImageView ivPoster, ivBackdrop;
+    private ImageView ivBackdrop;
     private ProgressBar pbLoadData;
+    private Menu menu;
+
+    private boolean isFavorite = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +99,29 @@ public class ItemDetailActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(movie.getTitle());
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_item_detail, menu);
+        this.menu = menu;
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_favorite) {
+            MenuItem favorite = menu.findItem(R.id.action_favorite);
+            if (!isFavorite) {
+                favorite.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_white));
+                isFavorite = true;
+            } else if (isFavorite) {
+                favorite.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_border_white));
+                isFavorite = false;
+            }
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void initComponent() {

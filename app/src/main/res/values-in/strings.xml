@@ -12,40 +12,9 @@
     <string name="category_movie">Film</string>*
     <string name="category_tv_show">Acara Tv</string>
 
-    <!--
-        String resource untuk localization data TvShow
-    -->
-    <string name="arrow_description">
-        Playboy miliarder manja, Oliver Queen, hilang dan diduga tewas ketika kapal pesiarnya hilang di laut. Dia kembali lima tahun kemudian seorang pria yang berubah, bertekad untuk membersihkan kota sebagai main hakim sendiri bersenjatakan busur.
-    </string>
-    <string name="doom_patrol_description">
-        Anggota Patroli Doom masing-masing mengalami kecelakaan mengerikan yang memberi mereka kemampuan manusia super - tetapi juga membuat mereka terluka dan cacat. Trauma dan tertindas, tim menemukan tujuan melalui Ketua, yang menyatukan mereka untuk menyelidiki fenomena aneh yang ada - dan untuk melindungi Bumi dari apa yang mereka temukan.
-    </string>
-    <string name="fairy_tail_description">
-        Lucy adalah seorang gadis berusia 17 tahun, yang ingin menjadi penyihir penuh. Suatu hari ketika mengunjungi Kota Harujion, dia bertemu Natsu, seorang pemuda yang mudah sakit karena segala jenis transportasi. Tapi Natsu bukan sembarang anak biasa, ia adalah anggota dari salah satu serikat penyihir paling terkenal di dunia: Fairy Tail.
-    </string>
-    <string name="family_guy_description">
-        Seri animasi animasi Freaking Sweet yang sakit, terpelintir, dan salah, menampilkan petualangan keluarga Griffin yang disfungsional. Peter yang kikuk dan Lois yang sudah lama menderita memiliki tiga anak. Stewie (bayi yang brilian tetapi sadis yang bertekad membunuh ibunya dan mengambil alih dunia), Meg (yang tertua, dan merupakan gadis yang paling tidak populer di kota) dan Chris (anak tengah, dia tidak terlalu cerdas tetapi memiliki hasrat untuk film ). Anggota terakhir keluarga itu adalah Brian - anjing yang bisa bicara dan lebih dari sekadar hewan peliharaan, ia menjaga Stewie, sementara menghirup Martinis dan memilah-milah masalah hidupnya sendiri.
-    </string>
-    <string name="flash_description">
-        Setelah akselerator partikel menyebabkan badai aneh, Penyelidik CSI Barry Allen disambar petir dan jatuh koma. Beberapa bulan kemudian dia terbangun dengan kekuatan kecepatan super, memberinya kemampuan untuk bergerak melalui Central City seperti malaikat penjaga yang tak terlihat. Meskipun awalnya senang dengan kekuatan barunya, Barry terkejut menemukan bahwa dia bukan satu-satunya "manusia meta" yang diciptakan setelah ledakan akselerator - dan tidak semua orang menggunakan kekuatan baru mereka untuk kebaikan. Barry bermitra dengan S.T.A.R. Lab dan mendedikasikan hidupnya untuk melindungi yang tidak bersalah. Untuk saat ini, hanya beberapa teman dekat dan rekan yang tahu bahwa Barry secara harfiah adalah manusia tercepat, tetapi tidak lama sebelum dunia mengetahui apa yang menjadi Barry Allen ... The Flash.
-    </string>
-    <string name="game_of_thrones_description">
-        Tujuh keluarga bangsawan berjuang untuk menguasai tanah mitos Westeros. Gesekan antara rumah-rumah mengarah ke perang skala penuh. Semua sementara kejahatan yang sangat kuno terbangun di utara terjauh. Di tengah-tengah perang, perintah militer yang diabaikan, Night\'s Watch, adalah yang berdiri di antara alam manusia dan kengerian es di luarnya.
-    </string>
-    <string name="gotham_description">
-        Before there was Batman, there was GOTHAM.\nEveryone knows the name Commissioner Gordon. He is one of the crime world\'s greatest foes, a man whose reputation is synonymous with law and order. But what is known of Gordon\'s story and his rise from rookie detective to Police Commissioner\? What did it take to navigate the multiple layers of corruption that secretly ruled Gotham City, the spawning ground of the world\'s most iconic villains\? And what circumstances created them the larger than life personas who would become Catwoman, The Penguin, The Riddler, Two-Face and The Joker\?
-    </string>
-    <string name="grey_description">
-        Ikuti kehidupan pribadi dan profesional sekelompok dokter di Rumah Sakit Gray Sloan Memorial di Seattle.
-    </string>
-    <string name="hanna_description">
-        Drama yang menegangkan dan menjadi dewasa ini mengikuti perjalanan seorang gadis muda yang luar biasa ketika ia menghindari pengejaran tanpa henti dari seorang agen CIA yang tidak ada buku dan mencoba untuk menggali kebenaran di balik siapa dirinya. Berdasarkan film Joe Wright 2011.
-    </string>
-    <string name="iron_fist_description">
-        Danny Rand muncul kembali 15 tahun setelah dianggap mati. Sekarang, dengan kekuatan Iron Fist, ia berusaha untuk merebut kembali masa lalunya dan memenuhi takdirnya.
-    </string>
-
     <string name="err_msg_load_data">Gagal memuat data</string>
+    <string name="genre">Genre</string>
+    <string name="category_favorite">Favorit</string>
+    <string name="backdrop">Latar Belakang</string>
 
 </resources>
