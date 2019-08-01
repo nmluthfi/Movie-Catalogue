@@ -1,4 +1,4 @@
-package com.android.example.moviewcatalogue.ui;
+package com.android.example.moviewcatalogue.ui.main_menu;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,12 +14,12 @@ import android.view.MenuItem;
 import com.android.example.moviewcatalogue.R;
 import com.android.example.moviewcatalogue.adapter.FragmentAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class FavoriteActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_favorite);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         initView();

@@ -1,4 +1,4 @@
-package com.android.example.moviewcatalogue.ui;
+package com.android.example.moviewcatalogue.ui.main_menu.fragment;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -15,23 +15,24 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.example.moviewcatalogue.R;
-import com.android.example.moviewcatalogue.adapter.MovieAdapter;
-import com.android.example.moviewcatalogue.model.Movie;
+import com.android.example.moviewcatalogue.adapter.TvShowAdapter;
+import com.android.example.moviewcatalogue.model.TvShow;
 import com.android.example.moviewcatalogue.utils.LanguageFormater;
-import com.android.example.moviewcatalogue.viewModel.MovieViewModel;
+import com.android.example.moviewcatalogue.viewModel.TvShowViewModel;
 
 import java.util.ArrayList;
 
-public class MovieFragment extends Fragment {
+public class TvShowFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private MovieViewModel movieViewModel;
-    private MovieAdapter movieAdapter;
+
+    private TvShowViewModel tvShowViewModel;
+    private TvShowAdapter tvShowAdapter;
 
     private ProgressBar pbLoadData;
     private TextView tvFailedLoadData;
 
-    public MovieFragment() {
+    public TvShowFragment() {
     }
 
     @Nullable
@@ -45,20 +46,19 @@ public class MovieFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initComponent(view);
         initRecyclerView();
-
         loadData();
     }
 
     private void loadData() {
-        movieViewModel.setMovie(LanguageFormater.checkCurrentLanguage());
+        tvShowViewModel.setTvShow(LanguageFormater.checkCurrentLanguage());
         showLoading(true);
     }
 
-    private Observer<ArrayList<Movie>> getMovie = new Observer<ArrayList<Movie>>() {
+    private Observer<ArrayList<TvShow>> getTvShow = new Observer<ArrayList<TvShow>>() {
         @Override
-        public void onChanged(@Nullable ArrayList<Movie> movies) {
-            if (movies != null) {
-                movieAdapter.setmData(movies);
+        public void onChanged(@Nullable ArrayList<TvShow> tvShows) {
+            if (tvShows != null) {
+                tvShowAdapter.setmData(tvShows);
                 showLoading(false);
             } else {
                 tvFailedLoadData.setVisibility(View.VISIBLE);
@@ -76,23 +76,20 @@ public class MovieFragment extends Fragment {
 
     private void initRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        movieAdapter= new MovieAdapter(getContext());
-        movieAdapter.notifyDataSetChanged();
-        recyclerView.setAdapter(movieAdapter);
+        tvShowAdapter = new TvShowAdapter(getContext());
+        tvShowAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(tvShowAdapter);
     }
 
     private void initComponent(View container) {
         recyclerView = container.findViewById(R.id.rv_list);
         recyclerView.setHasFixedSize(true);
 
-        movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
-        movieViewModel.getMovies().observe(this, getMovie);
+        tvShowViewModel = ViewModelProviders.of(this).get(TvShowViewModel.class);
+        tvShowViewModel.getTvShows().observe(this, getTvShow);
 
         pbLoadData = container.findViewById(R.id.pb_loading_list_data);
 
         tvFailedLoadData = container.findViewById(R.id.tv_failed_load_data);
     }
-
 }
-
-

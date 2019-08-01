@@ -9,7 +9,7 @@
     <string name="change_language">Change language</string>
     <string name="user_score">/10</string>
 
-    <string name="category_movie">movie</string>
+    <string name="category_movie">Movie</string>
     <string name="category_tv_show">Tv Show</string>
 
     <!--
@@ -48,5 +48,6 @@
 
     <string name="err_msg_load_data">Failed loading data</string>
     <string name="genre">Genre</string>
+    <string name="category_favorite">Favorite</string>
 
 </resources>

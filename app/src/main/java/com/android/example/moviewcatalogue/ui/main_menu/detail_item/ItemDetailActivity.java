@@ -1,4 +1,4 @@
-package com.android.example.moviewcatalogue.ui;
+package com.android.example.moviewcatalogue.ui.main_menu.detail_item;
 
 import android.content.Intent;
 import android.os.Bundle;

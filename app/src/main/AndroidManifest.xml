@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android.example.moviewcatalogue">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,15 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.main_menu.MainActivity"></activity>
         <activity
-            android:name=".ui.ItemDetailActivity"
-            android:parentActivityName=".ui.MainActivity">
+            android:name=".ui.main_menu.detail_item.ItemDetailActivity"
+            android:parentActivityName=".ui.main_menu.FavoriteActivity">
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.MainActivity" />
+                android:value=".ui.main_menu.FavoriteActivity" />
         </activity>
-        <activity android:name=".ui.MainActivity"
+        <activity
+            android:name=".ui.main_menu.FavoriteActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

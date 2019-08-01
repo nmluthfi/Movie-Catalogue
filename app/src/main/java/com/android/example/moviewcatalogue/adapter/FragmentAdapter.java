@@ -7,8 +7,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.android.example.moviewcatalogue.R;
-import com.android.example.moviewcatalogue.ui.MovieFragment;
-import com.android.example.moviewcatalogue.ui.TvShowFragment;
+import com.android.example.moviewcatalogue.ui.main_menu.fragment.MovieFragment;
+import com.android.example.moviewcatalogue.ui.main_menu.fragment.TvShowFragment;
 
 public class FragmentAdapter extends FragmentPagerAdapter {
 

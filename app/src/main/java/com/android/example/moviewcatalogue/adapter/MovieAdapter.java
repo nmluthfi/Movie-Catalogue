@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.android.example.moviewcatalogue.R;
 import com.android.example.moviewcatalogue.model.Movie;
-import com.android.example.moviewcatalogue.ui.ItemDetailActivity;
+import com.android.example.moviewcatalogue.ui.main_menu.detail_item.ItemDetailActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
