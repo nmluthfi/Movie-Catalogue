@@ -1,6 +1,10 @@
 package com.android.example.moviewcatalogue.ui.main_menu.detail_item;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
@@ -29,6 +33,7 @@ public class ItemDetailActivity extends AppCompatActivity {
     private ImageView ivBackdrop;
     private ProgressBar pbLoadData;
     private Menu menu;
+    private Dialog dialogShowPhotoFullscreen;
 
     private boolean isFavorite = false;
 
@@ -57,7 +62,8 @@ public class ItemDetailActivity extends AppCompatActivity {
         pbLoadData.setVisibility(View.GONE);
     }
 
-    private void showTvShowData(TvShow tvShow) {
+
+    private void showTvShowData(final TvShow tvShow) {
         tvTitle.setText(tvShow.getTitle());
         tvDescription.setText(tvShow.getDescription());
         tvUserScore.setText(String.format("%s" + getString(R.string.user_score), tvShow.getUserScore()));
@@ -69,7 +75,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         }
 
         Glide.with(this)
-                .load(tvShow.getBackropPhoto())
+                .load(tvShow.getBackdropPhoto())
                 .into(ivBackdrop);
 
         ActionBar actionBar = getSupportActionBar();
@@ -77,9 +83,16 @@ public class ItemDetailActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(tvShow.getTitle());
         }
+
+        ivBackdrop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFullscreenPhoto(tvShow.getBackdropPhoto());
+            }
+        });
     }
 
-    private void showMovieData(Movie movie) {
+    private void showMovieData(final Movie movie) {
         tvTitle.setText(movie.getTitle());
         tvDescription.setText(movie.getDescription());
         tvUserScore.setText(String.format("%s" + getString(R.string.user_score), movie.getUserScore()));
@@ -99,6 +112,37 @@ public class ItemDetailActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(movie.getTitle());
         }
+
+        ivBackdrop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFullscreenPhoto(movie.getBackdropPhoto());
+            }
+        });
+    }
+
+    /*
+     * Method for launch dialogShowPhotoFullscreen contains full screen image
+     * */
+    public void showFullscreenPhoto(String backdropPhoto) {
+        dialogShowPhotoFullscreen.setContentView(R.layout.dialog_poster_fullscreen);
+
+        ImageView ivPhotoFullScreen = dialogShowPhotoFullscreen.findViewById(R.id.iv_photo_fullscreen);
+
+        Glide.with(getBaseContext())
+                .load(backdropPhoto)
+                .override(600, 250)
+                .into(ivPhotoFullScreen);
+
+        dialogShowPhotoFullscreen.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogShowPhotoFullscreen.show();
+
+        dialogShowPhotoFullscreen.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                dialog.dismiss();
+            }
+        });
     }
 
     @Override
@@ -124,6 +168,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     private void initComponent() {
         tvTitle = findViewById(R.id.tv_title);
         tvDateOfRelease = findViewById(R.id.tv_date_of_release);
@@ -136,5 +181,9 @@ public class ItemDetailActivity extends AppCompatActivity {
         ivBackdrop = findViewById(R.id.iv_poster_backdrop);
 
         pbLoadData = findViewById(R.id.pb_loading_detail_data);
+
+        dialogShowPhotoFullscreen = new Dialog(this, android.R.style.Theme_Light);
+
     }
+
 }

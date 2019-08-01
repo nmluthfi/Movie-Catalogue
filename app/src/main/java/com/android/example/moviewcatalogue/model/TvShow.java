@@ -13,7 +13,7 @@ public class TvShow implements Parcelable {
 
     private int id;
     private Double userScore;
-    private String title, description, dateOfFirstAir, imgPhoto, backropPhoto;
+    private String title, description, dateOfFirstAir, imgPhoto, backdropPhoto;
     private ArrayList<Integer> genreId = new ArrayList<>();
 
     public TvShow(JSONObject currentTvShow) {
@@ -40,7 +40,7 @@ public class TvShow implements Parcelable {
             this.description = description;
             this.dateOfFirstAir = dateOfRelase;
             this.imgPhoto = posterPath;
-            this.backropPhoto = backdropPath;
+            this.backdropPhoto = backdropPath;
             Log.d("TV show", title);
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,8 +50,8 @@ public class TvShow implements Parcelable {
     public TvShow() {
     }
 
-    public String getBackropPhoto() {
-        return backropPhoto;
+    public String getBackdropPhoto() {
+        return backdropPhoto;
     }
 
     public int getId() {
@@ -100,7 +100,7 @@ public class TvShow implements Parcelable {
         dest.writeString(this.description);
         dest.writeString(this.dateOfFirstAir);
         dest.writeString(this.imgPhoto);
-        dest.writeString(this.backropPhoto);
+        dest.writeString(this.backdropPhoto);
         dest.writeList(this.genreId);
     }
 
@@ -111,7 +111,7 @@ public class TvShow implements Parcelable {
         this.description = in.readString();
         this.dateOfFirstAir = in.readString();
         this.imgPhoto = in.readString();
-        this.backropPhoto = in.readString();
+        this.backdropPhoto = in.readString();
         this.genreId = new ArrayList<Integer>();
         in.readList(this.genreId, Integer.class.getClassLoader());
     }
