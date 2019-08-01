@@ -19,7 +19,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/img_photo"
+            android:id="@+id/iv_poster"
             android:layout_width="100dp"
             android:layout_height="0dp"
             android:contentDescription="@string/movie_poster"
@@ -36,14 +36,14 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:layout_toEndOf="@id/img_photo"
-            android:layout_toRightOf="@id/img_photo"
+            android:layout_toEndOf="@id/iv_poster"
+            android:layout_toRightOf="@id/iv_poster"
             android:ellipsize="end"
             android:maxLines="2"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/tv_description"
-            app:layout_constraintStart_toEndOf="@+id/img_photo"
+            app:layout_constraintStart_toEndOf="@+id/iv_poster"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Aquaman" />
 
@@ -57,12 +57,12 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:layout_toEndOf="@id/img_photo"
-            android:layout_toRightOf="@id/img_photo"
+            android:layout_toEndOf="@id/iv_poster"
+            android:layout_toRightOf="@id/iv_poster"
             android:ellipsize="end"
             android:maxLines="3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/img_photo"
+            app:layout_constraintStart_toEndOf="@+id/iv_poster"
             app:layout_constraintTop_toBottomOf="@+id/tv_title"
             tools:text="Once home to the most advanced civilization on Earth, Atlantis is now an underwater kingdom ruled by the power-hungry King Orm. With a vast army at his disposal, Orm plans to conquer the remaining oceanic people and then the surface world. Standing in his way is Arthur Curry, Orm's half-human, half-Atlantean brother and true heir to the throne." />
 

@@ -14,7 +14,6 @@ import com.android.example.moviewcatalogue.model.Movie;
 import com.android.example.moviewcatalogue.model.TvShow;
 import com.android.example.moviewcatalogue.utils.GenreChecks;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
@@ -24,7 +23,7 @@ public class ItemDetailActivity extends AppCompatActivity {
     public static final String EXTRA_TV_SHOW = "extra_tv_show";
 
     private TextView tvTitle, tvDescription, tvUserScore, tvDateOfRelease, tvFailedLoadData, tvGenre;
-    private ImageView imgPoster;
+    private ImageView ivPoster, ivBackdrop;
     private ProgressBar pbLoadData;
 
     @Override
@@ -52,9 +51,8 @@ public class ItemDetailActivity extends AppCompatActivity {
                 }
 
                 Glide.with(this)
-                        .load(movie.getImgPhoto())
-                        .apply(new RequestOptions().override(150, 250))
-                        .into(imgPoster);
+                        .load(movie.getBackdropPhoto())
+                        .into(ivBackdrop);
 
                 ActionBar actionBar = getSupportActionBar();
                 if (actionBar != null) {
@@ -74,9 +72,8 @@ public class ItemDetailActivity extends AppCompatActivity {
                 }
 
                 Glide.with(this)
-                        .load(tvShow.getImgPhoto())
-                        .apply(new RequestOptions().override(150, 250))
-                        .into(imgPoster);
+                        .load(tvShow.getBackropPhoto())
+                        .into(ivBackdrop);
 
                 ActionBar actionBar = getSupportActionBar();
                 if (actionBar != null) {
@@ -100,7 +97,7 @@ public class ItemDetailActivity extends AppCompatActivity {
 
         tvFailedLoadData = findViewById(R.id.tv_failed_load_data);
 
-        imgPoster = findViewById(R.id.img_photo);
+        ivBackdrop = findViewById(R.id.iv_poster_backdrop);
 
         pbLoadData = findViewById(R.id.pb_loading_detail_data);
 

@@ -13,7 +13,7 @@ public class Movie implements Parcelable {
 
     private int id;
     private Double userScore;
-    private String title, description, dateOfRelease, imgPhoto;
+    private String title, description, dateOfRelease, imgPhoto, backdropPhoto;
     private ArrayList<Integer> genreId = new ArrayList<>();
 
     public Movie(JSONObject currentMovie) {
@@ -24,7 +24,10 @@ public class Movie implements Parcelable {
             String description = currentMovie.getString("overview");
             String dateOfRelase = currentMovie.getString("release_date");
             String photoUrl = currentMovie.getString("poster_path");
-            String posterPath = "https://image.tmdb.org/t/p/w342/" + photoUrl;
+            String backdropUrl = currentMovie.getString("backdrop_path");
+
+            String posterPath = "https://image.tmdb.org/t/p/original/" + photoUrl;
+            String backdropPath = "https://image.tmdb.org/t/p/original/" + backdropUrl;
 
             JSONArray genre_ids = currentMovie.getJSONArray("genre_ids");
             for (int i = 0; i < genre_ids.length(); i++) {
@@ -37,10 +40,15 @@ public class Movie implements Parcelable {
             this.description = description;
             this.dateOfRelease = dateOfRelase;
             this.imgPhoto = posterPath;
+            this.backdropPhoto = backdropPath;
             Log.d("Movie", String.valueOf(genreId));
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public String getBackdropPhoto() {
+        return backdropPhoto;
     }
 
     public ArrayList<Integer> getGenreId() {
@@ -75,6 +83,7 @@ public class Movie implements Parcelable {
         return dateOfRelease;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -88,6 +97,7 @@ public class Movie implements Parcelable {
         dest.writeString(this.description);
         dest.writeString(this.dateOfRelease);
         dest.writeString(this.imgPhoto);
+        dest.writeString(this.backdropPhoto);
         dest.writeList(this.genreId);
     }
 
@@ -98,6 +108,7 @@ public class Movie implements Parcelable {
         this.description = in.readString();
         this.dateOfRelease = in.readString();
         this.imgPhoto = in.readString();
+        this.backdropPhoto = in.readString();
         this.genreId = new ArrayList<Integer>();
         in.readList(this.genreId, Integer.class.getClassLoader());
     }

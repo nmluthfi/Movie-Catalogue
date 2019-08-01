@@ -88,7 +88,7 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowView
 
             tvTitle = itemView.findViewById(R.id.tv_title);
             tvDescription = itemView.findViewById(R.id.tv_description);
-            ivPoster = itemView.findViewById(R.id.img_photo);
+            ivPoster = itemView.findViewById(R.id.iv_poster);
             tvUserScore = itemView.findViewById(R.id.tv_user_score);
             cardView = itemView.findViewById(R.id.cv_item);
         }
