@@ -26,6 +26,7 @@ import java.util.ArrayList;
 
 public class ItemDetailActivity extends AppCompatActivity {
 
+    // This is submission 4
     public static final String EXTRA_MOVIE = "extra_movie";
     public static final String EXTRA_TV_SHOW = "extra_tv_show";
 
