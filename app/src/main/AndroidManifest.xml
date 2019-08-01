@@ -11,24 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.main_menu.MainActivity"></activity>
-        <activity
-            android:name=".ui.main_menu.detail_item.ItemDetailActivity"
-            android:parentActivityName=".ui.main_menu.FavoriteActivity">
-
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.main_menu.FavoriteActivity" />
-        </activity>
-        <activity
-            android:name=".ui.main_menu.FavoriteActivity"
+        <activity android:name=".ui.main_menu.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.main_menu.detail_item.ItemDetailActivity"
+            android:parentActivityName=".ui.main_menu.MainActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.main_menu.MainActivity" />
         </activity>
     </application>
 

@@ -1,4 +1,4 @@
-package com.android.example.moviewcatalogue.ui.main_menu.fragment;
+package com.android.example.moviewcatalogue.ui.main_menu.main_menu_fragment;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,7 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.example.moviewcatalogue.R;
-import com.android.example.moviewcatalogue.adapter.MovieAdapter;
+import com.android.example.moviewcatalogue.adapter.recycler_view.MovieAdapter;
 import com.android.example.moviewcatalogue.model.Movie;
 import com.android.example.moviewcatalogue.utils.LanguageFormater;
 import com.android.example.moviewcatalogue.viewModel.MovieViewModel;
@@ -45,7 +47,7 @@ public class MovieFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initComponent(view);
         initRecyclerView();
-
+        setupActionbar();
         loadData();
     }
 
@@ -76,7 +78,7 @@ public class MovieFragment extends Fragment {
 
     private void initRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        movieAdapter= new MovieAdapter(getContext());
+        movieAdapter = new MovieAdapter(getContext());
         movieAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(movieAdapter);
     }
@@ -92,6 +94,18 @@ public class MovieFragment extends Fragment {
 
         tvFailedLoadData = container.findViewById(R.id.tv_failed_load_data);
     }
+
+    /*
+     * Method fo setting custom title ActionBar depends on the fragment
+     * */
+    private void setupActionbar() {
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(getString(R.string.category_movie));
+            actionBar.show();
+        }
+    }
+
 
 }
 

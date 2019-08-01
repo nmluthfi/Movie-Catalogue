@@ -1,4 +1,4 @@
-package com.android.example.moviewcatalogue.adapter;
+package com.android.example.moviewcatalogue.adapter.recycler_view;
 
 import android.content.Context;
 import android.content.Intent;
