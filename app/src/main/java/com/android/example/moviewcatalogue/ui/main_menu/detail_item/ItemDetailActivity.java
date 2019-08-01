@@ -40,52 +40,59 @@ public class ItemDetailActivity extends AppCompatActivity {
             pbLoadData.setVisibility(View.VISIBLE);
 
             if (movie != null) {
-                tvTitle.setText(movie.getTitle());
-                tvDescription.setText(movie.getDescription());
-                tvUserScore.setText(String.format("%s" + getString(R.string.user_score), movie.getUserScore()));
-                tvDateOfRelease.setText(movie.getDateOfRelease());
-
-                ArrayList<String> genreInString = GenreChecks.MovieGenre(movie.getGenreId());
-                for (int i = 0; i < genreInString.size(); i++) {
-                    tvGenre.setText(genreInString.get(i));
-                }
-
-                Glide.with(this)
-                        .load(movie.getBackdropPhoto())
-                        .into(ivBackdrop);
-
-                ActionBar actionBar = getSupportActionBar();
-                if (actionBar != null) {
-                    actionBar.setDisplayHomeAsUpEnabled(true);
-                    actionBar.setTitle(movie.getTitle());
-                }
-
+               showMovieData(movie);
             } else if (tvShow != null) {
-                tvTitle.setText(tvShow.getTitle());
-                tvDescription.setText(tvShow.getDescription());
-                tvUserScore.setText(String.format("%s" + getString(R.string.user_score), tvShow.getUserScore()));
-                tvDateOfRelease.setText(tvShow.getDateOfFirstAir());
-
-                ArrayList<String> genreInString = GenreChecks.TvShowGenre(tvShow.getGenreId());
-                for (int i = 0; i < genreInString.size(); i++) {
-                    tvGenre.setText(genreInString.get(i));
-                }
-
-                Glide.with(this)
-                        .load(tvShow.getBackropPhoto())
-                        .into(ivBackdrop);
-
-                ActionBar actionBar = getSupportActionBar();
-                if (actionBar != null) {
-                    actionBar.setDisplayHomeAsUpEnabled(true);
-                    actionBar.setTitle(tvShow.getTitle());
-                }
+                showTvShowData(tvShow);
             } else {
                 tvFailedLoadData.setVisibility(View.VISIBLE);
             }
         }
 
         pbLoadData.setVisibility(View.GONE);
+    }
+
+    private void showTvShowData(TvShow tvShow) {
+        tvTitle.setText(tvShow.getTitle());
+        tvDescription.setText(tvShow.getDescription());
+        tvUserScore.setText(String.format("%s" + getString(R.string.user_score), tvShow.getUserScore()));
+        tvDateOfRelease.setText(tvShow.getDateOfFirstAir());
+
+        ArrayList<String> genreInString = GenreChecks.TvShowGenre(tvShow.getGenreId());
+        for (int i = 0; i < genreInString.size(); i++) {
+            tvGenre.setText(genreInString.get(i));
+        }
+
+        Glide.with(this)
+                .load(tvShow.getBackropPhoto())
+                .into(ivBackdrop);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle(tvShow.getTitle());
+        }
+    }
+
+    private void showMovieData(Movie movie) {
+        tvTitle.setText(movie.getTitle());
+        tvDescription.setText(movie.getDescription());
+        tvUserScore.setText(String.format("%s" + getString(R.string.user_score), movie.getUserScore()));
+        tvDateOfRelease.setText(movie.getDateOfRelease());
+
+        ArrayList<String> genreInString = GenreChecks.MovieGenre(movie.getGenreId());
+        for (int i = 0; i < genreInString.size(); i++) {
+            tvGenre.setText(genreInString.get(i));
+        }
+
+        Glide.with(this)
+                .load(movie.getBackdropPhoto())
+                .into(ivBackdrop);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle(movie.getTitle());
+        }
     }
 
     private void initComponent() {
@@ -100,6 +107,5 @@ public class ItemDetailActivity extends AppCompatActivity {
         ivBackdrop = findViewById(R.id.iv_poster_backdrop);
 
         pbLoadData = findViewById(R.id.pb_loading_detail_data);
-
     }
 }
