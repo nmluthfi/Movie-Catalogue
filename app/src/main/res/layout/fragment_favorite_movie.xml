@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.main_menu.main_menu_fragment.favorite_fragment.FavoriteMovieFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/tv_empty_favorite_movie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Favorite Movie"
+        android:text="@string/empty_favorite_movie"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

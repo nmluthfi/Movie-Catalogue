@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.example.moviewcatalogue.R;
+import com.android.example.moviewcatalogue.database.movie.MovieHelper;
 import com.android.example.moviewcatalogue.model.Movie;
 import com.android.example.moviewcatalogue.model.TvShow;
 import com.android.example.moviewcatalogue.utils.GenreChecks;
@@ -29,14 +30,28 @@ public class ItemDetailActivity extends AppCompatActivity {
     // This is submission 4
     public static final String EXTRA_MOVIE = "extra_movie";
     public static final String EXTRA_TV_SHOW = "extra_tv_show";
+    public static final String EXTRA_POSITION = "extra_position";
+    public static final String EXTRA_CATEGORY = "extra_category";
+
+    public static final int REQUEST_ADD = 100;
+    public static final int RESULT_ADD = 101;
+    public static final int RESULT_DELETE = 301;
+
+    private Movie movie;
+    private TvShow tvShow;
 
     private TextView tvTitle, tvDescription, tvUserScore, tvDateOfRelease, tvFailedLoadData, tvGenre;
     private ImageView ivBackdrop;
     private ProgressBar pbLoadData;
     private Menu menu;
+    private MenuItem favorite;
     private Dialog dialogShowPhotoFullscreen;
 
-    private boolean isFavorite = false;
+    private boolean isAlreadyLoved = false;
+    private int position;
+    private String cateogry;
+
+    private MovieHelper movieHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +62,15 @@ public class ItemDetailActivity extends AppCompatActivity {
 
         Intent intentThatStartThisActivity = getIntent();
         if (intentThatStartThisActivity != null) {
-            Movie movie = intentThatStartThisActivity.getParcelableExtra(EXTRA_MOVIE);
-            TvShow tvShow = intentThatStartThisActivity.getParcelableExtra(EXTRA_TV_SHOW);
+            movie = intentThatStartThisActivity.getParcelableExtra(EXTRA_MOVIE);
+            tvShow = intentThatStartThisActivity.getParcelableExtra(EXTRA_TV_SHOW);
             pbLoadData.setVisibility(View.VISIBLE);
 
             if (movie != null) {
-               showMovieData(movie);
+                position = intentThatStartThisActivity.getIntExtra(EXTRA_POSITION, 0);
+                cateogry = intentThatStartThisActivity.getStringExtra(EXTRA_CATEGORY);
+                setFavorite(movieHelper.isAlreadyLoved(movie.getTitle()));
+                showMovieData(movie);
             } else if (tvShow != null) {
                 showTvShowData(tvShow);
             } else {
@@ -98,11 +116,12 @@ public class ItemDetailActivity extends AppCompatActivity {
         tvDescription.setText(movie.getDescription());
         tvUserScore.setText(String.format("%s" + getString(R.string.user_score), movie.getUserScore()));
         tvDateOfRelease.setText(movie.getDateOfRelease());
+        tvGenre.setText(GenreChecks.MovieGenre(movie.getGenreId()));
+//        ArrayList<String> genreInString = GenreChecks.MovieGenre(movie.getGenreId());
+//        for (int i = 0; i < genreInString.size(); i++) {
+//            tvGenre.setText(genreInString.get(i));
+//        }
 
-        ArrayList<String> genreInString = GenreChecks.MovieGenre(movie.getGenreId());
-        for (int i = 0; i < genreInString.size(); i++) {
-            tvGenre.setText(genreInString.get(i));
-        }
 
         Glide.with(this)
                 .load(movie.getBackdropPhoto())
@@ -150,25 +169,28 @@ public class ItemDetailActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_item_detail, menu);
         this.menu = menu;
+        favorite = menu.findItem(R.id.action_favorite);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_favorite) {
-            MenuItem favorite = menu.findItem(R.id.action_favorite);
-            if (!isFavorite) {
-                favorite.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_white));
-                isFavorite = true;
-            } else if (isFavorite) {
-                favorite.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_border_white));
-                isFavorite = false;
-            }
+
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    private void setFavorite(boolean alreadyLoved) {
+        if (alreadyLoved) {
+            isAlreadyLoved = true;
+            favorite.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_white));
+        } else {
+            isAlreadyLoved = false;
+            favorite.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_border_white));
+        }
+    }
 
     private void initComponent() {
         tvTitle = findViewById(R.id.tv_title);
@@ -185,6 +207,7 @@ public class ItemDetailActivity extends AppCompatActivity {
 
         dialogShowPhotoFullscreen = new Dialog(this, android.R.style.Theme_Light);
 
+        movieHelper = MovieHelper.getInstance(getApplicationContext());
     }
 
 }

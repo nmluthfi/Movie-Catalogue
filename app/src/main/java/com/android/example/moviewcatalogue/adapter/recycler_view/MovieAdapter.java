@@ -59,7 +59,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         movieViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openItemDetailActivity(mData.get(position));
+                openItemDetailActivity(mData.get(position), position);
             }
         });
     }
@@ -69,9 +69,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         return mData.size();
     }
 
-    private void openItemDetailActivity(Movie movie) {
+    private void openItemDetailActivity(Movie movie, int position) {
         Intent startMoveDetailActivityyIntent = new Intent(mContext, ItemDetailActivity.class);
         startMoveDetailActivityyIntent.putExtra(ItemDetailActivity.EXTRA_MOVIE, movie);
+        startMoveDetailActivityyIntent.putExtra(ItemDetailActivity.EXTRA_CATEGORY, "Movie");
+        startMoveDetailActivityyIntent.putExtra(ItemDetailActivity.EXTRA_POSITION, position);
         mContext.startActivity(startMoveDetailActivityyIntent);
     }
 

@@ -17,4 +17,7 @@
     <string name="category_favorite">Favorit</string>
     <string name="backdrop">Latar Belakang</string>
 
+    <string name="empty_favorite_movie">Belum ada Film favorite</string>
+    <string name="empty_favorite_tv_show">Belum ada Serial TV favorite</string>
+
 </resources>
