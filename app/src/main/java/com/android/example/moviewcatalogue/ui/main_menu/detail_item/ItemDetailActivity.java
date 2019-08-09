@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.example.moviewcatalogue.R;
 import com.android.example.moviewcatalogue.database.movie.MovieHelper;
@@ -27,15 +29,8 @@ import java.util.ArrayList;
 
 public class ItemDetailActivity extends AppCompatActivity {
 
-    // This is submission 4
-    public static final String EXTRA_MOVIE = "extra_movie";
-    public static final String EXTRA_TV_SHOW = "extra_tv_show";
-    public static final String EXTRA_POSITION = "extra_position";
-    public static final String EXTRA_CATEGORY = "extra_category";
-
-    public static final int REQUEST_ADD = 100;
-    public static final int RESULT_ADD = 101;
-    public static final int RESULT_DELETE = 301;
+    public static final String EXTRA_MOVIE = "extra_movie", EXTRA_TV_SHOW = "extra_tv_show",
+            EXTRA_CATEGORY = "extra_category";
 
     private Movie movie;
     private TvShow tvShow;
@@ -44,11 +39,9 @@ public class ItemDetailActivity extends AppCompatActivity {
     private ImageView ivBackdrop;
     private ProgressBar pbLoadData;
     private Menu menu;
-    private MenuItem favorite;
     private Dialog dialogShowPhotoFullscreen;
 
     private boolean isAlreadyLoved = false;
-    private int position;
     private String cateogry;
 
     private MovieHelper movieHelper;
@@ -64,12 +57,12 @@ public class ItemDetailActivity extends AppCompatActivity {
         if (intentThatStartThisActivity != null) {
             movie = intentThatStartThisActivity.getParcelableExtra(EXTRA_MOVIE);
             tvShow = intentThatStartThisActivity.getParcelableExtra(EXTRA_TV_SHOW);
-            pbLoadData.setVisibility(View.VISIBLE);
+            cateogry = intentThatStartThisActivity.getStringExtra(EXTRA_CATEGORY);
+            Log.d("Category: ", cateogry);
 
+
+            pbLoadData.setVisibility(View.VISIBLE);
             if (movie != null) {
-                position = intentThatStartThisActivity.getIntExtra(EXTRA_POSITION, 0);
-                cateogry = intentThatStartThisActivity.getStringExtra(EXTRA_CATEGORY);
-                setFavorite(movieHelper.isAlreadyLoved(movie.getTitle()));
                 showMovieData(movie);
             } else if (tvShow != null) {
                 showTvShowData(tvShow);
@@ -77,10 +70,15 @@ public class ItemDetailActivity extends AppCompatActivity {
                 tvFailedLoadData.setVisibility(View.VISIBLE);
             }
         }
-
         pbLoadData.setVisibility(View.GONE);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        isAlreadyLoved = movieHelper.isAlreadyLoved(movie.getTitle());
+        Log.d("IsAlreadyLove", String.valueOf(isAlreadyLoved));
+    }
 
     private void showTvShowData(final TvShow tvShow) {
         tvTitle.setText(tvShow.getTitle());
@@ -117,11 +115,6 @@ public class ItemDetailActivity extends AppCompatActivity {
         tvUserScore.setText(String.format("%s" + getString(R.string.user_score), movie.getUserScore()));
         tvDateOfRelease.setText(movie.getDateOfRelease());
         tvGenre.setText(GenreChecks.MovieGenre(movie.getGenreId()));
-//        ArrayList<String> genreInString = GenreChecks.MovieGenre(movie.getGenreId());
-//        for (int i = 0; i < genreInString.size(); i++) {
-//            tvGenre.setText(genreInString.get(i));
-//        }
-
 
         Glide.with(this)
                 .load(movie.getBackdropPhoto())
@@ -141,9 +134,6 @@ public class ItemDetailActivity extends AppCompatActivity {
         });
     }
 
-    /*
-     * Method for launch dialogShowPhotoFullscreen contains full screen image
-     * */
     public void showFullscreenPhoto(String backdropPhoto) {
         dialogShowPhotoFullscreen.setContentView(R.layout.dialog_poster_fullscreen);
 
@@ -169,27 +159,50 @@ public class ItemDetailActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_item_detail, menu);
         this.menu = menu;
-        favorite = menu.findItem(R.id.action_favorite);
+        setFavorite();
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_favorite) {
-
+            if (cateogry.equalsIgnoreCase("Movie")) {
+                if (isAlreadyLoved) {
+                    isAlreadyLoved = false;
+                    unFavoriteMovie();
+                    setFavorite();
+                } else {
+                    isAlreadyLoved = true;
+                    saveFavoriteMovie();
+                    setFavorite();
+                }
+            } else if (cateogry.equalsIgnoreCase("Tv Show")) {
+                Toast.makeText(this, tvShow.getTitle(), Toast.LENGTH_SHORT).show();
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void setFavorite(boolean alreadyLoved) {
-        if (alreadyLoved) {
-            isAlreadyLoved = true;
+    private void setFavorite() {
+        MenuItem favorite = menu.findItem(R.id.action_favorite);
+        if (isAlreadyLoved) {
             favorite.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_white));
         } else {
-            isAlreadyLoved = false;
             favorite.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_border_white));
         }
+    }
+
+    private void saveFavoriteMovie() {
+        movieHelper.open();
+        movieHelper.insertFavoriteMovie(movie);
+        movieHelper.close();
+    }
+
+    private void unFavoriteMovie(){
+        movieHelper.open();
+        movieHelper.deleteFavoriteMovie(movie.getTitle());
+        movieHelper.close();
     }
 
     private void initComponent() {

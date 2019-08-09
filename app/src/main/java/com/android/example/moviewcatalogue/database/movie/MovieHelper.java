@@ -58,12 +58,12 @@ public class MovieHelper {
     public ArrayList<Movie> getAllFavoriteMovie() {
         ArrayList<Movie> arrayList = new ArrayList<>();
         Cursor cursor = database.query(DATABASE_TABLE,
-                    null,
                 null,
                 null,
                 null,
                 null,
-                _ID+ " ASC",
+                null,
+                _ID + " ASC",
                 null);
         cursor.moveToFirst();
 
@@ -81,39 +81,35 @@ public class MovieHelper {
 
                 movie.setUserScore(cursor.getDouble(cursor.getColumnIndexOrThrow(userScore)));
                 movie.setGenreId(cursor.getInt(cursor.getColumnIndexOrThrow(genreId)));
+                arrayList.add(movie);
+                cursor.moveToNext();
             } while (!cursor.isAfterLast());
         }
         cursor.close();
         return arrayList;
     }
 
-    public long inserFavoriteMovie(Movie movie) {
+    public void insertFavoriteMovie(Movie movie) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(title, movie.getTitle());
-        contentValues.put(description, movie.getTitle());
-        contentValues.put(dateOfRelease, movie.getTitle());
-        contentValues.put(imgPhoto, movie.getTitle());
-        contentValues.put(backdropPhoto, movie.getTitle());
-        contentValues.put(userScore, movie.getTitle());
-        contentValues.put(genreId, movie.getTitle());
+        contentValues.put(description, movie.getDescription());
+        contentValues.put(dateOfRelease, movie.getDateOfRelease());
+        contentValues.put(imgPhoto, movie.getImgPhoto());
+        contentValues.put(backdropPhoto, movie.getBackdropPhoto());
+        contentValues.put(userScore, movie.getUserScore());
+        contentValues.put(genreId, movie.getGenreId());
 
-        if (isAlreadyLoved(movie.getTitle())) {
-            database.delete(DATABASE_TABLE, "title = " + movie.getTitle(), null);
-        } else {
-            database.insert(DATABASE_TABLE, null, contentValues);
-        }
-
-        return database.insert(DATABASE_TABLE, null, contentValues);
+        database.insert(DATABASE_TABLE, null, contentValues);
     }
 
-    public boolean isAlreadyLoved(String title) {
+    public boolean isAlreadyLoved(String movieTitle) {
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
         boolean isFavorite = false;
 
         try {
             Cursor cursor;
-            String sql = "SELECT * FROM " + TABLE_MOVIE + " WHERE title =" + title; // you can check it by comparing any unique value
+            String sql = "SELECT * FROM " + DATABASE_TABLE + " WHERE " + title + " = '" + movieTitle + "'"; // you can check it by comparing any unique value
             cursor = db.rawQuery(sql, null);
             isFavorite = cursor.getCount() > 0;
             cursor.close();
@@ -124,7 +120,7 @@ public class MovieHelper {
         return isFavorite;
     }
 
-    public int deleteFavoriteMovie(int id) {
-        return database.delete(TABLE_MOVIE, _ID + " = '" + id + "'", null);
+    public void deleteFavoriteMovie(String movieTitle) {
+        database.delete(DATABASE_TABLE, title + " = '" + movieTitle + "'", null);
     }
 }

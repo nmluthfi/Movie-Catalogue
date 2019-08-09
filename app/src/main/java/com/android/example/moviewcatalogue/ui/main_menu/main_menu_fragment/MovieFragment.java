@@ -105,8 +105,6 @@ public class MovieFragment extends Fragment {
             actionBar.show();
         }
     }
-
-
 }
 
 

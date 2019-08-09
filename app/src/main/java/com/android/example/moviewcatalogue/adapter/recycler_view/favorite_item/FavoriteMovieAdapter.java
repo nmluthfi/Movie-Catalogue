@@ -63,7 +63,7 @@ public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdap
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openItemDetailActivity(listMovies.get(position), position);
+                openItemDetailActivity(listMovies.get(position));
             }
         });
     }
@@ -73,23 +73,11 @@ public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdap
         return listMovies.size();
     }
 
-    private void openItemDetailActivity(Movie movie, int position) {
+    private void openItemDetailActivity(Movie movie) {
         Intent startMoveDetailActivityyIntent = new Intent(activity, ItemDetailActivity.class);
         startMoveDetailActivityyIntent.putExtra(ItemDetailActivity.EXTRA_MOVIE, movie);
         startMoveDetailActivityyIntent.putExtra(ItemDetailActivity.EXTRA_CATEGORY, "Movie");
-        startMoveDetailActivityyIntent.putExtra(ItemDetailActivity.EXTRA_POSITION, position);
         activity.startActivity(startMoveDetailActivityyIntent);
-    }
-
-    public void addItem(Movie movie) {
-        this.listMovies.add(movie);
-        notifyItemInserted(listMovies.size() - 1);
-    }
-
-    public void removeItem(int position) {
-        this.listMovies.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeRemoved(position, listMovies.size());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
