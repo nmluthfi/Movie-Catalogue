@@ -33,7 +33,7 @@ public class FavoriteMovieFragment extends Fragment implements LoadMovieCallback
 
     private static final String EXTRA_STATE = "EXTRA_STATE";
 
-    private RecyclerView rvNotes;
+    private RecyclerView rvFavoriteMovie;
     private ProgressBar progressBar;
     private TextView tvEmptyState;
 
@@ -105,15 +105,15 @@ public class FavoriteMovieFragment extends Fragment implements LoadMovieCallback
 
         tvEmptyState = view.findViewById(R.id.tv_empty_favorite_movie);
 
-        rvNotes = view.findViewById(R.id.rv_favorite_movie);
-        rvNotes.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvNotes.setHasFixedSize(true);
+        rvFavoriteMovie = view.findViewById(R.id.rv_favorite_movie);
+        rvFavoriteMovie.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvFavoriteMovie.setHasFixedSize(true);
 
         movieHelper = MovieHelper.getInstance(getContext());
         movieHelper.open();
 
         adapter = new FavoriteMovieAdapter(getActivity());
-        rvNotes.setAdapter(adapter);
+        rvFavoriteMovie.setAdapter(adapter);
 
         if (savedInstanceState == null) {
             new LoadMovieAsync(movieHelper, this).execute();

@@ -74,6 +74,7 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowView
     private void openItemDetailActivity(TvShow tvShow) {
         Intent startMoveDetailActivityyIntent = new Intent(mContext, ItemDetailActivity.class);
         startMoveDetailActivityyIntent.putExtra(ItemDetailActivity.EXTRA_TV_SHOW, tvShow);
+        startMoveDetailActivityyIntent.putExtra(ItemDetailActivity.EXTRA_CATEGORY, "Tv Show");
         mContext.startActivity(startMoveDetailActivityyIntent);
     }
 

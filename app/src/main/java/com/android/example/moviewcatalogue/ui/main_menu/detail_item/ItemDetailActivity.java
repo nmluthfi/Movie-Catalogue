@@ -16,16 +16,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.example.moviewcatalogue.R;
 import com.android.example.moviewcatalogue.database.movie.MovieHelper;
+import com.android.example.moviewcatalogue.database.tv_show.TvShowHelper;
 import com.android.example.moviewcatalogue.model.Movie;
 import com.android.example.moviewcatalogue.model.TvShow;
 import com.android.example.moviewcatalogue.utils.GenreChecks;
 import com.bumptech.glide.Glide;
-
-import java.util.ArrayList;
 
 public class ItemDetailActivity extends AppCompatActivity {
 
@@ -45,6 +43,7 @@ public class ItemDetailActivity extends AppCompatActivity {
     private String cateogry;
 
     private MovieHelper movieHelper;
+    private TvShowHelper tvShowHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +58,6 @@ public class ItemDetailActivity extends AppCompatActivity {
             tvShow = intentThatStartThisActivity.getParcelableExtra(EXTRA_TV_SHOW);
             cateogry = intentThatStartThisActivity.getStringExtra(EXTRA_CATEGORY);
             Log.d("Category: ", cateogry);
-
 
             pbLoadData.setVisibility(View.VISIBLE);
             if (movie != null) {
@@ -76,7 +74,11 @@ public class ItemDetailActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        isAlreadyLoved = movieHelper.isAlreadyLoved(movie.getTitle());
+        if (movie != null) {
+            isAlreadyLoved = movieHelper.isAlreadyLoved(movie.getTitle());
+        } else if (tvShow != null) {
+            isAlreadyLoved = tvShowHelper.isAlreadyLoved(tvShow.getTitle());
+        }
         Log.d("IsAlreadyLove", String.valueOf(isAlreadyLoved));
     }
 
@@ -85,11 +87,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         tvDescription.setText(tvShow.getDescription());
         tvUserScore.setText(String.format("%s" + getString(R.string.user_score), tvShow.getUserScore()));
         tvDateOfRelease.setText(tvShow.getDateOfFirstAir());
-
-        ArrayList<String> genreInString = GenreChecks.TvShowGenre(tvShow.getGenreId());
-        for (int i = 0; i < genreInString.size(); i++) {
-            tvGenre.setText(genreInString.get(i));
-        }
+        tvGenre.setText(GenreChecks.MovieGenre(tvShow.getGenreId()));
 
         Glide.with(this)
                 .load(tvShow.getBackdropPhoto())
@@ -177,8 +175,15 @@ public class ItemDetailActivity extends AppCompatActivity {
                     setFavorite();
                 }
             } else if (cateogry.equalsIgnoreCase("Tv Show")) {
-                Toast.makeText(this, tvShow.getTitle(), Toast.LENGTH_SHORT).show();
-            }
+                if (isAlreadyLoved) {
+                    isAlreadyLoved = false;
+                    unFavoriteTvShow();
+                    setFavorite();
+                } else {
+                    isAlreadyLoved = true;
+                    saveFavoriteTvShow();
+                    setFavorite();
+                }            }
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -205,6 +210,18 @@ public class ItemDetailActivity extends AppCompatActivity {
         movieHelper.close();
     }
 
+    private void saveFavoriteTvShow() {
+        tvShowHelper.open();
+        tvShowHelper.insertFavoriteTvShow(tvShow);
+        tvShowHelper.close();
+    }
+
+    private void unFavoriteTvShow(){
+        tvShowHelper.open();
+        tvShowHelper.deleteFavoriteTvShow(tvShow.getTitle());
+        tvShowHelper.close();
+    }
+
     private void initComponent() {
         tvTitle = findViewById(R.id.tv_title);
         tvDateOfRelease = findViewById(R.id.tv_date_of_release);
@@ -221,6 +238,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         dialogShowPhotoFullscreen = new Dialog(this, android.R.style.Theme_Light);
 
         movieHelper = MovieHelper.getInstance(getApplicationContext());
+        tvShowHelper = TvShowHelper.getInstance(getApplicationContext());
     }
 
 }

@@ -12,7 +12,6 @@ public class Movie implements Parcelable {
     private int id, genreId;
     private Double userScore;
     private String title, description, dateOfRelease, imgPhoto, backdropPhoto;
-//    private ArrayList<Integer> genreId = new ArrayList<>();
 
     public Movie(JSONObject currentMovie) {
         try {
@@ -29,9 +28,6 @@ public class Movie implements Parcelable {
 
             JSONArray genre_ids = currentMovie.getJSONArray("genre_ids");
             int firstGenre = genre_ids.getInt(0);
-//            for (int i = 0; i < genre_ids.length(); i++) {
-//                this.genreId.add(genre_ids.getInt(i));
-//            }
 
             this.id = id;
             this.userScore = userScore;
@@ -49,7 +45,6 @@ public class Movie implements Parcelable {
 
     public Movie() {
     }
-
 
 
     public void setUserScore(Double userScore) {
@@ -80,17 +75,9 @@ public class Movie implements Parcelable {
         this.backdropPhoto = backdropPhoto;
     }
 
-//    public void setGenreId(ArrayList<Integer> genreId) {
-//        this.genreId = genreId;
-//    }
-
     public String getBackdropPhoto() {
         return backdropPhoto;
     }
-
-//    public ArrayList<Integer> getGenreId() {
-//        return genreId;
-//    }
 
 
     public int getGenreId() {

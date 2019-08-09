@@ -7,14 +7,11 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 public class TvShow implements Parcelable {
 
-    private int id;
+    private int id, genreId;
     private Double userScore;
     private String title, description, dateOfFirstAir, imgPhoto, backdropPhoto;
-    private ArrayList<Integer> genreId = new ArrayList<>();
 
     public TvShow(JSONObject currentTvShow) {
         try {
@@ -29,10 +26,9 @@ public class TvShow implements Parcelable {
             String posterPath = "https://image.tmdb.org/t/p/original/" + photoUrl;
             String backdropPath = "https://image.tmdb.org/t/p/original/" + backdropUrl;
 
+
             JSONArray genre_ids = currentTvShow.getJSONArray("genre_ids");
-            for (int i = 0; i < genre_ids.length(); i++) {
-                this.genreId.add(genre_ids.getInt(i));
-            }
+            int firstGenre = genre_ids.getInt(0);
 
             this.id = id;
             this.userScore = userScore;
@@ -41,6 +37,7 @@ public class TvShow implements Parcelable {
             this.dateOfFirstAir = dateOfRelase;
             this.imgPhoto = posterPath;
             this.backdropPhoto = backdropPath;
+            this.genreId = firstGenre;
             Log.d("TV show", title);
         } catch (Exception e) {
             e.printStackTrace();
@@ -74,8 +71,12 @@ public class TvShow implements Parcelable {
         this.backdropPhoto = backdropPhoto;
     }
 
-    public void setGenreId(ArrayList<Integer> genreId) {
+    public void setGenreId(int genreId) {
         this.genreId = genreId;
+    }
+
+    public int getGenreId() {
+        return genreId;
     }
 
     public String getBackdropPhoto() {
@@ -110,10 +111,6 @@ public class TvShow implements Parcelable {
         return imgPhoto;
     }
 
-    public ArrayList<Integer> getGenreId() {
-        return genreId;
-    }
-
 
     @Override
     public int describeContents() {
@@ -123,25 +120,24 @@ public class TvShow implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
+        dest.writeInt(this.genreId);
         dest.writeValue(this.userScore);
         dest.writeString(this.title);
         dest.writeString(this.description);
         dest.writeString(this.dateOfFirstAir);
         dest.writeString(this.imgPhoto);
         dest.writeString(this.backdropPhoto);
-        dest.writeList(this.genreId);
     }
 
     protected TvShow(Parcel in) {
         this.id = in.readInt();
+        this.genreId = in.readInt();
         this.userScore = (Double) in.readValue(Double.class.getClassLoader());
         this.title = in.readString();
         this.description = in.readString();
         this.dateOfFirstAir = in.readString();
         this.imgPhoto = in.readString();
         this.backdropPhoto = in.readString();
-        this.genreId = new ArrayList<Integer>();
-        in.readList(this.genreId, Integer.class.getClassLoader());
     }
 
     public static final Creator<TvShow> CREATOR = new Creator<TvShow>() {
