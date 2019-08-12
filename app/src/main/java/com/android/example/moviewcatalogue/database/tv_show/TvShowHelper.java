@@ -90,6 +90,7 @@ public class TvShowHelper {
 
     public void insertFavoriteTvShow(TvShow tvShow) {
         ContentValues contentValues = new ContentValues();
+        contentValues.put(_ID, tvShow.getId());
         contentValues.put(title, tvShow.getTitle());
         contentValues.put(description, tvShow.getDescription());
         contentValues.put(dateOfRelease, tvShow.getDateOfFirstAir());
@@ -101,14 +102,14 @@ public class TvShowHelper {
         database.insert(DATABASE_TABLE, null, contentValues);
     }
 
-    public boolean isAlreadyLoved(String tvShowTitle) {
+    public boolean isAlreadyLoved(int tvShowId) {
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
         boolean isFavorite = false;
 
         try {
             Cursor cursor;
-            String sql = "SELECT * FROM " + DATABASE_TABLE + " WHERE " + title + " = '" + tvShowTitle + "'"; // you can check it by comparing any unique value
+            String sql = "SELECT * FROM " + DATABASE_TABLE + " WHERE " + _ID + " = '" + tvShowId + "'"; // you can check it by comparing any unique value
             cursor = db.rawQuery(sql, null);
             isFavorite = cursor.getCount() > 0;
             cursor.close();
@@ -119,7 +120,7 @@ public class TvShowHelper {
         return isFavorite;
     }
 
-    public void deleteFavoriteTvShow(String tvShowTitle) {
-        database.delete(DATABASE_TABLE, title + " = '" + tvShowTitle + "'", null);
+    public void deleteFavoriteTvShow(int tvShowId) {
+        database.delete(DATABASE_TABLE, _ID + " = '" + tvShowId + "'", null);
     }
 }

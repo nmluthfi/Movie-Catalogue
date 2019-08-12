@@ -77,7 +77,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         if (movie != null) {
             isAlreadyLoved = movieHelper.isAlreadyLoved(movie.getId());
         } else if (tvShow != null) {
-            isAlreadyLoved = tvShowHelper.isAlreadyLoved(tvShow.getTitle());
+            isAlreadyLoved = tvShowHelper.isAlreadyLoved(tvShow.getId());
         }
         Log.d("IsAlreadyLove", String.valueOf(isAlreadyLoved));
     }
@@ -218,7 +218,7 @@ public class ItemDetailActivity extends AppCompatActivity {
 
     private void unFavoriteTvShow(){
         tvShowHelper.open();
-        tvShowHelper.deleteFavoriteTvShow(tvShow.getTitle());
+        tvShowHelper.deleteFavoriteTvShow(tvShow.getId());
         tvShowHelper.close();
     }
 
