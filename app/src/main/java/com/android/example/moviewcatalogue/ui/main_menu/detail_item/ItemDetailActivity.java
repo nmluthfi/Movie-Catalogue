@@ -30,6 +30,8 @@ public class ItemDetailActivity extends AppCompatActivity {
     public static final String EXTRA_MOVIE = "extra_movie", EXTRA_TV_SHOW = "extra_tv_show",
             EXTRA_CATEGORY = "extra_category";
 
+    public static final int RESULT_DELETE = 301;
+
     private Movie movie;
     private TvShow tvShow;
 
@@ -48,7 +50,7 @@ public class ItemDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie_detail);
+        setContentView(R.layout.activity_detail);
 
         initComponent();
 
@@ -57,7 +59,7 @@ public class ItemDetailActivity extends AppCompatActivity {
             movie = intentThatStartThisActivity.getParcelableExtra(EXTRA_MOVIE);
             tvShow = intentThatStartThisActivity.getParcelableExtra(EXTRA_TV_SHOW);
             cateogry = intentThatStartThisActivity.getStringExtra(EXTRA_CATEGORY);
-            Log.d("Category: ", cateogry);
+            Log.d("cateogry: ", cateogry);
 
             pbLoadData.setVisibility(View.VISIBLE);
             if (movie != null) {
@@ -183,7 +185,8 @@ public class ItemDetailActivity extends AppCompatActivity {
                     isAlreadyLoved = true;
                     saveFavoriteTvShow();
                     setFavorite();
-                }            }
+                }
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -204,7 +207,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         movieHelper.close();
     }
 
-    private void unFavoriteMovie(){
+    private void unFavoriteMovie() {
         movieHelper.open();
         movieHelper.deleteFavoriteMovie(movie.getId());
         movieHelper.close();
@@ -216,7 +219,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         tvShowHelper.close();
     }
 
-    private void unFavoriteTvShow(){
+    private void unFavoriteTvShow() {
         tvShowHelper.open();
         tvShowHelper.deleteFavoriteTvShow(tvShow.getId());
         tvShowHelper.close();

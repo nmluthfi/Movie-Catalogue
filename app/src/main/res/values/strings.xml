@@ -18,5 +18,6 @@
     <string name="backdrop">backdrop</string>
     <string name="empty_favorite_movie">There is no favorite Movie</string>
     <string name="empty_favorite_tv_show">There is no favorite TvShow</string>
+    <string name="your_favorite">Your Favorite</string>
 
 </resources>

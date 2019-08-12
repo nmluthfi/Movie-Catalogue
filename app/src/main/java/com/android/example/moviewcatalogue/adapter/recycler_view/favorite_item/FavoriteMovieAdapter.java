@@ -77,8 +77,9 @@ public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdap
         Intent startMoveDetailActivityyIntent = new Intent(activity, ItemDetailActivity.class);
         startMoveDetailActivityyIntent.putExtra(ItemDetailActivity.EXTRA_MOVIE, movie);
         startMoveDetailActivityyIntent.putExtra(ItemDetailActivity.EXTRA_CATEGORY, "Movie");
-        activity.startActivity(startMoveDetailActivityyIntent);
+        activity.startActivityForResult(startMoveDetailActivityyIntent, ItemDetailActivity.RESULT_DELETE);
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 

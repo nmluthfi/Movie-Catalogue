@@ -87,7 +87,7 @@ public class FavoriteMovieFragment extends Fragment implements LoadMovieCallback
     @Override
     public void postExecute(ArrayList<Movie> movies) {
         progressBar.setVisibility(View.GONE);
-        if (movies != null) {
+        if (movies.size() != 0) {
             adapter.setListMovies(movies);
             tvEmptyState.setVisibility(View.GONE);
             progressBar.setVisibility(View.GONE);
@@ -128,7 +128,7 @@ public class FavoriteMovieFragment extends Fragment implements LoadMovieCallback
     private void setupActionbar() {
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle(getString(R.string.category_favorite));
+            actionBar.setTitle(getString(R.string.your_favorite));
             actionBar.show();
         }
     }
