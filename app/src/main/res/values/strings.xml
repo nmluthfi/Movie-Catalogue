@@ -16,8 +16,8 @@
     <string name="genre">Aliran</string>
     <string name="category_favorite">Favorite</string>
     <string name="backdrop">backdrop</string>
-    <string name="empty_favorite_movie">There is no favorite Movie</string>
-    <string name="empty_favorite_tv_show">There is no favorite TvShow</string>
+    <string name="empty_favorite_movie">There is no favorite movie, try to added one or more!</string>
+    <string name="empty_favorite_tv_show">There is no favorite TV show, try to added one or more!</string>
     <string name="your_favorite">Your Favorite</string>
     <string name="your_favorite_movie">Favorite Movie</string>
     <string name="your_favorite_tv_show">Favorite Tv Show</string>

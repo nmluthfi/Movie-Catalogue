@@ -88,7 +88,7 @@ public class FavoriteTvShowFragment extends Fragment implements LoadTvShowCallba
     @Override
     public void postExecute(ArrayList<TvShow> tvShows) {
         progressBar.setVisibility(View.GONE);
-        if (tvShows != null) {
+        if (tvShows.size() != 0) {
             adapter.setListTvShows(tvShows);
             tvEmptyState.setVisibility(View.GONE);
             progressBar.setVisibility(View.GONE);

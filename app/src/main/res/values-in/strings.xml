@@ -17,8 +17,8 @@
     <string name="category_favorite">Favorit</string>
     <string name="backdrop">Latar Belakang</string>
 
-    <string name="empty_favorite_movie">Belum ada film favorite</string>
-    <string name="empty_favorite_tv_show">Belum ada serial TV favorite</string>
+    <string name="empty_favorite_movie">Belum ada film favorite, pilihlah satu atau lebih film favorit!</string>
+    <string name="empty_favorite_tv_show">Belum ada serial TV favorite, pililah satu atau lebih serial TV favorit!</string>
 
     <string name="your_favorite">Favorit Kamu</string>
     <string name="your_favorite_movie">Film Favorite</string>
