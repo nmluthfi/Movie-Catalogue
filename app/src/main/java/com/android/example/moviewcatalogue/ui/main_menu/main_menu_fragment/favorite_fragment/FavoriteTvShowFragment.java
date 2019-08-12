@@ -130,7 +130,7 @@ public class FavoriteTvShowFragment extends Fragment implements LoadTvShowCallba
     private void setupActionbar() {
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle(getString(R.string.category_favorite));
+            actionBar.setTitle(getString(R.string.your_favorite));
             actionBar.show();
         }
     }

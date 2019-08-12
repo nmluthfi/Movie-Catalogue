@@ -54,7 +54,6 @@ public class FavoriteFragment extends Fragment {
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (actionBar != null) {
             actionBar.setElevation(0f);
-            actionBar.setTitle(getString(R.string.your_favorite));
         }
     }
 
