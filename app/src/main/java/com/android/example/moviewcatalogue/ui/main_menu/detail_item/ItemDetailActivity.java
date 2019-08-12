@@ -75,7 +75,7 @@ public class ItemDetailActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (movie != null) {
-            isAlreadyLoved = movieHelper.isAlreadyLoved(movie.getTitle());
+            isAlreadyLoved = movieHelper.isAlreadyLoved(movie.getId());
         } else if (tvShow != null) {
             isAlreadyLoved = tvShowHelper.isAlreadyLoved(tvShow.getTitle());
         }
@@ -206,7 +206,7 @@ public class ItemDetailActivity extends AppCompatActivity {
 
     private void unFavoriteMovie(){
         movieHelper.open();
-        movieHelper.deleteFavoriteMovie(movie.getTitle());
+        movieHelper.deleteFavoriteMovie(movie.getId());
         movieHelper.close();
     }
 

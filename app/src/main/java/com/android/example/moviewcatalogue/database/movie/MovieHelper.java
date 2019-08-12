@@ -91,6 +91,7 @@ public class MovieHelper {
 
     public void insertFavoriteMovie(Movie movie) {
         ContentValues contentValues = new ContentValues();
+        contentValues.put(_ID, movie.getId());
         contentValues.put(title, movie.getTitle());
         contentValues.put(description, movie.getDescription());
         contentValues.put(dateOfRelease, movie.getDateOfRelease());
@@ -102,14 +103,14 @@ public class MovieHelper {
         database.insert(DATABASE_TABLE, null, contentValues);
     }
 
-    public boolean isAlreadyLoved(String movieTitle) {
+    public boolean isAlreadyLoved(int movieId) {
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
         boolean isFavorite = false;
 
         try {
             Cursor cursor;
-            String sql = "SELECT * FROM " + DATABASE_TABLE + " WHERE " + title + " = '" + movieTitle + "'"; // you can check it by comparing any unique value
+            String sql = "SELECT * FROM " + DATABASE_TABLE + " WHERE " + _ID + " = '" + movieId + "'"; // you can check it by comparing any unique value
             cursor = db.rawQuery(sql, null);
             isFavorite = cursor.getCount() > 0;
             cursor.close();
@@ -120,7 +121,7 @@ public class MovieHelper {
         return isFavorite;
     }
 
-    public void deleteFavoriteMovie(String movieTitle) {
-        database.delete(DATABASE_TABLE, title + " = '" + movieTitle + "'", null);
+    public void deleteFavoriteMovie(int movieId) {
+        database.delete(DATABASE_TABLE, _ID + " = '" + movieId + "'", null);
     }
 }
