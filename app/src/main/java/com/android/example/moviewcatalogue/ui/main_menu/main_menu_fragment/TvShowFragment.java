@@ -61,8 +61,12 @@ public class TvShowFragment extends Fragment {
         @Override
         public void onChanged(@Nullable ArrayList<TvShow> tvShows) {
             if (tvShows != null) {
-                tvShowAdapter.setmData(tvShows);
-                showLoading(false);
+                if (tvShows.size() != 0) {
+                    tvShowAdapter.setmData(tvShows);
+                    showLoading(false);
+                } else {
+                    tvFailedLoadData.setVisibility(View.VISIBLE);
+                }
             } else {
                 tvFailedLoadData.setVisibility(View.VISIBLE);
             }

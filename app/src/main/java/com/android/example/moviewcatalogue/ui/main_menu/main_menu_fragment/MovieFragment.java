@@ -60,8 +60,12 @@ public class MovieFragment extends Fragment {
         @Override
         public void onChanged(@Nullable ArrayList<Movie> movies) {
             if (movies != null) {
-                movieAdapter.setmData(movies);
-                showLoading(false);
+                if (movies.size() != 0) {
+                    movieAdapter.setmData(movies);
+                    showLoading(false);
+                } else {
+                    tvFailedLoadData.setVisibility(View.VISIBLE);
+                }
             } else {
                 tvFailedLoadData.setVisibility(View.VISIBLE);
             }
