@@ -98,7 +98,7 @@ public class FavoriteMovieFragment extends Fragment implements LoadMovieCallback
                 progressBar.setVisibility(View.GONE);
                 Log.d("MOVIE NULL", " MOVIE NULL");
             }
-        }else {
+        } else {
             tvEmptyState.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.GONE);
             Log.d("MOVIE NULL", " MOVIE NULL");
@@ -156,6 +156,7 @@ public class FavoriteMovieFragment extends Fragment implements LoadMovieCallback
             weakCallback.get().preExecute();
             Log.d("onPreExecute", "onPreExecute");
         }
+
         @Override
         protected ArrayList<Movie> doInBackground(Void... voids) {
             Log.d("doInBackground", "doInBackground");

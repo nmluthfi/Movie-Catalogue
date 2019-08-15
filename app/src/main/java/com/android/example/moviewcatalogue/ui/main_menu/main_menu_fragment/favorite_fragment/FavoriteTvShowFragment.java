@@ -158,6 +158,7 @@ public class FavoriteTvShowFragment extends Fragment implements LoadTvShowCallba
             weakCallback.get().preExecute();
             Log.d("onPreExecute", "onPreExecute");
         }
+
         @Override
         protected ArrayList<TvShow> doInBackground(Void... voids) {
             Log.d("doInBackground", "doInBackground");
