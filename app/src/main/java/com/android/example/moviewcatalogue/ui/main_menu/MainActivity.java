@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         initComponent();
         setupClickListener();
 
-
         if (savedInstanceState == null) {
             loadFragment(pageContent);
         } else {
@@ -65,7 +64,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onSaveInstanceState(outState);
     }
 
-    // method untuk load fragment yang sesuai
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
             getSupportFragmentManager().beginTransaction()
@@ -75,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
         return false;
     }
+
 
     private void setupClickListener() {
         // beri listener pada saat item/menu bottomnavigation terpilih

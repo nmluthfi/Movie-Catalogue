@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -48,7 +46,6 @@ public class TvShowFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initComponent(view);
         initRecyclerView();
-        setupActionbar();
         loadData();
     }
 
@@ -100,14 +97,4 @@ public class TvShowFragment extends Fragment {
         tvFailedLoadData = container.findViewById(R.id.tv_failed_load_data);
     }
 
-    /*
-     * Method fo setting custom title ActionBar depends on the fragment
-     * */
-    private void setupActionbar() {
-        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(getString(R.string.category_tv_show));
-            actionBar.show();
-        }
-    }
 }
