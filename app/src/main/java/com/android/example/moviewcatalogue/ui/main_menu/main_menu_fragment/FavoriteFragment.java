@@ -59,6 +59,8 @@ public class FavoriteFragment extends Fragment {
 
     private void initView(View view) {
         ViewPager viewPager = view.findViewById(R.id.viewpager);
+
+
         FavoriteFragmentAdapter adapter = new FavoriteFragmentAdapter(getContext(),
                 getChildFragmentManager());
         viewPager.setAdapter(adapter);
