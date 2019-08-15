@@ -26,7 +26,7 @@ public class MovieViewModel extends ViewModel {
         // request API
         AsyncHttpClient client = new AsyncHttpClient();
         final ArrayList<Movie> listItem = new ArrayList<>();
-        String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=" + API_KEY +
+        String url = "https://api.themoviedb.org/4/discover/movie?api_key=" + API_KEY +
                 "&language=" + currentLanguage;
         client.get(url, new AsyncHttpResponseHandler() {
             @Override

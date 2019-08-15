@@ -68,8 +68,8 @@ public class FavoriteMovieFragment extends Fragment implements LoadMovieCallback
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(EXTRA_STATE, adapter.getListMovies());
+        super.onSaveInstanceState(outState);
     }
 
     @Override
