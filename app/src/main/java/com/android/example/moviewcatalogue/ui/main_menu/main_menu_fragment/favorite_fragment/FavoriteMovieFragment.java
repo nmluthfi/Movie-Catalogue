@@ -87,12 +87,18 @@ public class FavoriteMovieFragment extends Fragment implements LoadMovieCallback
     @Override
     public void postExecute(ArrayList<Movie> movies) {
         progressBar.setVisibility(View.GONE);
-        if (movies.size() != 0) {
-            adapter.setListMovies(movies);
-            tvEmptyState.setVisibility(View.GONE);
-            progressBar.setVisibility(View.GONE);
-            Log.d("MOVIE TIDAK NULL", " MOVIE TIDAK NULL");
-        } else {
+        if (movies != null) {
+            if (movies.size() > 0) {
+                adapter.setListMovies(movies);
+                tvEmptyState.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
+                Log.d("MOVIE TIDAK NULL", " MOVIE TIDAK NULL");
+            } else {
+                tvEmptyState.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+                Log.d("MOVIE NULL", " MOVIE NULL");
+            }
+        }else {
             tvEmptyState.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.GONE);
             Log.d("MOVIE NULL", " MOVIE NULL");

@@ -1,6 +1,5 @@
 package com.android.example.moviewcatalogue.ui.main_menu;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -15,10 +14,12 @@ import com.android.example.moviewcatalogue.ui.main_menu.main_menu_fragment.TvSho
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private static final String LOAD_FRAGMENT_MAIN_MENU = "load_fragment_main_menu";
+    private static final String KEY_TITLE = "key_title";
+    private static final String KEY_FRAGMENT = "key fragment";
 
     private BottomNavigationView bottomNavigationView;
-
+    private Fragment pageContent = new TvShowFragment();
+    private String title = "TV Show";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,52 +29,40 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         initComponent();
         setupClickListener();
 
-        /*
-         * We load the fragment based on wether it's is first open or from intent
-         * */
-        Intent intent = getIntent();
-        int intentFragment = intent.getIntExtra(LOAD_FRAGMENT_MAIN_MENU, 1);
-        if (intentFragment != -1) {
-            loadFragmentFromIntent(intentFragment);
+
+        if (savedInstanceState == null) {
+            loadFragment(pageContent);
         } else {
-            loadFragment(new TvShowFragment());
+            pageContent = getSupportFragmentManager().getFragment(savedInstanceState, KEY_FRAGMENT);
+            title = savedInstanceState.getString(KEY_TITLE);
+            loadFragment(pageContent);
         }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        Fragment fragment = null;
         switch (menuItem.getItemId()) {
             case R.id.menu_tv_show:
-                fragment = new TvShowFragment();
+                pageContent = new TvShowFragment();
+                title = "TV Show";
                 break;
             case R.id.menu_movie:
-                fragment = new MovieFragment();
+                pageContent = new MovieFragment();
+                title = "Movie";
                 break;
             case R.id.menu_favorite:
-                fragment = new FavoriteFragment();
+                pageContent = new FavoriteFragment();
+                title = "Favorite";
                 break;
         }
-        return loadFragment(fragment);
+        return loadFragment(pageContent);
     }
 
-    /*
-     * Method to launch specific Fragment from Intent
-     * */
-    private void loadFragmentFromIntent(int intentFragment) {
-        Fragment fragment = null;
-        switch (intentFragment) {
-            case 1:
-                fragment = new TvShowFragment();
-                break;
-            case 2:
-                fragment = new MovieFragment();
-                break;
-            case 3:
-                fragment = new FavoriteFragment();
-                break;
-        }
-        loadFragment(fragment);
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString(KEY_TITLE, title);
+        getSupportFragmentManager().putFragment(outState, KEY_FRAGMENT, pageContent);
+        super.onSaveInstanceState(outState);
     }
 
     // method untuk load fragment yang sesuai
@@ -87,17 +76,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return false;
     }
 
-    /*
-     * Setup click listener
-     * */
     private void setupClickListener() {
         // beri listener pada saat item/menu bottomnavigation terpilih
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
     }
 
-    /*
-     * Initialize component
-     * */
     private void initComponent() {
         // inisialisasi BottomNavigaionView
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
