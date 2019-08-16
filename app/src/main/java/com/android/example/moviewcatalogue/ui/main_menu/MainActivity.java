@@ -6,8 +6,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 
 import com.android.example.moviewcatalogue.R;
 import com.android.example.moviewcatalogue.ui.main_menu.main_menu_fragment.FavoriteFragment;
@@ -21,7 +19,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private BottomNavigationView bottomNavigationView;
     private Fragment pageContent = new TvShowFragment();
-    private EditText etSearch;
 
     private String title = "TV Show";
 
@@ -48,30 +45,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.menu_tv_show:
                 pageContent = new TvShowFragment();
                 title = "TV Show";
-                etSearch.setVisibility(View.VISIBLE);
                 break;
             case R.id.menu_movie:
                 pageContent = new MovieFragment();
                 title = "Movie";
-                etSearch.setVisibility(View.VISIBLE);
                 break;
             case R.id.menu_favorite:
                 pageContent = new FavoriteFragment();
                 title = "Favorite";
-                etSearch.setVisibility(View.GONE);
                 break;
         }
         return loadFragment(pageContent);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (title.equalsIgnoreCase( "TV Show")) {
-            etSearch.setVisibility(View.VISIBLE);
-        } else if (title.equalsIgnoreCase("Movie")) {
-            etSearch.setVisibility(View.VISIBLE);
-        }
     }
 
     @Override
@@ -101,8 +85,5 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         // inisialisasi BottomNavigaionView
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
-        etSearch = findViewById(R.id.et_search_item);
     }
-
-
 }
