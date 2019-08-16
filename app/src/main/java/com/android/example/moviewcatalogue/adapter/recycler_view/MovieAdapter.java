@@ -2,6 +2,7 @@ package com.android.example.moviewcatalogue.adapter.recycler_view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,8 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
+import static com.android.example.moviewcatalogue.database.movie.MovieContract.MovieColumns.CONTENT_URI;
+
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     private Context mContext;
@@ -32,6 +35,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         this.mData.clear();
         this.mData.addAll(mData);
         notifyDataSetChanged();
+    }
+
+    public ArrayList<Movie> getmData() {
+        return mData;
     }
 
     @NonNull
@@ -59,7 +66,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         movieViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openItemDetailActivity(mData.get(position));
+                openItemDetailActivity(mData.get(position), position);
             }
         });
     }
@@ -69,8 +76,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         return mData.size();
     }
 
-    private void openItemDetailActivity(Movie movie) {
+    private void openItemDetailActivity(Movie movie, int position) {
         Intent startMoveDetailActivityyIntent = new Intent(mContext, ItemDetailActivity.class);
+
+        Uri uri = Uri.parse(CONTENT_URI + "/" + getmData().get(position).getId());
+        startMoveDetailActivityyIntent.setData(uri);
         startMoveDetailActivityyIntent.putExtra(ItemDetailActivity.EXTRA_MOVIE, movie);
         startMoveDetailActivityyIntent.putExtra(ItemDetailActivity.EXTRA_CATEGORY, "Movie");
         mContext.startActivity(startMoveDetailActivityyIntent);

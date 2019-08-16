@@ -1,11 +1,19 @@
 package com.android.example.moviewcatalogue.model;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import com.android.example.moviewcatalogue.database.movie.MovieContract.MovieColumns;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import static android.provider.BaseColumns._ID;
+import static com.android.example.moviewcatalogue.database.movie.MovieContract.getColumnDouble;
+import static com.android.example.moviewcatalogue.database.movie.MovieContract.getColumnInt;
+import static com.android.example.moviewcatalogue.database.movie.MovieContract.getColumnString;
 
 public class Movie implements Parcelable {
 
@@ -43,9 +51,30 @@ public class Movie implements Parcelable {
         }
     }
 
-    public Movie() {
+    public Movie(int id, int genreId, Double userScore, String title, String description, String dateOfRelease, String imgPhoto, String backdropPhoto) {
+        this.id = id;
+        this.genreId = genreId;
+        this.userScore = userScore;
+        this.title = title;
+        this.description = description;
+        this.dateOfRelease = dateOfRelease;
+        this.imgPhoto = imgPhoto;
+        this.backdropPhoto = backdropPhoto;
     }
 
+    public Movie(Cursor cursor) {
+        this.id = getColumnInt(cursor, _ID);
+        this.userScore = getColumnDouble(cursor, MovieColumns.userScore);
+        this.title = getColumnString(cursor, MovieColumns.title);
+        this.description = getColumnString(cursor, MovieColumns.description);
+        this.dateOfRelease = getColumnString(cursor, MovieColumns.dateOfRelease);
+        this.imgPhoto = getColumnString(cursor, MovieColumns.imgPhoto);
+        this.backdropPhoto = getColumnString(cursor, MovieColumns.backdropPhoto);
+        this.genreId = getColumnInt(cursor, MovieColumns.genreId);
+    }
+
+    public Movie() {
+    }
 
     public void setUserScore(Double userScore) {
         this.userScore = userScore;

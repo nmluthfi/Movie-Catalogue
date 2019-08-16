@@ -1,10 +1,13 @@
 package com.android.example.moviewcatalogue.ui.main_menu.detail_item;
 
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
@@ -24,6 +27,16 @@ import com.android.example.moviewcatalogue.model.Movie;
 import com.android.example.moviewcatalogue.model.TvShow;
 import com.android.example.moviewcatalogue.utils.GenreChecks;
 import com.bumptech.glide.Glide;
+
+import static android.provider.BaseColumns._ID;
+import static com.android.example.moviewcatalogue.database.movie.MovieContract.MovieColumns.CONTENT_URI;
+import static com.android.example.moviewcatalogue.database.movie.MovieContract.MovieColumns.backdropPhoto;
+import static com.android.example.moviewcatalogue.database.movie.MovieContract.MovieColumns.dateOfRelease;
+import static com.android.example.moviewcatalogue.database.movie.MovieContract.MovieColumns.description;
+import static com.android.example.moviewcatalogue.database.movie.MovieContract.MovieColumns.genreId;
+import static com.android.example.moviewcatalogue.database.movie.MovieContract.MovieColumns.imgPhoto;
+import static com.android.example.moviewcatalogue.database.movie.MovieContract.MovieColumns.title;
+import static com.android.example.moviewcatalogue.database.movie.MovieContract.MovieColumns.userScore;
 
 public class ItemDetailActivity extends AppCompatActivity {
 
@@ -71,6 +84,16 @@ public class ItemDetailActivity extends AppCompatActivity {
             }
         }
         pbLoadData.setVisibility(View.GONE);
+
+        Uri uri = getIntent().getData();
+        if (uri != null) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            Log.d("id: ", "Id: " + getIntent().getData());
+            if (cursor != null) {
+                if (cursor.moveToFirst()) movie = new Movie(cursor);
+                cursor.close();
+            }
+        }
     }
 
     @Override
@@ -203,13 +226,24 @@ public class ItemDetailActivity extends AppCompatActivity {
 
     private void saveFavoriteMovie() {
         movieHelper.open();
-        movieHelper.insertFavoriteMovie(movie);
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(_ID, movie.getId());
+        contentValues.put(title, movie.getTitle());
+        contentValues.put(description, movie.getDescription());
+        contentValues.put(dateOfRelease, movie.getDateOfRelease());
+        contentValues.put(imgPhoto, movie.getImgPhoto());
+        contentValues.put(backdropPhoto, movie.getBackdropPhoto());
+        contentValues.put(userScore, movie.getUserScore());
+        contentValues.put(genreId, movie.getGenreId());
+        getContentResolver().insert(CONTENT_URI, contentValues);
+
         movieHelper.close();
     }
 
     private void unFavoriteMovie() {
         movieHelper.open();
-        movieHelper.deleteFavoriteMovie(movie.getId());
+        getContentResolver().delete(getIntent().getData(), null, null);
         movieHelper.close();
     }
 

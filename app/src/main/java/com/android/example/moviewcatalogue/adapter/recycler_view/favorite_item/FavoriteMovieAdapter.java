@@ -2,6 +2,7 @@ package com.android.example.moviewcatalogue.adapter.recycler_view.favorite_item;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +19,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
+
+import static com.android.example.moviewcatalogue.database.movie.MovieContract.MovieColumns.CONTENT_URI;
 
 public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdapter.ViewHolder> {
 
@@ -63,7 +66,7 @@ public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdap
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openItemDetailActivity(listMovies.get(position));
+                openItemDetailActivity(listMovies.get(position), position);
             }
         });
     }
@@ -73,11 +76,14 @@ public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdap
         return listMovies.size();
     }
 
-    private void openItemDetailActivity(Movie movie) {
+    private void openItemDetailActivity(Movie movie, int position) {
         Intent startMoveDetailActivityyIntent = new Intent(activity, ItemDetailActivity.class);
+
+        Uri uri = Uri.parse(CONTENT_URI + "/" + getListMovies().get(position).getId());
+        startMoveDetailActivityyIntent.setData(uri);
         startMoveDetailActivityyIntent.putExtra(ItemDetailActivity.EXTRA_MOVIE, movie);
         startMoveDetailActivityyIntent.putExtra(ItemDetailActivity.EXTRA_CATEGORY, "Movie");
-        activity.startActivityForResult(startMoveDetailActivityyIntent, ItemDetailActivity.RESULT_DELETE);
+        activity.startActivity(startMoveDetailActivityyIntent);
     }
 
 

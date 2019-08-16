@@ -1,8 +1,13 @@
 package com.android.example.moviewcatalogue.ui.main_menu.main_menu_fragment.favorite_fragment;
 
 
+import android.content.Context;
+import android.database.ContentObserver;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -26,6 +31,9 @@ import com.android.example.moviewcatalogue.model.Movie;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
+import static com.android.example.moviewcatalogue.database.movie.MovieContract.MovieColumns.CONTENT_URI;
+import static com.android.example.moviewcatalogue.utils.MappingHelper.mapCursorToArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -40,6 +48,8 @@ public class FavoriteMovieFragment extends Fragment implements LoadMovieCallback
     private FavoriteMovieAdapter adapter;
     private MovieHelper movieHelper;
 
+    private static HandlerThread handlerThread;
+    private DataObserver myObserver;
 
     public FavoriteMovieFragment() {
         // Required empty public constructor
@@ -85,8 +95,9 @@ public class FavoriteMovieFragment extends Fragment implements LoadMovieCallback
     }
 
     @Override
-    public void postExecute(ArrayList<Movie> movies) {
+    public void postExecute(Cursor cursor) {
         progressBar.setVisibility(View.GONE);
+        ArrayList<Movie> movies = mapCursorToArrayList(cursor);
         if (movies != null) {
             if (movies.size() > 0) {
                 adapter.setListMovies(movies);
@@ -121,8 +132,16 @@ public class FavoriteMovieFragment extends Fragment implements LoadMovieCallback
         adapter = new FavoriteMovieAdapter(getActivity());
         rvFavoriteMovie.setAdapter(adapter);
 
+        handlerThread = new HandlerThread("DataObserver");
+        handlerThread.start();
+
+        Handler handler = new Handler(handlerThread.getLooper());
+        myObserver = new DataObserver(handler, getContext());
+        getActivity().getContentResolver().registerContentObserver(CONTENT_URI, true, myObserver);
+
+
         if (savedInstanceState == null) {
-            new LoadMovieAsync(movieHelper, this).execute();
+            new LoadMovieAsync(getContext(), this).execute();
         } else {
             ArrayList<Movie> list = savedInstanceState.getParcelableArrayList(EXTRA_STATE);
             if (list != null) {
@@ -140,13 +159,13 @@ public class FavoriteMovieFragment extends Fragment implements LoadMovieCallback
     }
 
 
-    private static class LoadMovieAsync extends AsyncTask<Void, Void, ArrayList<Movie>> {
+    private static class LoadMovieAsync extends AsyncTask<Void, Void,Cursor> {
 
-        private final WeakReference<MovieHelper> weakMovieHelper;
+        private final WeakReference<Context> weakContext;
         private final WeakReference<LoadMovieCallback> weakCallback;
 
-        private LoadMovieAsync(MovieHelper movieHelper, LoadMovieCallback callback) {
-            weakMovieHelper = new WeakReference<>(movieHelper);
+        private LoadMovieAsync(Context context, LoadMovieCallback callback) {
+            weakContext = new WeakReference<>(context);
             weakCallback = new WeakReference<>(callback);
         }
 
@@ -158,16 +177,31 @@ public class FavoriteMovieFragment extends Fragment implements LoadMovieCallback
         }
 
         @Override
-        protected ArrayList<Movie> doInBackground(Void... voids) {
+        protected Cursor doInBackground(Void... voids) {
             Log.d("doInBackground", "doInBackground");
-            return weakMovieHelper.get().getAllFavoriteMovie();
+            Context context = weakContext.get();
+            return context.getContentResolver().query(CONTENT_URI, null, null, null, null);
         }
 
         @Override
-        protected void onPostExecute(ArrayList<Movie> movies) {
-            super.onPostExecute(movies);
-            weakCallback.get().postExecute(movies);
+        protected void onPostExecute(Cursor cursor) {
+            super.onPostExecute(cursor);
+            weakCallback.get().postExecute(cursor);
             Log.d("onPostExecute", "onPostExecute");
+        }
+    }
+
+    public static class DataObserver extends ContentObserver {
+        final Context context;
+
+        public DataObserver(Handler handler, Context context) {
+            super(handler);
+            this.context = context;
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            super.onChange(selfChange);
         }
     }
 }

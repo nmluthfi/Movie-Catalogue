@@ -3,6 +3,9 @@
     package="com.android.example.moviewcatalogue">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <permission android:name="com.android.example.moviewcatalogue.READ_DATABASE" android:protectionLevel="normal"/>
+    <permission android:name="com.android.example.moviewcatalogue.WRITE_DATABASE" android:protectionLevel="normal"/>
+
 
     <application
         android:allowBackup="true"
@@ -28,6 +31,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.main_menu.MainActivity" />
         </activity>
+
+        <provider
+            android:authorities="com.android.example.moviewcatalogue"
+            android:name=".database.movie.MovieProvider"
+            android:exported="true"
+            android:readPermission="com.dicoding.mynotesapp.READ_DATABASE"
+            android:writePermission="com.dicoding.mynotesapp.WRITE_DATABASE" />
+
     </application>
 
 </manifest>
