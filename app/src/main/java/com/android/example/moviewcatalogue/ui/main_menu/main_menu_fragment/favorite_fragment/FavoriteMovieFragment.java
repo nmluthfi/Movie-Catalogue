@@ -32,7 +32,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import static com.android.example.moviewcatalogue.database.movie.MovieContract.MovieColumns.CONTENT_URI;
-import static com.android.example.moviewcatalogue.utils.MappingHelper.mapCursorToArrayList;
+import static com.android.example.moviewcatalogue.utils.MappingHelper.mapCursorMovieToArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -97,7 +97,7 @@ public class FavoriteMovieFragment extends Fragment implements LoadMovieCallback
     @Override
     public void postExecute(Cursor cursor) {
         progressBar.setVisibility(View.GONE);
-        ArrayList<Movie> movies = mapCursorToArrayList(cursor);
+        ArrayList<Movie> movies = mapCursorMovieToArrayList(cursor);
         if (movies != null) {
             if (movies.size() > 0) {
                 adapter.setListMovies(movies);
@@ -159,7 +159,7 @@ public class FavoriteMovieFragment extends Fragment implements LoadMovieCallback
     }
 
 
-    private static class LoadMovieAsync extends AsyncTask<Void, Void,Cursor> {
+    private static class LoadMovieAsync extends AsyncTask<Void, Void, Cursor> {
 
         private final WeakReference<Context> weakContext;
         private final WeakReference<LoadMovieCallback> weakCallback;

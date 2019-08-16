@@ -1,8 +1,13 @@
 package com.android.example.moviewcatalogue.ui.main_menu.main_menu_fragment.favorite_fragment;
 
 
+import android.content.Context;
+import android.database.ContentObserver;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -26,6 +31,9 @@ import com.android.example.moviewcatalogue.model.TvShow;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
+import static com.android.example.moviewcatalogue.database.tv_show.TvShowContract.TvColumns.CONTENT_URI;
+import static com.android.example.moviewcatalogue.utils.MappingHelper.mapCursorTvShowToArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -41,6 +49,8 @@ public class FavoriteTvShowFragment extends Fragment implements LoadTvShowCallba
     private FavoriteTvShowAdapter adapter;
     private TvShowHelper tvShowHelper;
 
+    private static HandlerThread handlerThread;
+    private DataObserver myObserver;
 
     public FavoriteTvShowFragment() {
         // Required empty public constructor
@@ -86,8 +96,9 @@ public class FavoriteTvShowFragment extends Fragment implements LoadTvShowCallba
     }
 
     @Override
-    public void postExecute(ArrayList<TvShow> tvShows) {
+    public void postExecute(Cursor cursor) {
         progressBar.setVisibility(View.GONE);
+        ArrayList<TvShow> tvShows = mapCursorTvShowToArrayList(cursor);
         if (tvShows != null) {
             if (tvShows.size() > 0) {
                 adapter.setListTvShows(tvShows);
@@ -123,8 +134,15 @@ public class FavoriteTvShowFragment extends Fragment implements LoadTvShowCallba
         adapter = new FavoriteTvShowAdapter(getActivity());
         rvFavoriteTvShow.setAdapter(adapter);
 
+        handlerThread = new HandlerThread("DataObserver");
+        handlerThread.start();
+
+        Handler handler = new Handler(handlerThread.getLooper());
+        myObserver = new DataObserver(handler, getContext());
+        getActivity().getContentResolver().registerContentObserver(CONTENT_URI, true, myObserver);
+
         if (savedInstanceState == null) {
-            new LoadTvShowAsync(tvShowHelper, this).execute();
+            new LoadTvShowAsync(getContext(), this).execute();
         } else {
             ArrayList<TvShow> list = savedInstanceState.getParcelableArrayList(EXTRA_STATE);
             if (list != null) {
@@ -142,13 +160,13 @@ public class FavoriteTvShowFragment extends Fragment implements LoadTvShowCallba
     }
 
 
-    private static class LoadTvShowAsync extends AsyncTask<Void, Void, ArrayList<TvShow>> {
+    private static class LoadTvShowAsync extends AsyncTask<Void, Void, Cursor> {
 
-        private final WeakReference<TvShowHelper> weakTvShowHelper;
+        private final WeakReference<Context> weakContext;
         private final WeakReference<LoadTvShowCallback> weakCallback;
 
-        private LoadTvShowAsync(TvShowHelper tvShowHelper, LoadTvShowCallback callback) {
-            weakTvShowHelper = new WeakReference<>(tvShowHelper);
+        private LoadTvShowAsync(Context context, LoadTvShowCallback callback) {
+            weakContext = new WeakReference<>(context);
             weakCallback = new WeakReference<>(callback);
         }
 
@@ -160,16 +178,31 @@ public class FavoriteTvShowFragment extends Fragment implements LoadTvShowCallba
         }
 
         @Override
-        protected ArrayList<TvShow> doInBackground(Void... voids) {
+        protected Cursor doInBackground(Void... voids) {
             Log.d("doInBackground", "doInBackground");
-            return weakTvShowHelper.get().getAllFavoriteTvShow();
+            Context context = weakContext.get();
+            return context.getContentResolver().query(CONTENT_URI, null, null, null, null);
         }
 
         @Override
-        protected void onPostExecute(ArrayList<TvShow> tvShows) {
-            super.onPostExecute(tvShows);
-            weakCallback.get().postExecute(tvShows);
+        protected void onPostExecute(Cursor cursor) {
+            super.onPostExecute(cursor);
+            weakCallback.get().postExecute(cursor);
             Log.d("onPostExecute", "onPostExecute");
+        }
+    }
+
+    public static class DataObserver extends ContentObserver {
+        final Context context;
+
+        public DataObserver(Handler handler, Context context) {
+            super(handler);
+            this.context = context;
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            super.onChange(selfChange);
         }
     }
 }

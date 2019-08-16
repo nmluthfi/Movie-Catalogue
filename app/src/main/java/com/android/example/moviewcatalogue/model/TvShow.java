@@ -1,11 +1,19 @@
 package com.android.example.moviewcatalogue.model;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import com.android.example.moviewcatalogue.database.tv_show.TvShowContract.TvColumns;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import static android.provider.BaseColumns._ID;
+import static com.android.example.moviewcatalogue.database.tv_show.TvShowContract.getColumnDouble;
+import static com.android.example.moviewcatalogue.database.tv_show.TvShowContract.getColumnInt;
+import static com.android.example.moviewcatalogue.database.tv_show.TvShowContract.getColumnString;
 
 public class TvShow implements Parcelable {
 
@@ -42,6 +50,28 @@ public class TvShow implements Parcelable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public TvShow(int id, int genreId, Double userScore, String title, String description, String dateOfFirstAir, String imgPhoto, String backdropPhoto) {
+        this.id = id;
+        this.genreId = genreId;
+        this.userScore = userScore;
+        this.title = title;
+        this.description = description;
+        this.dateOfFirstAir = dateOfFirstAir;
+        this.imgPhoto = imgPhoto;
+        this.backdropPhoto = backdropPhoto;
+    }
+
+    public TvShow(Cursor cursor) {
+        this.id = getColumnInt(cursor, _ID);
+        this.userScore = getColumnDouble(cursor, TvColumns.userScore);
+        this.title = getColumnString(cursor, TvColumns.title);
+        this.description = getColumnString(cursor, TvColumns.description);
+        this.dateOfFirstAir = getColumnString(cursor, TvColumns.dateOfRelease);
+        this.imgPhoto = getColumnString(cursor, TvColumns.imgPhoto);
+        this.backdropPhoto = getColumnString(cursor, TvColumns.backdropPhoto);
+        this.genreId = getColumnInt(cursor, TvColumns.genreId);
     }
 
     public TvShow() {

@@ -3,7 +3,9 @@ package com.android.example.moviewcatalogue.utils;
 import android.database.Cursor;
 
 import com.android.example.moviewcatalogue.database.movie.MovieContract.MovieColumns;
+import com.android.example.moviewcatalogue.database.tv_show.TvShowContract.TvColumns;
 import com.android.example.moviewcatalogue.model.Movie;
+import com.android.example.moviewcatalogue.model.TvShow;
 
 import java.util.ArrayList;
 
@@ -16,7 +18,7 @@ import static com.android.example.moviewcatalogue.database.movie.MovieContract.M
 
 public class MappingHelper {
 
-    public static ArrayList<Movie> mapCursorToArrayList(Cursor cursor) {
+    public static ArrayList<Movie> mapCursorMovieToArrayList(Cursor cursor) {
         ArrayList<Movie> movies = new ArrayList<>();
         while (cursor.moveToNext()) {
             int id = cursor.getInt(cursor.getColumnIndexOrThrow(_ID));
@@ -32,5 +34,23 @@ public class MappingHelper {
                     photoUrl, backdropUrl));
         }
         return movies;
+    }
+
+    public static ArrayList<TvShow> mapCursorTvShowToArrayList(Cursor cursor) {
+        ArrayList<TvShow> tvShows = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(_ID));
+            double userScore = cursor.getDouble(cursor.getColumnIndexOrThrow(TvColumns.userScore));
+
+            String title = cursor.getString(cursor.getColumnIndexOrThrow(TvColumns.title));
+            String description = cursor.getString(cursor.getColumnIndexOrThrow(TvColumns.description));
+            String dateOfRelase = cursor.getString(cursor.getColumnIndexOrThrow(TvColumns.dateOfRelease));
+            String photoUrl = cursor.getString(cursor.getColumnIndexOrThrow(TvColumns.imgPhoto));
+            String backdropUrl = cursor.getString(cursor.getColumnIndexOrThrow(TvColumns.backdropPhoto));
+            int firstGenre = cursor.getInt(cursor.getColumnIndexOrThrow(TvColumns.genreId));
+            tvShows.add(new TvShow(id, firstGenre, userScore, title, description, dateOfRelase,
+                    photoUrl, backdropUrl));
+        }
+        return tvShows;
     }
 }

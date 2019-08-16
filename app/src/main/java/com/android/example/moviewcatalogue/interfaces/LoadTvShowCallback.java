@@ -1,10 +1,8 @@
 package com.android.example.moviewcatalogue.interfaces;
 
-import com.android.example.moviewcatalogue.model.TvShow;
-
-import java.util.ArrayList;
+import android.database.Cursor;
 
 public interface LoadTvShowCallback {
     void preExecute();
-    void postExecute(ArrayList<TvShow> tvShows);
+    void postExecute(Cursor cursor);
 }

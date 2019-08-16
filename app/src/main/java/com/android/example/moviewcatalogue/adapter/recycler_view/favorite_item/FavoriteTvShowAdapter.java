@@ -2,6 +2,7 @@ package com.android.example.moviewcatalogue.adapter.recycler_view.favorite_item;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +19,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
+
+import static com.android.example.moviewcatalogue.database.tv_show.TvShowContract.TvColumns.CONTENT_URI;
 
 public class FavoriteTvShowAdapter extends RecyclerView.Adapter<FavoriteTvShowAdapter.ViewHolder> {
 
@@ -63,7 +66,7 @@ public class FavoriteTvShowAdapter extends RecyclerView.Adapter<FavoriteTvShowAd
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openItemDetailActivity(listTvShows.get(position));
+                openItemDetailActivity(listTvShows.get(position), position);
             }
         });
     }
@@ -73,8 +76,10 @@ public class FavoriteTvShowAdapter extends RecyclerView.Adapter<FavoriteTvShowAd
         return listTvShows.size();
     }
 
-    private void openItemDetailActivity(TvShow tvShow) {
+    private void openItemDetailActivity(TvShow tvShow, int position) {
         Intent startMoveDetailActivityyIntent = new Intent(activity, ItemDetailActivity.class);
+        Uri uri = Uri.parse(CONTENT_URI + "/" + getListTvShows().get(position).getId());
+        startMoveDetailActivityyIntent.setData(uri);
         startMoveDetailActivityyIntent.putExtra(ItemDetailActivity.EXTRA_TV_SHOW, tvShow);
         startMoveDetailActivityyIntent.putExtra(ItemDetailActivity.EXTRA_CATEGORY, "Tv Show");
         activity.startActivity(startMoveDetailActivityyIntent);

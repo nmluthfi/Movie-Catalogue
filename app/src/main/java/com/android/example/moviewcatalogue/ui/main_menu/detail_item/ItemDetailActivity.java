@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.android.example.moviewcatalogue.R;
 import com.android.example.moviewcatalogue.database.movie.MovieHelper;
+import com.android.example.moviewcatalogue.database.tv_show.TvShowContract.TvColumns;
 import com.android.example.moviewcatalogue.database.tv_show.TvShowHelper;
 import com.android.example.moviewcatalogue.model.Movie;
 import com.android.example.moviewcatalogue.model.TvShow;
@@ -90,7 +91,13 @@ public class ItemDetailActivity extends AppCompatActivity {
             Cursor cursor = getContentResolver().query(uri, null, null, null, null);
             Log.d("id: ", "Id: " + getIntent().getData());
             if (cursor != null) {
-                if (cursor.moveToFirst()) movie = new Movie(cursor);
+                if (cursor.moveToFirst()) {
+                    if (cateogry.equalsIgnoreCase("movie")) {
+                        movie = new Movie(cursor);
+                    } else if (cateogry.equalsIgnoreCase("Tv Show")) {
+                        tvShow = new TvShow(cursor);
+                    }
+                }
                 cursor.close();
             }
         }
@@ -249,13 +256,24 @@ public class ItemDetailActivity extends AppCompatActivity {
 
     private void saveFavoriteTvShow() {
         tvShowHelper.open();
-        tvShowHelper.insertFavoriteTvShow(tvShow);
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(_ID, tvShow.getId());
+        contentValues.put(TvColumns.title, tvShow.getTitle());
+        contentValues.put(TvColumns.description, tvShow.getDescription());
+        contentValues.put(TvColumns.dateOfRelease, tvShow.getDateOfFirstAir());
+        contentValues.put(TvColumns.imgPhoto, tvShow.getImgPhoto());
+        contentValues.put(TvColumns.backdropPhoto, tvShow.getBackdropPhoto());
+        contentValues.put(TvColumns.userScore, tvShow.getUserScore());
+        contentValues.put(TvColumns.genreId, tvShow.getGenreId());
+        getContentResolver().insert(TvColumns.CONTENT_URI, contentValues);
+
         tvShowHelper.close();
     }
 
     private void unFavoriteTvShow() {
         tvShowHelper.open();
-        tvShowHelper.deleteFavoriteTvShow(tvShow.getId());
+        getContentResolver().delete(getIntent().getData(), null, null);
         tvShowHelper.close();
     }
 
