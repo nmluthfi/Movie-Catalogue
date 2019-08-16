@@ -21,9 +21,9 @@ public class MovieViewModel extends ViewModel {
 
     private static final String API_KEY = "af47732ccfe067085f13970fee065143";
     private MutableLiveData<ArrayList<Movie>> listMovies = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<Movie>> listSearchMovies = new MutableLiveData<>();
 
     public void setMovie(String currentLanguage) {
-        // request API
         AsyncHttpClient client = new AsyncHttpClient();
         final ArrayList<Movie> listItem = new ArrayList<>();
         String url = "https://api.themoviedb.org/4/discover/movie?api_key=" + API_KEY +
@@ -52,9 +52,40 @@ public class MovieViewModel extends ViewModel {
         });
     }
 
-
     public LiveData<ArrayList<Movie>> getMovies() {
         return listMovies;
     }
 
+    public void searchMovie(String currentLanguage, String query) {
+        AsyncHttpClient client = new AsyncHttpClient();
+        final ArrayList<Movie> listItem = new ArrayList<>();
+        String url = "https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY +
+                "&language=" + currentLanguage + "&query=" + query;
+        client.get(url, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String result = new String(responseBody);
+                try {
+                    JSONObject responseObject = new JSONObject(result);
+                    JSONArray movieResults = responseObject.getJSONArray("results");
+                    for (int i = 0; i < movieResults.length(); i++) {
+                        JSONObject currentMovie = movieResults.getJSONObject(i);
+                        Movie movie = new Movie(currentMovie);
+                        listItem.add(movie);
+                    }
+                    listSearchMovies.postValue(listItem);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.e("ERROR MOVIE VIEW MODEL", "ERROR MOVIE VIEW MODEL", error);
+            }
+        });
+    }
+
+    public LiveData<ArrayList<Movie>> getSearchMovies() {
+        return listSearchMovies;
+    }
 }

@@ -76,6 +76,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         mContext.startActivity(startMoveDetailActivityyIntent);
     }
 
+    public void filterList(ArrayList<Movie> filterdNames) {
+        this.mData = filterdNames;
+        notifyDataSetChanged();
+    }
+
     public class MovieViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle, tvDescription, tvUserScore;

@@ -6,7 +6,6 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:focusable="false"
         android:id="@+id/et_search_item"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
