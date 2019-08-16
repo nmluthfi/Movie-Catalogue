@@ -1,4 +1,4 @@
-package com.android.example.moviewcatalogue.database.movie;
+package com.android.example.moviewcatalogue.database;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
 
+import com.android.example.moviewcatalogue.database.movie.MovieHelper;
 import com.android.example.moviewcatalogue.database.tv_show.TvShowContract;
 import com.android.example.moviewcatalogue.database.tv_show.TvShowContract.TvColumns;
 import com.android.example.moviewcatalogue.database.tv_show.TvShowHelper;
@@ -17,7 +18,7 @@ import static com.android.example.moviewcatalogue.database.movie.MovieContract.M
 import static com.android.example.moviewcatalogue.database.movie.MovieContract.TABLE_MOVIE;
 import static com.android.example.moviewcatalogue.database.tv_show.TvShowContract.TABLE_TV_SHOW;
 
-public class MovieProvider extends ContentProvider {
+public class MovieTvShowProvider extends ContentProvider {
 
     private static final int MOVIE = 1;
     private static final int MOVIE_ID = 2;

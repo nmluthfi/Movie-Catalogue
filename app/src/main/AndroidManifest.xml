@@ -34,7 +34,7 @@
 
         <provider
             android:authorities="com.android.example.moviewcatalogue"
-            android:name=".database.movie.MovieProvider"
+            android:name=".database.MovieTvShowProvider"
             android:exported="true"
             android:readPermission="com.dicoding.mynotesapp.READ_DATABASE"
             android:writePermission="com.dicoding.mynotesapp.WRITE_DATABASE" />
