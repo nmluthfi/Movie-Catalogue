@@ -88,20 +88,6 @@ public class TvShowHelper {
         return arrayList;
     }
 
-    public void insertFavoriteTvShow(TvShow tvShow) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(_ID, tvShow.getId());
-        contentValues.put(title, tvShow.getTitle());
-        contentValues.put(description, tvShow.getDescription());
-        contentValues.put(dateOfRelease, tvShow.getDateOfFirstAir());
-        contentValues.put(imgPhoto, tvShow.getImgPhoto());
-        contentValues.put(backdropPhoto, tvShow.getBackdropPhoto());
-        contentValues.put(userScore, tvShow.getUserScore());
-        contentValues.put(genreId, tvShow.getGenreId());
-
-        database.insert(DATABASE_TABLE, null, contentValues);
-    }
-
     public boolean isAlreadyLoved(int tvShowId) {
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
@@ -118,10 +104,6 @@ public class TvShowHelper {
         }
 
         return isFavorite;
-    }
-
-    public void deleteFavoriteTvShow(int tvShowId) {
-        database.delete(DATABASE_TABLE, _ID + " = '" + tvShowId + "'", null);
     }
 
     public Cursor queryByIdProvider(String id) {

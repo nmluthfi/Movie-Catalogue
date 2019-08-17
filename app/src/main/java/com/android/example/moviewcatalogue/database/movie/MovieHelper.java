@@ -89,20 +89,6 @@ public class MovieHelper {
         return arrayList;
     }
 
-    public void insertFavoriteMovie(Movie movie) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(_ID, movie.getId());
-        contentValues.put(title, movie.getTitle());
-        contentValues.put(description, movie.getDescription());
-        contentValues.put(dateOfRelease, movie.getDateOfRelease());
-        contentValues.put(imgPhoto, movie.getImgPhoto());
-        contentValues.put(backdropPhoto, movie.getBackdropPhoto());
-        contentValues.put(userScore, movie.getUserScore());
-        contentValues.put(genreId, movie.getGenreId());
-
-        database.insert(DATABASE_TABLE, null, contentValues);
-    }
-
     public boolean isAlreadyLoved(int movieId) {
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
@@ -119,10 +105,6 @@ public class MovieHelper {
         }
 
         return isFavorite;
-    }
-
-    public void deleteFavoriteMovie(int movieId) {
-        database.delete(DATABASE_TABLE, _ID + " = '" + movieId + "'", null);
     }
 
     public Cursor queryByIdProvider(String id) {
