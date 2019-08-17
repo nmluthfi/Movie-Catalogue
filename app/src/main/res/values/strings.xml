@@ -17,5 +17,6 @@
     <string name="empty_favorite_tv_show">There is no favorite TV show, try to added one or more!</string>
     <string name="your_favorite">Your Favorite</string>
     <string name="search_here">Search Here</string>
-
+    <string name="appwidget_text">Your Favorite Movie and TV Show</string>
+    <string name="empty_text">No Favorite Movie and TV Show Available</string>
 </resources>

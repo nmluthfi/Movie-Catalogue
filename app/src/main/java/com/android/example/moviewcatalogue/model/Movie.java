@@ -73,6 +73,11 @@ public class Movie implements Parcelable {
         this.genreId = getColumnInt(cursor, MovieColumns.genreId);
     }
 
+    public Movie(String title, String backdropPhoto) {
+        this.title = title;
+        this.backdropPhoto = backdropPhoto;
+    }
+
     public Movie() {
     }
 

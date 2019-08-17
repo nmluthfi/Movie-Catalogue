@@ -3,9 +3,13 @@
     package="com.android.example.moviewcatalogue">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <permission android:name="com.android.example.moviewcatalogue.READ_DATABASE" android:protectionLevel="normal"/>
-    <permission android:name="com.android.example.moviewcatalogue.WRITE_DATABASE" android:protectionLevel="normal"/>
 
+    <permission
+        android:name="com.android.example.moviewcatalogue.READ_DATABASE"
+        android:protectionLevel="normal" />
+    <permission
+        android:name="com.android.example.moviewcatalogue.WRITE_DATABASE"
+        android:protectionLevel="normal" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +18,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.main_menu.MainActivity"
+        <receiver android:name=".widget.ImageFavoriteWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/image_favorite_widget_info" />
+        </receiver>
+
+        <activity
+            android:name=".ui.main_menu.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,12 +48,15 @@
         </activity>
 
         <provider
-            android:authorities="com.android.example.moviewcatalogue"
             android:name=".database.MovieTvShowProvider"
+            android:authorities="com.android.example.moviewcatalogue"
             android:exported="true"
             android:readPermission="com.dicoding.mynotesapp.READ_DATABASE"
             android:writePermission="com.dicoding.mynotesapp.WRITE_DATABASE" />
 
+        <service
+            android:name=".widget.StackWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
 </manifest>

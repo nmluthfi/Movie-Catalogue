@@ -19,4 +19,8 @@
 
     <string name="your_favorite">Favorit Kamu</string>
 
+    <string name="search_here">Cari di sini</string>
+    <string name="appwidget_text">Film dan Serial TV Favorite Anda</string>
+    <string name="empty_text">Belum ada film dan serial TV Favorit</string>
+
 </resources>
