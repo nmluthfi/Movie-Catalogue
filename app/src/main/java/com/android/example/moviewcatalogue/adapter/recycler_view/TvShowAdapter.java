@@ -87,6 +87,11 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowView
         mContext.startActivity(startMoveDetailActivityyIntent);
     }
 
+    public void filterList(ArrayList<TvShow> filterdNames) {
+        this.mData = filterdNames;
+        notifyDataSetChanged();
+    }
+
     public class TvShowViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle, tvDescription, tvUserScore;

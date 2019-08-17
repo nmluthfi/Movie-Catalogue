@@ -8,9 +8,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -24,13 +27,18 @@ import java.util.ArrayList;
 
 public class TvShowFragment extends Fragment {
 
+    private static final String KEY_QUERY = "query";
+
     private RecyclerView recyclerView;
 
-    private TvShowViewModel tvShowViewModel;
+    private TvShowViewModel tvShowViewModel, searchTvShowViewModel;
     private TvShowAdapter tvShowAdapter;
 
     private ProgressBar pbLoadData;
     private TextView tvFailedLoadData;
+    private EditText etSearch;
+
+    private String query;
 
     public TvShowFragment() {
     }
@@ -46,7 +54,19 @@ public class TvShowFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initComponent(view);
         initRecyclerView();
-        loadData();
+
+        if (savedInstanceState == null) {
+            loadData();
+        } else {
+            query = savedInstanceState.getString(KEY_QUERY);
+            searchTvShow(query);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putString(KEY_QUERY, query);
+        super.onSaveInstanceState(outState);
     }
 
     private void loadData() {
@@ -59,6 +79,7 @@ public class TvShowFragment extends Fragment {
         public void onChanged(@Nullable ArrayList<TvShow> tvShows) {
             if (tvShows != null) {
                 if (tvShows.size() != 0) {
+                    recyclerView.setVisibility(View.VISIBLE);
                     tvShowAdapter.setmData(tvShows);
                     showLoading(false);
                 } else {
@@ -67,6 +88,30 @@ public class TvShowFragment extends Fragment {
             } else {
                 tvFailedLoadData.setVisibility(View.VISIBLE);
             }
+        }
+    };
+
+    private void searchTvShow(String editable) {
+        searchTvShowViewModel.searchTvShow(LanguageFormater.checkCurrentLanguage(), editable);
+        showLoading(true);
+    }
+
+    private Observer<ArrayList<TvShow>> getSearchTvShow = new Observer<ArrayList<TvShow>>() {
+        @Override
+        public void onChanged(@Nullable ArrayList<TvShow> tvShows) {
+            if (tvShows != null) {
+                if (tvShows.size() != 0) {
+                    recyclerView.setVisibility(View.VISIBLE);
+                    tvShowAdapter.setmData(tvShows);
+                    showLoading(false);
+                } else {
+                    tvFailedLoadData.setVisibility(View.VISIBLE);
+                }
+            } else {
+                tvFailedLoadData.setVisibility(View.VISIBLE);
+            }
+
+            tvShowAdapter.filterList(tvShows);
         }
     };
 
@@ -92,9 +137,36 @@ public class TvShowFragment extends Fragment {
         tvShowViewModel = ViewModelProviders.of(this).get(TvShowViewModel.class);
         tvShowViewModel.getTvShows().observe(this, getTvShow);
 
+        searchTvShowViewModel = ViewModelProviders.of(this).get(TvShowViewModel.class);
+        searchTvShowViewModel.getSearchTvShows().observe(this, getSearchTvShow);
+
         pbLoadData = container.findViewById(R.id.pb_loading_list_data);
 
         tvFailedLoadData = container.findViewById(R.id.tv_failed_load_data);
+
+        etSearch = container.findViewById(R.id.et_search_item);
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                query = editable.toString();
+                recyclerView.setVisibility(View.GONE);
+                if (query.equalsIgnoreCase("")) {
+                    loadData();
+                } else {
+                    searchTvShow(editable.toString());
+                }
+            }
+        });
     }
 
 }
