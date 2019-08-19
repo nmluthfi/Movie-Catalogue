@@ -79,7 +79,8 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public void onDestroy() {
-
+        if (cursor != null) cursor.close();
+        mWidgetFavorite.clear();
     }
 
     @Override
@@ -91,16 +92,8 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
     public RemoteViews getViewAt(int position) {
         RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.widget_item);
 
-        Bundle extras = new Bundle();
-        extras.putInt(ImageFavoriteWidget.EXTRA_ITEM, position);
-
-        Intent fillInIntent = new Intent();
-        fillInIntent.putExtras(extras);
-
-        rv.setImageViewResource(R.id.imageView, R.drawable.backdrop_spiderman);
-        rv.setOnClickFillInIntent(R.id.imageView, fillInIntent);
-
         String backdropPhoto = mWidgetFavorite.get(position).getBackdropPhoto();
+        String movieTitle = mWidgetFavorite.get(position).getTitle();
         Log.i("WIDGET_DATA", "loadWidgetData: " + backdropPhoto);
         try {
             Bitmap preview = Glide.with(mContext)
@@ -113,6 +106,14 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
         } catch (InterruptedException | ExecutionException e) {
             Log.d("Widget Load Error", "error");
         }
+
+        Bundle extras = new Bundle();
+        extras.putString(ImageFavoriteWidget.EXTRA_ITEM, movieTitle);
+
+        Intent fillInIntent = new Intent();
+        fillInIntent.putExtras(extras);
+
+        rv.setOnClickFillInIntent(R.id.imageView, fillInIntent);
 
         return rv;
 }
