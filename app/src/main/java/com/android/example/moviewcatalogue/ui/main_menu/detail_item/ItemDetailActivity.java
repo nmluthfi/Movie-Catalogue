@@ -44,8 +44,6 @@ public class ItemDetailActivity extends AppCompatActivity {
     public static final String EXTRA_MOVIE = "extra_movie", EXTRA_TV_SHOW = "extra_tv_show",
             EXTRA_CATEGORY = "extra_category";
 
-    public static final int RESULT_DELETE = 301;
-
     private Movie movie;
     private TvShow tvShow;
 

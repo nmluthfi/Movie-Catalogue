@@ -5,10 +5,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <permission
-        android:name="com.android.example.moviewcatalogue.READ_DATABASE"
+        android:name="com.android.example.moviewcatalogue.database.MovieTvShowProvider.READ_DATABASE"
         android:protectionLevel="normal" />
     <permission
-        android:name="com.android.example.moviewcatalogue.WRITE_DATABASE"
+        android:name="com.android.example.moviewcatalogue.database.MovieTvShowProvider.WRITE_DATABASE"
         android:protectionLevel="normal" />
 
     <application
@@ -48,12 +48,12 @@
         </activity>
 
         <provider
-            android:name=".database.MovieTvShowProvider"
-            android:authorities="com.android.example.moviewcatalogue"
+            android:name="com.android.example.moviewcatalogue.database.MovieTvShowProvider"
+            android:authorities="com.android.example.moviewcatalogue.database"
             android:exported="true"
             android:enabled="true"
-            android:readPermission="com.android.example.moviewcatalogue.READ_DATABASE"
-            android:writePermission="com.android.example.moviewcatalogue.WRITE_DATABASE" />
+            android:readPermission="com.android.example.moviewcatalogue.database.MovieTvShowProvider.READ_DATABASE"
+            android:writePermission="com.android.example.moviewcatalogue.database.MovieTvShowProvider.WRITE_DATABASE" />
 
         <service
             android:name=".widget.StackWidgetService"
