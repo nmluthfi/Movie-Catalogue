@@ -137,7 +137,8 @@ public class FavoriteMovieFragment extends Fragment implements LoadMovieCallback
 
         Handler handler = new Handler(handlerThread.getLooper());
         myObserver = new DataObserver(handler, getContext());
-        getActivity().getContentResolver().registerContentObserver(CONTENT_URI, true, myObserver);
+        getActivity().getContentResolver()
+                .registerContentObserver(CONTENT_URI, true, myObserver);
 
 
         if (savedInstanceState == null) {

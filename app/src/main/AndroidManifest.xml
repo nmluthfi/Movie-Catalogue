@@ -51,8 +51,9 @@
             android:name=".database.MovieTvShowProvider"
             android:authorities="com.android.example.moviewcatalogue"
             android:exported="true"
-            android:readPermission="com.dicoding.mynotesapp.READ_DATABASE"
-            android:writePermission="com.dicoding.mynotesapp.WRITE_DATABASE" />
+            android:enabled="true"
+            android:readPermission="com.android.example.moviewcatalogue.READ_DATABASE"
+            android:writePermission="com.android.example.moviewcatalogue.WRITE_DATABASE" />
 
         <service
             android:name=".widget.StackWidgetService"

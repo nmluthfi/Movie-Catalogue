@@ -74,7 +74,6 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
             } while (cursor.moveToNext());
             cursor.close();
         }
-
     }
 
     @Override
