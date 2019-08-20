@@ -5,7 +5,7 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 
 import com.android.example.moviewcatalogue.R;
 
-public class MyPreferenceActivity extends PreferenceFragmentCompat {
+public class MyPreferenceFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {

@@ -21,7 +21,7 @@ import android.view.ViewGroup;
 
 import com.android.example.moviewcatalogue.R;
 import com.android.example.moviewcatalogue.adapter.tab_layout.FavoriteFragmentAdapter;
-import com.android.example.moviewcatalogue.preferences.MyPreferenceActivity;
+import com.android.example.moviewcatalogue.ui.main_menu.settings.UserPreferenceActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -85,7 +85,7 @@ public class FavoriteFragment extends Fragment {
             Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
             startActivity(mIntent);
         } else if (item.getItemId() == R.id.action_preference) {
-            startActivity(new Intent(getContext(), MyPreferenceActivity.class));
+            startActivity(new Intent(getContext(), UserPreferenceActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

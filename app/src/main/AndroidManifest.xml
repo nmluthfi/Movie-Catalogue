@@ -18,6 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.main_menu.settings.UserPreferenceActivity"></activity>
+
         <receiver android:name=".widget.ImageFavoriteWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -48,10 +50,10 @@
         </activity>
 
         <provider
-            android:name="com.android.example.moviewcatalogue.database.MovieTvShowProvider"
+            android:name=".database.MovieTvShowProvider"
             android:authorities="com.android.example.moviewcatalogue.database"
-            android:exported="true"
             android:enabled="true"
+            android:exported="true"
             android:readPermission="com.android.example.moviewcatalogue.database.MovieTvShowProvider.READ_DATABASE"
             android:writePermission="com.android.example.moviewcatalogue.database.MovieTvShowProvider.WRITE_DATABASE" />
 
