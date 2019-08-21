@@ -65,7 +65,12 @@
         </receiver>
 
         <receiver
-            android:name=".receivers.DailyReceiver"
+            android:name=".receivers.DailyReminderReceiver"
+            android:enabled="true"
+            android:exported="true">
+        </receiver>
+
+        <receiver android:name=".receivers.ReleaseTodayReminderReceiver"
             android:enabled="true"
             android:exported="true">
         </receiver>

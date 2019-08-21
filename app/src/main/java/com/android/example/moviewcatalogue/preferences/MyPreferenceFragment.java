@@ -6,15 +6,18 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 
 import com.android.example.moviewcatalogue.R;
-import com.android.example.moviewcatalogue.receivers.DailyReceiver;
+import com.android.example.moviewcatalogue.receivers.DailyReminderReceiver;
+import com.android.example.moviewcatalogue.receivers.ReleaseTodayReminderReceiver;
 
-public class MyPreferenceFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class MyPreferenceFragment extends PreferenceFragmentCompat
+        implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     public static String keyReleaseReminder, keyDailyReminder;
 
     private SwitchPreference spReleaseReminder, spDailyReminder;
 
-    private DailyReceiver dailyReceiver = new DailyReceiver();
+    private DailyReminderReceiver dailyReceiver = new DailyReminderReceiver();
+    private ReleaseTodayReminderReceiver releaseTodayReminderReceiver = new ReleaseTodayReminderReceiver();
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
@@ -47,7 +50,12 @@ public class MyPreferenceFragment extends PreferenceFragmentCompat implements Sh
         }
 
         if (key.equalsIgnoreCase(keyReleaseReminder)) {
-            spReleaseReminder.setChecked(sharedPreferences.getBoolean(keyReleaseReminder, false));
+            boolean isTodayRelaseReminder = sharedPreferences.getBoolean(keyDailyReminder, false);
+            if (isTodayRelaseReminder) {
+                releaseTodayReminderReceiver.setRepeatingAlarm(getActivity());
+            } else {
+                releaseTodayReminderReceiver.cancelAlarm(getActivity());
+            }
         }
     }
 
@@ -60,7 +68,12 @@ public class MyPreferenceFragment extends PreferenceFragmentCompat implements Sh
             dailyReceiver.cancelAlarm(getActivity());
         }
 
-        spReleaseReminder.setChecked(sh.getBoolean(keyReleaseReminder, false));
+        boolean isTodayRelaseReminder = sh.getBoolean(keyDailyReminder, false);
+        if (isTodayRelaseReminder) {
+            releaseTodayReminderReceiver.setRepeatingAlarm(getActivity());
+        } else {
+            releaseTodayReminderReceiver.cancelAlarm(getActivity());
+        }
     }
 
     private void init() {
