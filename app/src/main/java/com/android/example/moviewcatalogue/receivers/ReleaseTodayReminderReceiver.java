@@ -90,7 +90,7 @@ public class ReleaseTodayReminderReceiver extends BroadcastReceiver {
                 new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_notifications_white_24dp)
                 .setContentTitle(title)
-                .setContentText(new StringBuilder().append(content).append("Release Today").toString())
+                .setContentText(content)
                 .setAutoCancel(true);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
