@@ -79,19 +79,23 @@ public class MovieFragment extends Fragment {
             if (movies != null) {
                 if (movies.size() != 0) {
                     recyclerView.setVisibility(View.VISIBLE);
+                    tvFailedLoadData.setVisibility(View.GONE);
                     movieAdapter.setmData(movies);
                     showLoading(false);
                 } else {
                     tvFailedLoadData.setVisibility(View.VISIBLE);
+                    showLoading(false);
                 }
             } else {
                 tvFailedLoadData.setVisibility(View.VISIBLE);
+                showLoading(false);
             }
         }
     };
 
     private void searchMovies(String editable) {
         searchMoviewViewModel.searchMovie(LanguageFormater.checkCurrentLanguage(), editable);
+        tvFailedLoadData.setVisibility(View.GONE);
         showLoading(true);
     }
 
@@ -101,12 +105,15 @@ public class MovieFragment extends Fragment {
             if (movies != null) {
                 if (movies.size() != 0) {
                     recyclerView.setVisibility(View.VISIBLE);
+                    tvFailedLoadData.setVisibility(View.GONE);
                     movieAdapter.setmData(movies);
                     showLoading(false);
                 } else {
+                    showLoading(false);
                     tvFailedLoadData.setVisibility(View.VISIBLE);
                 }
             } else {
+                showLoading(false);
                 tvFailedLoadData.setVisibility(View.VISIBLE);
             }
 

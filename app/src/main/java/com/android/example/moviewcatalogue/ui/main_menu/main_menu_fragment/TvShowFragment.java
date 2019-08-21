@@ -80,6 +80,7 @@ public class TvShowFragment extends Fragment {
             if (tvShows != null) {
                 if (tvShows.size() != 0) {
                     recyclerView.setVisibility(View.VISIBLE);
+                    tvFailedLoadData.setVisibility(View.GONE);
                     tvShowAdapter.setmData(tvShows);
                     showLoading(false);
                 } else {
@@ -94,6 +95,7 @@ public class TvShowFragment extends Fragment {
     private void searchTvShow(String editable) {
         searchTvShowViewModel.searchTvShow(LanguageFormater.checkCurrentLanguage(), editable);
         showLoading(true);
+        tvFailedLoadData.setVisibility(View.GONE);
     }
 
     private Observer<ArrayList<TvShow>> getSearchTvShow = new Observer<ArrayList<TvShow>>() {
@@ -102,12 +104,15 @@ public class TvShowFragment extends Fragment {
             if (tvShows != null) {
                 if (tvShows.size() != 0) {
                     recyclerView.setVisibility(View.VISIBLE);
+                    tvFailedLoadData.setVisibility(View.GONE);
                     tvShowAdapter.setmData(tvShows);
                     showLoading(false);
                 } else {
+                    showLoading(false);
                     tvFailedLoadData.setVisibility(View.VISIBLE);
                 }
             } else {
+                showLoading(false);
                 tvFailedLoadData.setVisibility(View.VISIBLE);
             }
 
